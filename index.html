@@ -229,6 +229,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/shiro学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/13/shiro学习笔记/" itemprop="url">shiro学习笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T15:40:19+08:00">
+                2019-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一些相关的概念"><a href="#一些相关的概念" class="headerlink" title="一些相关的概念:"></a>一些相关的概念:</h2><ul>
+<li>Subject: </li>
+<li>Realm: realm是一种DAO, 是shiro的DAO</li>
+<li>Principal: 当事人</li>
+<li><p>Credential: 认证信息</p>
+</li>
+<li><p>AuthenticationInfo: subject的相关的账户的信息, 表示已验证和存储的帐户数据.</p>
+</li>
+<li><p>AuthenticationToken: 表示提交给login的任何数据, 包括成功的和不成功的.</p>
+</li>
+<li><p>AuthorizationInfo: 表示单个subject存储的授权数据(roles,permissions).</p>
+</li>
+<li>PrincipalCollection: 表示一个身份集合, 因为我们可以在Shiro中同时配置多个Realm,或者说一个subject可能有多个身份,<br>所以身份信息可能就有多个, 因此其提供了PrincipalCollection用于聚合这些身份信息.</li>
+</ul>
+<h2 id="shiro的realm怎么写"><a href="#shiro的realm怎么写" class="headerlink" title="shiro的realm怎么写?"></a>shiro的realm怎么写?</h2><p>一般情况下:</p>
+<ol>
+<li><p>首先, extends AuthorizingRealm ;</p>
+</li>
+<li><p>realm里面Autowired shiro相关的domian的service; 这是为了从数据源中获取用户的信息,主要是role和permission;</p>
+</li>
+<li><p>然后是重写两个方法: doGetAuthorizationInfo 和 doGetAuthenticationInfo ;</p>
+</li>
+<li><p>doGetAuthenticationInfo: 是认证的方法; 就是从当前的(默认)AuthenticationToken中取出username和password<br>然后从service中取出相关的用户进行验证;<br>入参是AuthenticationToken,出参是AuthenticationInfo, 表示的是从<strong>未认证</strong>到<strong>已认证</strong>的转变;</p>
+</li>
+<li><p>doGetAuthorizationInfo: 检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的.<br>入参是:PrincipalCollection,出参是:AuthorizationInfo.<br>返回的是这个Subject的所有的<strong>身份 和 权限</strong>的集合;</p>
+</li>
+</ol>
+<h2 id="shiro的shiroConfig怎么写"><a href="#shiro的shiroConfig怎么写" class="headerlink" title="shiro的shiroConfig怎么写?"></a>shiro的shiroConfig怎么写?</h2><p><strong>ShiroConfig主要是注入shiro的filterFactoryBean和securityManager等对象</strong></p>
+<p>ShiroFilterFactoryBean 处理拦截资源文件问题.<br>注意：单独一个ShiroFilterFactoryBean配置是会报错的, 因为在初始化ShiroFilterFactoryBean的时候需要注入SecurityManager ;</p>
+<p>Filter Chain定义说明:</p>
+<ol>
+<li>一个URL可以配置多个Filter,使用逗号分隔 </li>
+<li>当设置多个过滤器时，全部验证通过,才视为通过 </li>
+<li>部分过滤器可指定参数，如perms,roles </li>
+<li>过滤链从上向下顺序匹配,一般将/**放在最为下边</li>
+</ol>
+<p>securityManager主要是设置Realm;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/Haskell-自学笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -518,7 +674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -531,7 +687,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
