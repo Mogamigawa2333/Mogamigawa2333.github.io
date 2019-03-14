@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="shiro,">
+  <meta name="keywords" content="MyBatis,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一些相关的概念: Subject:当前用户, 当前线程/session的用户 Realm: 是一种DAO, 是shiro(领域)的DAO Principal: 当事人 Credential: 认证信息  AuthenticationInfo: subject的相关的账户的信息, 表示已验证和存储的帐户数据.  AuthenticationToken: 表示提交给login的任何数据, 包括成功的和">
-<meta name="keywords" content="shiro">
+<meta name="description" content="MyBatis Generator(以下简称MBG) 在Maven/Gradle的配置文件中添加Mybatis依赖,在Maven的Pom.xml文件中的&amp;lt;plugin&amp;gt;&amp;lt;/plugin&amp;gt;中添加MBG的依赖, 和指明generatorConfig.xml的位置;(注意: ${basedir}或者${project.basedir}是项目的根目录, ${project.base">
+<meta name="keywords" content="MyBatis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shiro学习笔记">
-<meta property="og:url" content="http://yoursite.com/2019/03/13/shiro学习笔记/index.html">
+<meta property="og:title" content="MyBatis Generator 使用">
+<meta property="og:url" content="http://yoursite.com/2019/03/14/MyBatis Generator 使用/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="一些相关的概念: Subject:当前用户, 当前线程/session的用户 Realm: 是一种DAO, 是shiro(领域)的DAO Principal: 当事人 Credential: 认证信息  AuthenticationInfo: subject的相关的账户的信息, 表示已验证和存储的帐户数据.  AuthenticationToken: 表示提交给login的任何数据, 包括成功的和">
+<meta property="og:description" content="MyBatis Generator(以下简称MBG) 在Maven/Gradle的配置文件中添加Mybatis依赖,在Maven的Pom.xml文件中的&amp;lt;plugin&amp;gt;&amp;lt;/plugin&amp;gt;中添加MBG的依赖, 和指明generatorConfig.xml的位置;(注意: ${basedir}或者${project.basedir}是项目的根目录, ${project.base">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-14T01:55:21.234Z">
+<meta property="og:updated_time" content="2019-03-14T02:59:23.801Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shiro学习笔记">
-<meta name="twitter:description" content="一些相关的概念: Subject:当前用户, 当前线程/session的用户 Realm: 是一种DAO, 是shiro(领域)的DAO Principal: 当事人 Credential: 认证信息  AuthenticationInfo: subject的相关的账户的信息, 表示已验证和存储的帐户数据.  AuthenticationToken: 表示提交给login的任何数据, 包括成功的和">
+<meta name="twitter:title" content="MyBatis Generator 使用">
+<meta name="twitter:description" content="MyBatis Generator(以下简称MBG) 在Maven/Gradle的配置文件中添加Mybatis依赖,在Maven的Pom.xml文件中的&amp;lt;plugin&amp;gt;&amp;lt;/plugin&amp;gt;中添加MBG的依赖, 和指明generatorConfig.xml的位置;(注意: ${basedir}或者${project.basedir}是项目的根目录, ${project.base">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/13/shiro学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/14/MyBatis Generator 使用/">
 
 
 
 
 
-  <title>shiro学习笔记 | 最上川</title>
+  <title>MyBatis Generator 使用 | 最上川</title>
   
 
 
@@ -233,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/shiro学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/14/MyBatis Generator 使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chiu">
@@ -250,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">shiro学习笔记</h1>
+          <h1 class="post-title" itemprop="name headline">MyBatis Generator 使用</h1>
         
 
         <div class="post-meta">
@@ -262,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T15:40:19+08:00">
-                2019-03-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-14T10:40:51+08:00">
+                2019-03-14
               </time>
             
 
@@ -300,56 +300,10 @@
       
 
       
-        <h2 id="一些相关的概念"><a href="#一些相关的概念" class="headerlink" title="一些相关的概念:"></a>一些相关的概念:</h2><ul>
-<li>Subject:当前用户, 当前线程/session的用户</li>
-<li>Realm: 是一种DAO, 是shiro(领域)的DAO</li>
-<li>Principal: 当事人</li>
-<li><p>Credential: 认证信息</p>
-</li>
-<li><p>AuthenticationInfo: subject的相关的账户的信息, 表示已验证和存储的帐户数据.</p>
-</li>
-<li><p>AuthenticationToken: 表示提交给login的任何数据, 包括成功的和不成功的.</p>
-</li>
-<li><p>AuthorizationInfo: 表示单个subject存储的授权数据(roles,permissions).</p>
-</li>
-<li><p>PrincipalCollection: 表示一个身份集合, 因为我们可以在Shiro中同时配置多个Realm,或者说一个subject可能有多个身份,<br>所以身份信息可能就有多个, 因此其提供了PrincipalCollection用于聚合这些身份信息.</p>
-</li>
-<li><p>Authentication 和 Authorization:<br>如何分辨两个如此相似的单词?</p>
-<ul>
-<li>Authentication 身份认证;<br>authentic：真实可信的<br>【结构分析】： authentic = aut(自己) + hent(行为人) + ic(形容词后缀) →自主行为人所说的或所做的→并非屈打成招的→真实可信的<br>【词源解释】： aut &lt;-希腊语 autos (自己); hent &lt;-希腊语 hentes (行为人)<br>【衍生词】： authenticity (真实性); authenticate (鉴定); authentication (证明)</li>
-<li>Authorization 授权<br>authorize<br>词根词缀： auth ( -auct- )增加-&gt;创造-&gt;权威 + -or 名词词尾 , 行为 + -ize 动词词尾</li>
-</ul>
-</li>
-</ul>
+        <p>MyBatis Generator(以下简称MBG)</p>
+<p>在Maven/Gradle的配置文件中添加Mybatis依赖,<br>在Maven的Pom.xml文件中的<code>&lt;plugin&gt;&lt;/plugin&gt;</code>中添加MBG的依赖, 和指明generatorConfig.xml的位置;<br>(注意: ${basedir}或者${project.basedir}是项目的根目录, ${project.basedir} is the root directory of your project.)</p>
 <a id="more"></a>
-<h2 id="shiro的realm怎么写"><a href="#shiro的realm怎么写" class="headerlink" title="shiro的realm怎么写"></a>shiro的realm怎么写</h2><p>一般情况下:</p>
-<ol>
-<li><p>首先, extends AuthorizingRealm ;</p>
-</li>
-<li><p>realm里面Autowired shiro相关的domian的service; 这是为了从数据源中获取用户的信息,主要是role和permission;</p>
-</li>
-<li><p>然后是重写两个方法: doGetAuthorizationInfo 和 doGetAuthenticationInfo ;</p>
-</li>
-<li><p>doGetAuthenticationInfo: 是认证的方法; 就是从当前的(默认)AuthenticationToken中取出username和password<br>然后从service中取出相关的用户进行验证;<br>入参是AuthenticationToken,出参是AuthenticationInfo, 表示的是从<strong>未认证</strong>到<strong>已认证</strong>的转变;</p>
-</li>
-<li><p>doGetAuthorizationInfo: 检测用户权限的时候才会调用此方法，例如checkRole,checkPermission之类的.<br>入参是:PrincipalCollection,出参是:AuthorizationInfo.<br>返回的是这个Subject的所有的<strong>身份 和 权限</strong>的集合;</p>
-</li>
-</ol>
-<h2 id="shiro的shiroConfig怎么写"><a href="#shiro的shiroConfig怎么写" class="headerlink" title="shiro的shiroConfig怎么写"></a>shiro的shiroConfig怎么写</h2><p><strong>ShiroConfig主要是注入shiro的filterFactoryBean和securityManager等对象</strong></p>
-<p>ShiroFilterFactoryBean 处理拦截资源文件问题.<br>注意：单独一个ShiroFilterFactoryBean配置是会报错的, 因为在初始化ShiroFilterFactoryBean的时候需要注入SecurityManager ;</p>
-<ul>
-<li><p>Filter Chain定义说明:</p>
-<ol>
-<li>一个URL可以配置多个Filter,使用逗号分隔</li>
-<li>当设置多个过滤器时，全部验证通过,才视为通过</li>
-<li>部分过滤器可指定参数，如perms,roles</li>
-<li>过滤链从上向下顺序匹配,一般将/**放在最为下边</li>
-</ol>
-</li>
-<li><p>securityManager主要是设置Realm;</p>
-</li>
-</ul>
-<h2 id="其他的"><a href="#其他的" class="headerlink" title="其他的"></a>其他的</h2><p>shiro也可以有自己的vo. 有别于ORM的pojo, 是ORM的pojo再包装一次去掉不需要的,或者添加其他需要的属性/方法(所以说称之为vo嘛~~);<br>如果没有自己的vo, 就需要在设计数据库的表的时候用点心思了;<br>既然都可以有自己的vo了,service也是可以的.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.generator<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-generator-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configurationFile</span>&gt;</span>$&#123;basedir&#125;/src/main/resources/generator/generatorConfig.xml<span class="tag">&lt;/<span class="name">configurationFile</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">overwrite</span>&gt;</span>true<span class="tag">&lt;/<span class="name">overwrite</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">verbose</span>&gt;</span>true<span class="tag">&lt;/<span class="name">verbose</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -367,7 +321,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/shiro/" rel="tag"># shiro</a>
+            <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
           
         </div>
       
@@ -380,8 +334,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/07/Haskell-自学笔记/" rel="next" title="Haskell 自学笔记">
-                <i class="fa fa-chevron-left"></i> Haskell 自学笔记
+              <a href="/2019/03/14/MBG配置文件详解/" rel="next" title="MBG配置文件详解">
+                <i class="fa fa-chevron-left"></i> MBG配置文件详解
               </a>
             
           </div>
@@ -389,10 +343,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/13/跨域请求学习笔记/" rel="prev" title="跨域请求学习笔记">
-                跨域请求学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -444,17 +394,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -505,22 +446,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些相关的概念"><span class="nav-number">1.</span> <span class="nav-text">一些相关的概念:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro的realm怎么写"><span class="nav-number">2.</span> <span class="nav-text">shiro的realm怎么写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro的shiroConfig怎么写"><span class="nav-number">3.</span> <span class="nav-text">shiro的shiroConfig怎么写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他的"><span class="nav-number">4.</span> <span class="nav-text">其他的</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
