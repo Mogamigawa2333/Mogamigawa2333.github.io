@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hello,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="_____                    _____                _____                    /\    \                  /\    \              /\    \                  /::\    \                /::\    \            /">
+<meta name="keywords" content="Hello">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git 总结">
+<meta property="og:url" content="http://yoursite.com/2019/03/24/Git 总结/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="_____                    _____                _____                    /\    \                  /\    \              /\    \                  /::\    \                /::\    \            /">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://45.77.68.200:32768/files/27450a3d-f983-4978-8e33-d032766b3b1e.png">
+<meta property="og:updated_time" content="2019-04-06T07:38:27.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git 总结">
+<meta name="twitter:description" content="_____                    _____                _____                    /\    \                  /\    \              /\    \                  /::\    \                /::\    \            /">
+<meta name="twitter:image" content="http://45.77.68.200:32768/files/27450a3d-f983-4978-8e33-d032766b3b1e.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/24/Git 总结/">
+
+
+
+
+
+  <title>Git 总结 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/24/Git 总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git 总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-24T15:44:50+08:00">
+                2019-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <hr>
+<pre><code>          _____                    _____                _____          
+         /\    \                  /\    \              /\    \         
+        /::\    \                /::\    \            /::\    \        
+       /::::\    \               \:::\    \           \:::\    \       
+      /::::::\    \               \:::\    \           \:::\    \      
+     /:::/\:::\    \               \:::\    \           \:::\    \     
+    /:::/  \:::\    \               \:::\    \           \:::\    \    
+   /:::/    \:::\    \              /::::\    \          /::::\    \   
+  /:::/    / \:::\    \    ____    /::::::\    \        /::::::\    \  
+ /:::/    /   \:::\ ___\  /\   \  /:::/\:::\    \      /:::/\:::\    \ 
+/:::/____/  ___\:::|    |/::\   \/:::/  \:::\____\    /:::/  \:::\____\
+\:::\    \ /\  /:::|____|\:::\  /:::/    \::/    /   /:::/    \::/    /
+ \:::\    /::\ \::/    /  \:::\/:::/    / \/____/   /:::/    / \/____/ 
+  \:::\   \:::\ \/____/    \::::::/    /           /:::/    /          
+   \:::\   \:::\____\       \::::/____/           /:::/    /           
+    \:::\  /:::/    /        \:::\    \           \::/    /            
+     \:::\/:::/    /          \:::\    \           \/____/             
+      \::::::/    /            \:::\    \                              
+       \::::/    /              \:::\____\                             
+        \::/____/                \::/    /                             
+                                  \/____/                              
+</code></pre><hr>
+<h1 id="Git的4个阶段-区"><a href="#Git的4个阶段-区" class="headerlink" title="Git的4个阶段(区)"></a>Git的4个阶段(区)</h1><ol>
+<li>工作区(Working Area)</li>
+<li>暂存区(Stage)</li>
+<li>本地仓库(Local Reposity)</li>
+<li>远程仓库(Remote Reposity)</li>
+</ol>
+<p><img src="http://45.77.68.200:32768/files/27450a3d-f983-4978-8e33-d032766b3b1e.png" alt="各个阶段之间的变化"></p>
+<a id="more"></a>
+<hr>
+<h1 id="git-的-ignore文件的使用"><a href="#git-的-ignore文件的使用" class="headerlink" title="git 的.ignore文件的使用"></a>git 的.ignore文件的使用</h1><p> 先修改Project的.ignore文件</p>
+<ol>
+<li><p>先将项目所有的代码都从git里清空掉 (对应到编辑器/IDE就是: 已经修改过的代码行前面绿色标记消失了)</p>
+<figure class="highlight plain"><figcaption><span>rm -r --cached .```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 重建git项目，这时候，就会读取新的.gitignore规则 (注意命令后面的点 &apos;.&apos; )</span><br><span class="line">   ```git add .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提交</p>
+<figure class="highlight plain"><figcaption><span>commit -m ".gitignore is now working"```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-----</span><br><span class="line">&lt;center&gt; ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ git的常用用法: ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓   &lt;/center&gt;</span><br><span class="line"></span><br><span class="line"># git 日常的提交步骤:</span><br><span class="line"></span><br><span class="line">git add . #存入暂存区</span><br><span class="line">git commit -m&quot;something&quot; #提交至本地仓库, 并注释</span><br><span class="line">git pull #更新本地代码；便于在本地合并冲突.</span><br><span class="line">git push #推送至远程仓库</span><br><span class="line"></span><br><span class="line"># git 日志:</span><br><span class="line">### git log</span><br><span class="line">git log 可以查看每次提交的具体信息;</span><br><span class="line"></span><br><span class="line">### git reflog</span><br><span class="line">git reflog 可以查看每次提交的版本号和注释;</span><br><span class="line">git恢复到某一版本: git reflog 然后 git reset --hard xxxx</span><br><span class="line"></span><br><span class="line">### git生成密钥</span><br><span class="line">[生成密钥](http://www.aobosir.com/blog/2016/12/25/git-add-ssh-key-solution-permission-denied-publickey-fatal/)</span><br><span class="line"></span><br><span class="line">-----</span><br><span class="line"># git rebase 与 git merge (分支合并/分支更新)</span><br><span class="line">情景:</span><br><span class="line">原来有一个master分支, Alice切出了一个dev分支进行开发. 这时候,Bob完成了一次hotfix,并提交至master; 这时候master分支已经领先于dev分支.</span><br><span class="line">这时候,Alice想要同步master分支的hotfix的改动; 有两种方式: merge和rebase;</span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line">       ___dev__</span><br><span class="line">     /        </span><br><span class="line">master ___ master(hotfix)__master(hotfix2)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="git-merge-master"><a href="#git-merge-master" class="headerlink" title="git merge master:"></a>git merge master:</h2><p>在master分支上, 把Alice切出分支的那个祖先<strong>基点</strong>以后的提交合并成一次提交(dev1), 提交至dev分支上.<br>这样做的副作用就是: 在Alice的dev分支上多出了一次提交记录(dev1)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">       ___dev__________________________dev1___</span><br><span class="line">     /                                  /</span><br><span class="line">master ___ master(hotfix)__master(hotfix2)___</span><br></pre></td></tr></table></figure></p>
+<p>这次的提交记录并不是Alice完成的, 是git自动提交的,</p>
+<h2 id="git-rebase-master"><a href="#git-rebase-master" class="headerlink" title="git rebase master :"></a>git rebase master :</h2><p>(它的原理正如它的 字面意思,别想太多, 就是更新基点)</p>
+<p><strong>首先, git会把dev分支的所有commit都取消掉;</strong><br>其次，把上面的操作临时保存成 patch 文件，存在 .git/rebase 目录下;<br><strong>然后, 更新dev分支的基点为master分支最新;</strong><br>最后, 把上面保存的 patch 文件应用到 feature1 分支上;</p>
+<p><strong>Warnning:</strong><br>在 rebase 的过程中, 也许会出现冲突 conflict.<br>在这种情况，git 会停止 rebase 并会让Alice去解决冲突. 在解决完冲突后,用 git add 命令去更新这些内容, 这时Alice不必使用git commit 来提交, 只需要使用git rebase –continue, 这样git会继续使用余下没用使用的patch补丁文件.</p>
+<p>git-rebase 存在的价值是：对一个分支做「变基」操作。</p>
+<ol>
+<li>当Alice在一个过时的分支上面开发的时候，执行 rebase 以此同步 master 分支最新变动；</li>
+<li>假如Alice要启动一个放置了很久的并行工作，现在有时间来继续这件事情，很显然这个分支已经落后了。这时候需要在最新的基准上面开始工作，所以 rebase 是最合适的选择。</li>
+</ol>
+<p>副作用: 使用git rebase只会改变Alice的基点, 其他人在dev的基点仍然是旧的, 所以这是一个危险的操作, 会让其他人丢失记录;</p>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较:"></a>比较:</h2><p>merge是在所有的提交之后更新, 把别人的提交拿过来应用到自己的分支上<br>rebase 是直接更新所有提交的基点.</p>
+<h2 id="都有副作用"><a href="#都有副作用" class="headerlink" title="###都有副作用"></a>###都有副作用</h2><h1 id="git-fetch-与-git-pull"><a href="#git-fetch-与-git-pull" class="headerlink" title="git fetch 与 git pull"></a>git fetch 与 git pull</h1><p>pull = fetch + merge</p>
+<hr>
+<h1 id="退回"><a href="#退回" class="headerlink" title="退回"></a>退回</h1><p><a href="http://einverne.github.io/post/2017/12/git-reset.html" target="_blank" rel="noopener">git不同阶段的退回</a></p>
+<hr>
+<p><a href="http://jartto.wang/2018/12/11/git-rebase/" target="_blank" rel="noopener"></a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hello/" rel="tag"># Hello</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/15/理解Python中的生成器/" rel="next" title="理解Python中的生成器">
+                <i class="fa fa-chevron-left"></i> 理解Python中的生成器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/05/给IDEA娘的换装/" rel="prev" title="让我们给IDEA娘换装">
+                让我们给IDEA娘换装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git的4个阶段-区"><span class="nav-number">1.</span> <span class="nav-text">Git的4个阶段(区)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-的-ignore文件的使用"><span class="nav-number">2.</span> <span class="nav-text">git 的.ignore文件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-merge-master"><span class="nav-number">2.1.</span> <span class="nav-text">git merge master:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-rebase-master"><span class="nav-number">2.2.</span> <span class="nav-text">git rebase master :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">2.3.</span> <span class="nav-text">比较:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#都有副作用"><span class="nav-number">2.4.</span> <span class="nav-text">###都有副作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-fetch-与-git-pull"><span class="nav-number">3.</span> <span class="nav-text">git fetch 与 git pull</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退回"><span class="nav-number">4.</span> <span class="nav-text">退回</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
