@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="最上川">
 <meta property="og:description" content="算法的英文翻译Algorithm来自于波斯数学家花拉子密,他的《代数学》是第一本解决一次方程及一元二次方程的系统著作,他因而被称为代数的创造者,从此有了十进制 … …">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-05T09:15:06.383Z">
+<meta property="og:updated_time" content="2019-05-05T09:24:23.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些软考中的算法">
 <meta name="twitter:description" content="算法的英文翻译Algorithm来自于波斯数学家花拉子密,他的《代数学》是第一本解决一次方程及一元二次方程的系统著作,他因而被称为代数的创造者,从此有了十进制 … …">
@@ -312,7 +312,7 @@
       
         <p>算法的英文翻译Algorithm来自于波斯数学家花拉子密,他的《代数学》是第一本解决一次方程及一元二次方程的系统著作,他因而被称为代数的创造者,从此有了十进制 … …<br><a id="more"></a></p>
 <h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序:"></a>归并排序:</h2><p>1945年由约翰·冯·诺伊曼首次提出. 该算法是采用分治法（Divide and Conquer）的一个非常典型的应用;</p>
-<p>采用分治法:<br><br>分割：递归地把当前序列平均分割成两半.<br><br>整合：在保持元素顺序的同时将上一步得到的子序列整合到一起(归并).<br></p>
+<p>采用分治法:<br>分割：递归地把当前序列平均分割成两半.<br>整合：在保持元素顺序的同时将上一步得到的子序列整合到一起(归并).</p>
 <p>递归地把当前序列平均分割成两半: 分割直到每个子序列只有一个元素, 这样每个子序列就都是”有序的”</p>
 <h3 id="过程"><a href="#过程" class="headerlink" title="过程:"></a>过程:</h3><ol>
 <li>申请空间,大小为2倍的序列长度 (合并空间)</li>
@@ -321,13 +321,13 @@
 <li>重复步骤3直到某一指针到达序列尾</li>
 <li>将另一序列剩下的所有元素直接复制到合并序列尾</li>
 </ol>
-<h4 id="步骤3演算"><a href="#步骤3演算" class="headerlink" title="步骤3演算:"></a>步骤3演算:</h4><p>假设有两个已经排好顺序的数组：int[] arr1 = {2, 7, 8}和int[] arr2 = {1, 4, 9}，还有一个大数组来装载它们 int[] arr = new int[6]; <em>(这里的大数组就是归并空间)</em></p>
+<h4 id="步骤3演算"><a href="#步骤3演算" class="headerlink" title="步骤3演算:"></a>步骤3演算:</h4><p>假设有两个已经排好顺序的数组：int[] arr1 = {2, 7, 8}和int[] arr2 = {1, 4, 9}，还有一个大数组来装载它们 int[] arr = new int[6]; <em>(这里的大数组就是合并空间)</em></p>
 <p>比较 arr1[0] 与 arr2[0] , 显然 arr2[0] 比较小, 将 arr2[0] 拿出来, 放入大数组中. 同时arr2的指针向后一格;<br>到目前为止: arr={1};</p>
 <p>比较 arr1[0] 和 arr2[1] , 显然 arr1[0] 比较小, 将 arr1[0] 拿出来, 放入大数组中. 同时arr1的指针向后一格;<br>到目前为止: arr = {1,2};</p>
 <p>比较 arr1[1] 和 arr2[1] , 显然 arr2[1] 比较小, 将 arr2[1] 拿出来, 放入大数组中. 同时arr2的指针向后一格;<br>到目前为止: arr = {1,2,4};</p>
 <p>… …</p>
 <p>最后, 我们会将两个已排好序的数组变成一个已排好序的数组arr = {1,2,4,7,8,9};</p>
-<p>步骤3所做的动作为:<br><br>比较,放入归并空间, 指针后移;</p>
+<p>步骤3所做的动作为:<br>比较,放入大数组, 指针后移;</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现:"></a>代码实现:</h3><h4 id="Java版"><a href="#Java版" class="headerlink" title="Java版:"></a>Java版:</h4><pre><code>/* 归并排序*/
 static void merge_sort_recursive(int[] arr, int[] result, int start, int end) {
 
@@ -342,12 +342,13 @@ static void merge_sort_recursive(int[] arr, int[] result, int start, int end) {
 
     //整合
     int k = start;
-    while (start1 &lt;= end1 &amp;&amp; start2 &lt;= end2) // 比较,放入归并空间, 指针后移;
-    result[k++] = arr[start1] &lt; arr[start2] ? arr[start1++] : arr[start2++];
+    while (start1 &lt;= end1 &amp;&amp; start2 &lt;= end2) // 比较,放入大数组, 指针后移;
+        result[k++] = arr[start1] &lt; arr[start2] ? arr[start1++] : arr[start2++];
     while (start1 &lt;= end1) //将另一序列剩下的所有元素直接复制到合并序列尾
-    result[k++] = arr[start1++];
+        result[k++] = arr[start1++];
     while (start2 &lt;= end2) //将另一序列剩下的所有元素直接复制到合并序列尾
         result[k++] = arr[start2++];
+
     // 设置共享对象
     for (k = start; k &lt;= end; k++)
         arr[k] = result[k];
