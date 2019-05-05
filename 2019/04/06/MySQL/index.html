@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, sans-serif,Source Code Pro, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, monospace:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="12345678 ______      # ______        # __          #/_____/\     #/_____/\       #/_/\         #\::::_\/_    #\:::_ \ \      #\:\ \        # \:\/___/\   # \:\ \ \ \_    # \:\ \       #  \_::._\:\  #">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="当代硬技能:MySQL">
+<meta property="og:url" content="http://yoursite.com/2019/04/06/MySQL/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="12345678 ______      # ______        # __          #/_____/\     #/_____/\       #/_/\         #\::::_\/_    #\:::_ \ \      #\:\ \        # \:\/___/\   # \:\ \ \ \_    # \:\ \       #  \_::._\:\  #">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-06T13:52:25.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="当代硬技能:MySQL">
+<meta name="twitter:description" content="12345678 ______      # ______        # __          #/_____/\     #/_____/\       #/_/\         #\::::_\/_    #\:::_ \ \      #\:\ \        # \:\/___/\   # \:\ \ \ \_    # \:\ \       #  \_::._\:\  #">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/06/MySQL/">
+
+
+
+
+
+  <title>当代硬技能:MySQL | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/MySQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">当代硬技能:MySQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-06T21:51:59+08:00">
+                2019-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> ______      # ______        # __          #</span><br><span class="line">/_____/\     #/_____/\       #/_/\         #</span><br><span class="line">\::::_\/_    #\:::_ \ \      #\:\ \        #</span><br><span class="line"> \:\/___/\   # \:\ \ \ \_    # \:\ \       #</span><br><span class="line">  \_::._\:\  #  \:\ \ /_ \   #  \:\ \____  #</span><br><span class="line">    /____\:\ #   \:\_-  \ \  #   \:\/___/\ #</span><br><span class="line">    \_____\/ #    \___|\_\_/ #    \_____\/ #</span><br><span class="line">             #               #             #</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="这里的-每一个知识点对我来说都沾满了血-每一步都是从泥泞里爬着过去的…"><a href="#这里的-每一个知识点对我来说都沾满了血-每一步都是从泥泞里爬着过去的…" class="headerlink" title="这里的 每一个知识点对我来说都沾满了血, 每一步都是从泥泞里爬着过去的…"></a>这里的 每一个知识点对我来说都沾满了血, 每一步都是从泥泞里爬着过去的…</h1><p>CREATE TABLE <code>T1</code> (<br>    id int(11) not null  primary key auto_increment comment ‘主键字段’,<br>    C1 float(11,5) unique key comment ‘唯一约束字段’,<br>    C2 int(11) comment ‘C2字段’,<br>    content VARCHAR(65535) comment ‘内容’,<br>    createTime timestamp  not null DEFAULT CURRENT_TIMESTAMP, –添加时自动填充<br>    updateTime timestamp  not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, –修改时自动填充</p>
+<pre><code>INDEX index_name (C1),
+CONSTRAINT foreign key (C2) references table_name(column_name)
+)
+</code></pre><p>ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;</p>
+<hr>
+<h2 id="MySQL-数据类型"><a href="#MySQL-数据类型" class="headerlink" title="MySQL 数据类型:"></a>MySQL 数据类型:</h2><p>在MySQL中有三种主要类型: Text, Number, Date/Time.</p>
+<p>下面只说常用的:</p>
+<p>Text:<br>CHAR(size) 固定长度就是size<br>VARCHAR(size) 可变长度,最大是size. 如果超过255则自动转换为Text类型;</p>
+<h2 id="TEXT-存放超过65535个字符"><a href="#TEXT-存放超过65535个字符" class="headerlink" title="TEXT 存放超过65535个字符"></a>TEXT 存放超过65535个字符</h2><p>Number:<br>INT(size) size默认是11<br>FLOAT(size,d) d是小数位数<br>DOUBLE(size,d)</p>
+<h2 id="DECIMAL-size-d"><a href="#DECIMAL-size-d" class="headerlink" title="DECIMAL(size,d)"></a>DECIMAL(size,d)</h2><p>Date/Time: 有同名的函数, 注意分别;<br>YEAR 格式：YYYY<br>DATE 格式：YYYY-MM-DD<br>DATETIME 格式：YYYY-MM-DD HH:MM:SS<br>TIMESTAMP 时间戳</p>
+<hr>
+<h2 id="simple-CURD"><a href="#simple-CURD" class="headerlink" title="simple CURD:"></a>simple CURD:</h2><p>INSERT INTO T1(C1,C2)<br>VALUES<br>    ( ‘f’, ‘6’ ),<br>    ( ‘b’, ‘7’ ),<br>    ( ‘c’, ‘8’ ),<br>    ( ‘g’, ‘9’ ),<br>    ( ‘h’, ‘0’ );</p>
+<p>SELECT * FROM T1 WHERE 1 =1;</p>
+<p>UPDATE T1 SET T1.C2= ‘10’ WHERE T1.C1=’g’;</p>
+<p>DELETE FROM T1 WHERE 1=1;</p>
+<hr>
+<h2 id="CURD’s-JOIN"><a href="#CURD’s-JOIN" class="headerlink" title="CURD’s JOIN"></a>CURD’s JOIN</h2><p>如果有多个 JOIN, 每个 JOIN ON 之间 不用逗号’,’分隔开</p>
+<p>SELECT C1,C2,C3<br>FROM T1<br>INNER JOIN T2<br>ON T1.C1 = T2.C1<br>ORDER BY T1.C1;</p>
+<p>UPDATE T1, T2,<br>[INNER JOIN | LEFT JOIN] T1 ON T1.C1 = T2. C1<br>SET T1.C2 = T2.C2,<br>    T2.C3 = expr<br>WHERE condition;</p>
+<p>ref: <a href="https://www.yiibai.com/mysql/update-join.html" target="_blank" rel="noopener">https://www.yiibai.com/mysql/update-join.html</a></p>
+<p>DELETE T1, T2<br>FROM T1<br>INNER JOIN T2 ON T1.key = T2.key<br>WHERE condition</p>
+<hr>
+<h2 id="SQL必知必会"><a href="#SQL必知必会" class="headerlink" title="SQL必知必会:"></a>SQL必知必会:</h2><p>行与列:<br>row 与 record 意思是相同的; 但是专业的说法是row<br>column 与 field 意思是相同的; 但是field更多的指的是 计算字段<br>注意: 单列和多列; </p>
+<hr>
+<h3 id="检索不同值"><a href="#检索不同值" class="headerlink" title="检索不同值:"></a>检索不同值:</h3><p>如果不希望每个值每次都出现, 就在字段前面使用 DISTINCT<br>SELECT DISTINCT cust_name FROM CUST_TABLE WHERE 1=1 ;<br>警告: DISTINCT关键字作用于所有的列, 不仅仅是其后的那一列; 是每行所有的列都不同.</p>
+<h3 id="限制结果"><a href="#限制结果" class="headerlink" title="限制结果:"></a>限制结果:</h3><p>LIMIT 5 OFFSET 3 ;<br>offset 从0开始计数<br>返回从第3行起的5条结果.<br>可以简写为 LIMIT 5,3 ;</p>
+<h3 id="排序检索数据"><a href="#排序检索数据" class="headerlink" title="排序检索数据:"></a>排序检索数据:</h3><p>ORDER BY 不仅可以按照一个列来排序, 而且可以按照多个列来排序<br>首先按产品的名字,然后按照产品的价格.<br>仅在多个行具有相同的prod_name值时,才对产品按prod_price进行排序. 如果prod_name列中所有的值都是唯一的,则不会按prod_price排序.<br>ORDER BY 不仅可以用列名来指定根据哪个来排序, 而且可以使用结果列的相对位置来排序<br>例子:<br>SELECT prod_id, prod_name, prod_price FROM product ORDER BY prod_name, prod_price;<br>或者可以这样写:<br>SELECT prod_id, prod_name, prod_price FROM product ORDER BY 2,3;</p>
+<p>排序顺序: DESC 和 ASC ; 降序 和 升序 ;  缺省为 ASC ;<br>也可以全写为 DESCENDING 和 ASCENDING ; 后缀 -ending<br>警告: 如果想在多个列上进行降序排序，必须对每一列指定DESC关键字</p>
+<h3 id="检查"><a href="#检查" class="headerlink" title="检查:"></a>检查:</h3><p>不匹配检查: != 和 &lt;&gt;<br>范围检查: BETWEEN<br>空值检查: IS NULL<br>exists</p>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符:"></a>通配符:</h3><p>三个: % _ []<br>% 通配多个字符<br>_ 通配单个字符<br>例子: SELECT <em> FROM Persons WHERE FirstName LIKE ‘_eorge’;<br>     SELECT </em> FROM Persons WHERE LastName LIKE ‘C_r_er’;<br>     现在，我们希望从上面的 “Persons” 表中选取居住的城市以 “A” 或 “L” 或 “N” 开头的人：<br>     SELECT <em> FROM Persons WHERE City LIKE ‘[ALN]%’;<br>     现在，我们希望从上面的 “Persons” 表中选取居住的城市不以 “A” 或 “L” 或 “N” 开头的人：<br>     SELECT </em> FROM Persons WHERE City LIKE ‘[!ALN]%’;<br>[]通配包含在方括号内的单个字母, 比如, [JM]%表示任何以J或者M开头的单词; 在这时可以使用^脱字符, [^JM]%表示不以J或M起头的单词<br>警告: 通配符是比较慢的, 通配符放在开始处是最慢的; 所以, 细心使用, 不要过度</p>
+<h3 id="计算字段"><a href="#计算字段" class="headerlink" title="计算字段:"></a>计算字段:</h3><p>算术运算 + - <em> / 可以用于两个字段之间 SELECT 2</em>3;<br>SELECT Trim(‘ abc ‘);返回abc; SELECT NOW();返回当前日期和时间 2018-10-30 11:27:07;<br>SELECT quantityInStock * buyPrice FROM products WHERE productCode=’S10_4698’;</p>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数:"></a>常用函数:</h3><p>AVG() 返回某列的平均值  警告: 会忽略null. 只能为单列;<br>COUNT() 返回某列的行数  警告: COUNT(*)是对表中行的数目进行计数,不管有没有null;而COUNT(column)会忽略null;<br>MAX() 返回某列的最大值  警告: 会忽略null;<br>MIN() 返回某列的最小值  警告: 会忽略null;<br>SUM() 返回某列值之和  警告: 会忽略null;</p>
+<p>SELECT AVG(DISTINCT prod_price) AS avg_price<br>FROM Products<br>WHERE vend_id = ‘DLL01’;<br>返回各个价格的平均价格;<br>警告:DISTINCT不可用于COUNT();</p>
+<p>TRIM (字串) 空白移除。<br>LTRIM (字串): 將所有字串起頭的空白移除。<br>RTRIM (字串): 將所有字串結尾的空白移除。</p>
+<p>SELECT TRIM (‘   Sample   ‘);<br>‘Sample’</p>
+<p>SELECT LTRIM (‘   Sample   ‘);<br>‘Sample   ‘</p>
+<p>SELECT RTRIM (‘   Sample   ‘);<br>‘   Sample’</p>
+<h3 id="创建分组"><a href="#创建分组" class="headerlink" title="创建分组:"></a>创建分组:</h3><p>GROUP BY column;<br>会根据column每个不同的值来分组;<br>例子:<br>SELECT vend_id, COUNT(*) AS num_prods<br>FROM Products<br>GROUP BY vend_id;<br>返回结果: 对每个vend_id而不是整个表计算num_prods一次<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">------------------</span><br><span class="line">vend_id  num_prods</span><br><span class="line">-------  ---------</span><br><span class="line">BRS01       3</span><br><span class="line">DLL01       4</span><br><span class="line">FNG01       2</span><br><span class="line">------------------</span><br></pre></td></tr></table></figure></p>
+<p>警告: GROUP BY 后面不能是函数<br>     GROUP BY 必须在where之后, ORDER BY 之前</p>
+<h3 id="过滤分组-HAVING"><a href="#过滤分组-HAVING" class="headerlink" title="过滤分组:HAVING"></a>过滤分组:HAVING</h3><p>把 GROUP BY 分组以后的数据, 进行取舍, 只留下符合HAVING条件的分组<br>SELECT country,<code>state</code>, postalCode,COUNT(*) FROM customers GROUP BY <code>state</code> HAVING country = ‘USA’;<br>警告: HAVING 与 WHERE 非常相似, 如果不指定 GROUP BY,大多数DBMS会把他们同等对待.<br>     HAVING 应该结合 GROUP BY 使用, 而 WHERE 子句则用于标准的行级过滤.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">----------------------------</span><br><span class="line">SELECT   |   要返回的列或表达式  </span><br><span class="line">FROM     |   从其中检索数据的表  </span><br><span class="line">WHERE    |   行级过滤           </span><br><span class="line">GROUP BY |   分组说明           </span><br><span class="line">HAVING   |   组级过滤           </span><br><span class="line">ORDER BY |   输出排序顺序        </span><br><span class="line">----------------------------</span><br></pre></td></tr></table></figure>
+<hr>
+<p>联结:JOIN<br>SQL最强大的功能就是能在数据查询的执行中联结(JOIN)表;<br>关系表: 可伸缩</p>
+<p>组合查询: UNION<br>可用UNION操作符来组合数条SQL查询.利用UNION,可给出多条SELECT语句,将它们的结果组合成一个结果集.<br>例如:<br>SELECT cust_name, cust_contact, cust_email<br>FROM Customers<br>WHERE cust_state IN (‘IL’,’IN’,’MI’)<br>UNION<br>SELECT cust_name, cust_contact, cust_email<br>FROM Customers<br>WHERE cust_name = ‘Fun4All’;</p>
+<p>警告: UNION中的每个查询必须包含相同的列、表达式或聚集函数（不过，各个列不需要以相同的次序列出）。<br>     使用UNION时，重复的行会被自动取消. 如果想返回所有的匹配行，可使用 UNION ALL 而不是 UNION 。</p>
+<p>对组合结果进行排序: ORDER BY cust_name, cust_contact; 在最后一条SELECT语句后使用 ORDER BY 子句。<br>虽然ORDER BY子句似乎只是最后一条SELECT语句的组成部分，但实际上DBMS用它来排序所有SELECT语句返回的所有结果。</p>
+<p>插入部分列:<br>INSERT INTO Customers(cust_id,cust_name,cust_address,cust_city,cust_state,cust_zip,cust_country)<br>VALUES(‘1000000006’,’Toy Land’,’123 Any Street’,’New York’,’NY’,’11111’,’USA’);<br>警告: 如果省略的列不允许有NULL值或者默认值，这时却省略了值，DBMS就会产生错误消息，相应的行不能成功插入</p>
+<p>从一个表复制到另外一个表:<br>INSERT INTO tab1(col1, col2, col3) SELECT col1,col2,col3 FROM tab2 WHERE 1=1;<br>或者可以这样写:<br>SELECT col1,col2,col3 INTO tab2 FROM tab1;</p>
+<p>UPDATE 和 DELETE : 注意一定要写where子句, 要注意自己是否有权限</p>
+<p>下面是许多SQL程序员使用UPDATE或DELETE时所遵循的重要原则:<br>-除非确实打算更新和删除每一行，否则绝对不要使用不带WHERE子句的UPDATE或DELETE语句。<br>-保证每个表都有主键（如果忘记这个内容，请参阅第12课），尽可能像WHERE子句那样使用它（可以指定各主键、多个值或值的范<br>围）。<br>-在UPDATE或DELETE语句使用WHERE子句前，应该先用SELECT进行测试，保证它过滤的是正确的记录，以防编写的WHERE子句不正<br>确。<br>-注意权限<br>-注意与其他表的关联</p>
+<hr>
+<h2 id="创建和操纵表"><a href="#创建和操纵表" class="headerlink" title="创建和操纵表:"></a>创建和操纵表:</h2><p>ALTER TABLE Vendors<br>ADD vend_phone CHAR(20);</p>
+<p>ALTER TABLE Vendors<br>DROP COLUMN vend_phone;</p>
+<p>DROP TABLE CustCopy;</p>
+<p>ALTER  TABLE table_name<br>RENAME TO new_table_name;</p>
+<p>=======================================================================================================</p>
+<pre><code>视图
+</code></pre><p>=======================================================================================================</p>
+<p>视图是虚拟的表。与包含数据的表不一样，视图只包含使用时动态检索数据的查询</p>
+<p>警告: 有些DBMS不支持视图 !</p>
+<p>输入▼<br>SELECT cust_name, cust_contact<br>FROM Customers, Orders, OrderItems<br>WHERE Customers.cust_id = Orders.cust_id<br>AND OrderItems.order_num = Orders.order_num<br>AND prod_id = ‘RGAN01’;<br>此查询用来检索订购了某种产品的顾客。任何需要这个数据的人都必须理解相关表的结构，知道如何创建查询和对表进行联结。检索其他产品<br>（或多个产品）的相同数据，必须修改最后的WHERE子句。<br>现在，假如可以把整个查询包装成一个名为ProductCustomers的虚拟表，则可以如下轻松地检索出相同的数据：<br>输入▼<br>SELECT cust_name, cust_contact<br>FROM ProductCustomers<br>WHERE prod_id = ‘RGAN01’;<br>这就是视图的作用。ProductCustomers是一个视图，作为视图，它不包含任何列或数据，包含的是一个查询（与上面用以正确联结表的相同查<br>询）。</p>
+<p>为什么使用视图:<br>1.重用SQL语句。<br>2.简化复杂的SQL操作。在编写查询后，可以方便地重用它而不必知道其基本查询细节。<br>3.使用表的一部分而不是整个表。<br>4.保护数据。可以授予用户访问表的特定部分的权限，而不是整个表的访问权限。<br>5.更改数据格式和表示。视图可返回与底层表的表示和格式不同的数据。<br>6.创建视图之后，可以用与表基本相同的方式使用它们。可以对视图执行SELECT操作，过滤和排序数据，将视图联结到其他视图或表，甚至添加<br>和更新数据（添加和更新数据存在某些限制，关于这个内容稍后做介绍）。<br>7.重要的是，要知道视图仅仅是用来查看存储在别处数据的一种设施。视图本身不包含数据，因此返回的数据是从其他表中检索出来的。在添加<br>或更改这些表中的数据时，视图将返回改变过的数据。</p>
+<p>警告：性能问题<br>因为视图不包含数据，所以每次使用视图时，都必须处理查询执行时需要的所有检索。如果你用多个联结和过滤创建了复杂的视图或者嵌套<br>了视图，性能可能会下降得很厉害。因此，在部署使用了大量视图的应用前，应该进行测试。</p>
+<p>视图的规则和限制(常见):<br>1.视图可以嵌套，即可以利用从其他视图中检索数据的查询来构造视图。所允许的嵌套层数在不同的DBMS中有所不同（嵌套视图可能会严<br>重降低查询的性能，因此在产品环境中使用之前，应该对其进行全面测试）。<br>2.许多DBMS禁止在视图查询中使用ORDER BY子句。<br>3.有些DBMS要求对返回的所有列进行命名，如果列是计算字段，则需要使用别名。<br>4.视图不能索引，也不能有关联的触发器或默认值。<br>5.有些DBMS把视图作为只读的查询，这表示可以从视图检索数据，但不能将数据写回底层表。详情请参阅具体的DBMS文档。</p>
+<p>创建视图: (“茴”字的4种写法)</p>
+<p>1.利用视图简化复杂的联结<br>最常见的应用就是隐藏复杂的SQL,如:<br>CREATE VIEW ProductCustomers AS<br>SELECT cust_name, cust_contact, prod_id<br>FROM Customers, Orders, OrderItems<br>WHERE Customers.cust_id = Orders.cust_id<br>AND OrderItems.order_num = Orders.order_num;<br>这个查询联结了三张表,可以说是很复杂了, 把它做成一个视图, 再次查询就简单了;<br>SELECT cust_name, cust_contact<br>FROM ProductCustomers<br>WHERE prod_id = ‘RGAN01’;</p>
+<p>2.利用视图重新格式化检索出的数据:<br>CREATE VIEW VendorLocations as<br>SELECT RTRIM(vend_name) + ‘ (‘ + RTRIM(vend_country) + ‘)’<br>AS vend_title<br>FROM Vendors<br>ORDER BY vend_name;</p>
+<p>3.利用视图过滤掉不想要的数据:<br>CREATE VIEW CustomerEMailList AS<br>SELECT cust_id, cust_name, cust_email<br>FROM Customers<br>WHERE cust_email IS NOT NULL;</p>
+<p>4.使用视图与计算字段:<br>CREATE VIEW OrderItemsExpanded AS<br>SELECT order_num,<br>prod_id,<br>quantity,<br>item_price,<br>quantity*item_price AS expanded_price</p>
+<h1 id="FROM-OrderItems"><a href="#FROM-OrderItems" class="headerlink" title="FROM OrderItems;"></a>FROM OrderItems;</h1><pre><code>约束
+</code></pre><p>=======================================================================================================<br>CONSTRAINT 分为:</p>
+<p>primary key 主键约束<br>foreign key 外键约束<br>unique key 唯一约束<br>not NULL 非空约束<br>default 默认约束<br>check</p>
+<p>primary key 的创建方式:<br>可以直接在field上添加 primary key 关键字;<br>或者: CONSTRAINT 主键名 primary key (列名),<br>或者: alter table 表名 add primary key (列名);<br>     alter table 表名 drop primary key;<br>联合主键: CONSTRAINT 主键名 primary key (列名1，列名2),</p>
+<p>foreign key 的创建方式:<br>CONSTRAINT 外键名 foreign key (列名) references 表名(列名),<br>alter TABLE 表名 DROP foreign key 外键名;<br>alter table 表名 add foreign key (列名) references 表名(列名);</p>
+<p>unique key 的创建方式:<br>可以直接在field上添加 unique key 关键字;</p>
+<p>NOT NULL 的创建方式:<br>输入值必须是非空的，需要注意的是允许控制尽量不要太多，太多会更消耗数据库性能。<br>CREATE TABLE student<br>(<br>  name CHAR(20) NOT NULL<br> );</p>
+<p>=======================================================================================================</p>
+<pre><code>索引
+</code></pre><p>=======================================================================================================<br>索引是以空间换时间的典型例子</p>
+<p>创建索引:<br>普通索引<br>这是最基本的索引类型，而且它没有唯一性之类的限制。普通索引可以通过以下几种方式创建：<br>（1）创建索引: CREATE INDEX 索引名 ON 表名(列名1，列名2,…);<br>（2）修改表: ALTER TABLE 表名ADD INDEX 索引名 (列名1，列名2,…);<br>（3）创建表时指定索引：CREATE TABLE 表名 ( […], INDEX 索引名 (列名1，列名2,…) );</p>
+<p>UNIQUE索引<br>表示唯一的，不允许重复的索引，如果该字段信息保证不会重复例如身份证号用作索引时，可设置为unique：<br>（1）创建索引：CREATE UNIQUE INDEX 索引名 ON 表名(列的列表);<br>（2）修改表：ALTER TABLE 表名ADD UNIQUE 索引名 (列的列表);<br>（3）创建表时指定索引：CREATE TABLE 表名( […], UNIQUE 索引名 (列的列表) );</p>
+<p>主键：PRIMARY KEY索引<br>主键是一种唯一性索引，但它必须指定为“PRIMARY KEY”。<br>（1）主键一般在创建表的时候指定：“CREATE TABLE 表名( […], PRIMARY KEY (列的列表) ); ”<br>（2）但是，我们也可以通过修改表的方式加入主键：“ALTER TABLE 表名ADD PRIMARY KEY (列的列表); ”<br>每个表只能有一个主键（主键相当于聚合索引，是查找最快的索引）<br>注：不能用CREATE INDEX语句创建PRIMARY KEY索引</p>
+<p>删除索引:<br>DROP INDEX index_name ON talbe_name<br>ALTER TABLE table_name DROP INDEX index_name</p>
+<p>查看索引:<br>show index from tblname;<br>show keys from tblname;</p>
+<p>创建原则:</p>
+<ol>
+<li>较频繁的作为查询条件的字段应该创建索引</li>
+<li>唯一性太差的字段不适合单独创建索引，即使频繁作为查询条件</li>
+<li>更新非常频繁的字段不适合创建索引</li>
+<li>不会出现在 WHERE 子句中的字段不该创建索引</li>
+</ol>
+<p>=======================================================================================================</p>
+<pre><code>事务控制      
+</code></pre><p>=======================================================================================================<br>START 或 BEGIN TRANSACTION;<br>SET TRANSACTION [ READ WRITE | READ ONLY ];<br>USE talbe_name;<br>SQL语句…….;<br>SAVEPOINT 状态点名字;<br>SQL语句…….<br>COMMIT;</p>
+<p>ROLLBACK;<br>或者<br>ROLLBACK TO 状态点名字;</p>
+<p>RELEASE SAVEPOINT 状态点名字; 用于删除先前创建的保存点;</p>
+<p>=======================================================================================================</p>
+<pre><code>函数:解决公有问题
+</code></pre><p>=======================================================================================================<br>– 解决可能的坑: – set global log_bin_trust_function_creators=1;<br>– 函数和存储过程 目前可能暂时不可以返回多个值;</p>
+<p>变量: @@变量名 是系统变量,不能创建和删除但是可以修改和使用.<br>     @变量名 是用户自定义变量</p>
+<pre><code>定义: SET @变量名=值; 如 SET @name=&apos;admin&apos;;
+查看: SELECT @变量名; 如 SELECT @name;
+</code></pre><p>变量的作用域:<br>全局变量: 外部定义的变量叫做全局变量; 可以在函数内部使用;<br>局部变量: declare 变量名 数据类型;  不能在函数外部使用;</p>
+<hr>
+<p>自定义函数:</p>
+<p>delimiter $$ –定义分隔符</p>
+<p>CREATE funcation 函数名(参数列表) returns 数据类型<br>     BEGIN<br>     – 函数体<br>     – 返回值<br>     END<br>$$ –结束</p>
+<p>delimiter ; –还原分隔符</p>
+<p>注意:<br>1.DELIMITER是分割符的意思，因为MySQL默认以”;”为分隔 符，<br>如果我们没有声明分割符，那么编译器会把函数当成SQL语句进行处理，<br>则函数的编译过程会报错，所以要事先用DELIMITER关键字申明当前段分隔符，<br>这样MySQL才会将”;”当做函数中的代码，不会执行这些代码，用完了之后要把分隔符还原;<br>2.自定义函数 不能跨库;</p>
+<p>示例:<br>delimiter $$<br>CREATE funcation myAvg(p1 int) returns int<br>     BEGIN<br>          declare value1;<br>          set value1=p1;<br>          return value1;<br>     END<br>$$<br>delimiter ;</p>
+<p>调用自定以函数: SELECT mystu(“s001”) FROM DUAL;<br>查看自定义函数: show function status;<br>删除自定义函数: drop function 函数名;</p>
+<hr>
+<p>分支结构:<br>if 条件 then<br>     –语句<br>else<br>     –语句<br>end if;</p>
+<p>循环结构:<br>循环名字:while 条件 do<br>     –循环体<br>end while;</p>
+<p>在mysql中也有类似continue和break的语句，iterate 对应 continue,leave 对应 break, 执行语法 ：iterate 或者 leave 循环名字</p>
+<p>示例:<br>delimiter $$<br>– 从1开始计算到指定数字的和<br>create function test_while(number int) returns int<br>begin<br>    – 定义局部变量返回值，默认为0<br>    declare res int default 0;<br>    – 定义个局部变量,默认值为1<br>    declare i int default 1;</p>
+<pre><code>-- 循环操作
+sum_number:while i &lt;= number do
+        set res = res + i;
+        set i =i + 1;
+        end while;
+-- 返回值
+return res;
+</code></pre><p>end<br>$$<br>delimiter ;</p>
+<hr>
+<p>#创建一个函数<br>DELIMITER $$ – 定界符<br>– 开始创建函数<br>CREATE FUNCTION user_main_fn(v_id INT)<br>RETURNS VARCHAR(50)<br>BEGIN<br>  – 定义变量<br>  DECLARE v_userName VARCHAR(50);<br>  – 给定义的变量赋值<br>  SELECT f_userName INTO v_userName FROM t_user_main<br>  WHERE f_userId = v_id;<br>  – 返回函数处理结果<br>  RETURN v_userName;<br>END $$ – 函数创建定界符<br>DELIMITER; </p>
+<hr>
+<p>delimiter $$<br>create FUNCTION mystu(sno VARCHAR(10)) RETURNS VARCHAR(20)<br>BEGIN<br>DECLARE mname VARCHAR(20);<br>SELECT sname INTO mname from student WHERE sno=sno LIMIT 1;<br>return mname;<br>end<br>$$<br>delimiter ;</p>
+<p>=======================================================================================================</p>
+<pre><code>存储过程:解决特定问题
+</code></pre><p>=======================================================================================================<br>SQL 是先编译后执行的; 存储过程就是一个函数;<br>存储过程 是经过 预编译 存储在 服务器 里面的, 所以当执行的时候会跳过 预编译 环节,执行效率自然会快;</p>
+<p>语法:<br>delimiter $$<br>create procedure 存储过程名字 (in/out/inout 参数名 参数类型, 其它参数…)<br>     BEGIN<br>          –过程体<br>     END<br>$$<br>delimiter ;</p>
+<p>参数分为 in,out 和 inout 类型<br>in： 该参数只能从外部传入，不能从内部传出去，只能读取外部的值<br>out：只能从内部把数据传出去，不能读取变量在外部定义的值，只能在存储过程内部对其进行赋值和访问<br>inout：既能从外部传入，又能从内部传出，既可以读取外部的值，又可以在内部进行赋值，从而实现对外部的值的修改</p>
+<p>示例:<br>DELIMITER //<br>CREATE PROCEDURE proc_1(OUT s int)<br>BEGIN<br>SELECT count(*) INTO s from student;<br>end<br>//<br>DELIMITER ;</p>
+<p>set @s = 1;<br>call proc_1(@s);<br>SELECT @s;</p>
+<p>delimiter //<br>CREATE PROCEDURE proc_3(in s3 VARCHAR(10))<br>BEGIN<br>SELECT * from student where sno=s3;<br>END//<br>delimiter ;</p>
+<p>set @s3 = ‘s001’;<br>call proc_3(@s3);</p>
+<p>delimiter $$<br>create procedure test_procedure2()<br>begin<br>    select * from student;<br>end<br>$$<br>delimiter ;</p>
+<h2 id="call-test-procedure"><a href="#call-test-procedure" class="headerlink" title="call test_procedure;"></a>call test_procedure;</h2><p>调用存储过程: 不能使用select调用<br>Set @参数名字 = 值;<br>call 存储过程名字(参数);<br>查看存储过程: 与查看函数类似<br>show procedure status;<br>删除存储过程:<br>语法: drop procedure 存储过程名字;</p>
+<p>=======================================================================================================</p>
+<pre><code>锁
+</code></pre><p>=======================================================================================================</p>
+<p>=======================================================================================================</p>
+<pre><code>触发器
+</code></pre><p>=======================================================================================================</p>
+<p>================================================其它=====================================================<br>查询的数据分页: 即使用 LIMIT 和 OFFSET 关键字 (MySQL推荐使用)<br>              或者 使用 TOP 或者 Row_number() 函数 ;</p>
+<pre><code>分页查询的优化是通过返回上次的主键id;
+select * from table_name where id &gt; 上次的id值 limit 5 OFFSET 10;
+</code></pre><p>MySQL两个字段相加减:<br>select IFNULL(c1,0) + IFNULL(c2,0) from table where Id = 1;<br>select IFNULL(c1,0) - IFNULL(c2,0) from table where Id = 1;</p>
+<p>MySQL两个字段拼接:<br>CONCAT(str1,str2…)  –将多个结果作为字符串拼接在一起<br>CONCAT_WS(separator,str1,str2,…) –使用指定分隔符<br>GROUP_CONCAT(expr1,expr2) –将多行的字符串按分组整合成一个字符串，必须配合group使用<br>拼接示例:<br>SELECT CONCAT(o.user_code,o.user_name) FROM sys_user o WHERE id = 109007; –如果字段有null,通常配合使用IFNULL()<br>SELECT CONCAT_WS(‘;’,o.user_code,o.user_name) FROM sys_user o WHERE id = 109002;<br>SELECT o.id,group_concat(o.student_name) FROM student_info o GROUP BY o.class_id;</p>
+<p>IFNULL(expr1,expr2)<br>如果expr1不是NULL，IFNULL()返回expr1，否则它返回expr2.</p>
+<p>时间转字符串<br>select date_format(now(), ‘%Y-%m-%d’);<br>结果：2016-01-05 </p>
+<p>时间转时间戳<br>select unix_timestamp(now());<br>结果：1452001082 </p>
+<p>字符串转时间<br>select str_to_date(‘2016-01-02’, ‘%Y-%m-%d %H’);<br>结果：2016-01-02 00:00:00</p>
+<p>字符串转时间戳<br>select unix_timestamp(‘2016-01-02’);<br>结果：1451664000</p>
+<p>时间戳转时间<br>select from_unixtime(1451997924);<br>结果：2016-01-05 20:45:24 </p>
+<p>时间戳转字符串<br>select from_unixtime(1451997924,’%Y-%d’);<br>结果：2016-01-05 20:45:24</p>
+<p>=======================================================================================================<br>ref:</p>
+<p>存储过程 与 函数:<br><a href="https://chenjiabing666.github.io/2018/06/26/Mysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%98%E5%82%A8%E5%87%BD%E6%95%B0/" target="_blank" rel="noopener">https://chenjiabing666.github.io/2018/06/26/Mysql%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%AD%98%E5%82%A8%E5%87%BD%E6%95%B0/</a></p>
+<p>函数:<br><a href="https://www.jianshu.com/p/6e411e849502" target="_blank" rel="noopener">https://www.jianshu.com/p/6e411e849502</a></p>
+<p>存储过程:<br><a href="https://segmentfault.com/a/1190000009058579" target="_blank" rel="noopener">https://segmentfault.com/a/1190000009058579</a></p>
+<p>=======================================================================================================<br>注意各种 JOIN 的用法: 如果直接写 JOIN , 默认是 left outer join ;</p>
+<p>以下关键字可以后面跟多个字段, 注意其含义.往往能解决复杂问题<br>DISTINCT<br>GROUP BY<br>ORDER BY</p>
+<h1 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h1><p><a href="http://mysql.taobao.org/monthly/2017/11/09/" target="_blank" rel="noopener">http://mysql.taobao.org/monthly/2017/11/09/</a><br><a href="http://mysql.taobao.org/monthly/" target="_blank" rel="noopener">http://mysql.taobao.org/monthly/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/05/给IDEA娘的换装/" rel="next" title="让我们给IDEA娘换装">
+                <i class="fa fa-chevron-left"></i> 让我们给IDEA娘换装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/30/Java-数据结构-二叉树/" rel="prev" title="数据结构-二叉树">
+                数据结构-二叉树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这里的-每一个知识点对我来说都沾满了血-每一步都是从泥泞里爬着过去的…"><span class="nav-number">1.</span> <span class="nav-text">这里的 每一个知识点对我来说都沾满了血, 每一步都是从泥泞里爬着过去的…</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL 数据类型:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TEXT-存放超过65535个字符"><span class="nav-number">1.2.</span> <span class="nav-text">TEXT 存放超过65535个字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DECIMAL-size-d"><span class="nav-number">1.3.</span> <span class="nav-text">DECIMAL(size,d)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simple-CURD"><span class="nav-number">1.4.</span> <span class="nav-text">simple CURD:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CURD’s-JOIN"><span class="nav-number">1.5.</span> <span class="nav-text">CURD’s JOIN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL必知必会"><span class="nav-number">1.6.</span> <span class="nav-text">SQL必知必会:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检索不同值"><span class="nav-number">1.6.1.</span> <span class="nav-text">检索不同值:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限制结果"><span class="nav-number">1.6.2.</span> <span class="nav-text">限制结果:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序检索数据"><span class="nav-number">1.6.3.</span> <span class="nav-text">排序检索数据:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查"><span class="nav-number">1.6.4.</span> <span class="nav-text">检查:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符"><span class="nav-number">1.6.5.</span> <span class="nav-text">通配符:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算字段"><span class="nav-number">1.6.6.</span> <span class="nav-text">计算字段:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数"><span class="nav-number">1.6.7.</span> <span class="nav-text">常用函数:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建分组"><span class="nav-number">1.6.8.</span> <span class="nav-text">创建分组:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤分组-HAVING"><span class="nav-number">1.6.9.</span> <span class="nav-text">过滤分组:HAVING</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建和操纵表"><span class="nav-number">1.7.</span> <span class="nav-text">创建和操纵表:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FROM-OrderItems"><span class="nav-number">2.</span> <span class="nav-text">FROM OrderItems;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#call-test-procedure"><span class="nav-number">2.1.</span> <span class="nav-text">call test_procedure;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIMIT"><span class="nav-number">3.</span> <span class="nav-text">LIMIT</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
