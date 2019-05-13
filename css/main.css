@@ -216,7 +216,7 @@ h6 {
   padding: 0;
   font-weight: bold;
   line-height: 1.5;
-  font-family: "Source Code Pro", Georgia, sans;
+  font-family: "Noto Sans SC", sans;
 }
 h2,
 h3,
@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #492478;
+  background: #42ff96;
 }
 .links-of-blogroll {
   font-size: 13px;
