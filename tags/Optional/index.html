@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="编程语言,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -123,18 +123,13 @@
 
 
 
-<meta name="description" content="______         _         _                | ___ \       (_)       | |               | |_/ /  ___   _  _ __  | |_   ___  _ __  |  __/  / _ \ | || &amp;apos;_ \ | __| / _ \| &amp;apos;__| | |    | (_) || || |">
-<meta name="keywords" content="编程语言">
-<meta property="og:type" content="article">
-<meta property="og:title" content="C语言的指针">
-<meta property="og:url" content="http://yoursite.com/2019/05/05/C语言的指针/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="最上川">
+<meta property="og:url" content="http://yoursite.com/tags/Optional/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="______         _         _                | ___ \       (_)       | |               | |_/ /  ___   _  _ __  | |_   ___  _ __  |  __/  / _ \ | || &amp;apos;_ \ | __| / _ \| &amp;apos;__| | |    | (_) || || |">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-05T07:42:16.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C语言的指针">
-<meta name="twitter:description" content="______         _         _                | ___ \       (_)       | |               | |_/ /  ___   _  _ __  | |_   ___  _ __  |  __/  / _ \ | || &amp;apos;_ \ | __| / _ \| &amp;apos;__| | |    | (_) || || |">
+<meta name="twitter:title" content="最上川">
 
 
 
@@ -164,13 +159,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/05/C语言的指针/">
+  <link rel="canonical" href="http://yoursite.com/tags/Optional/">
 
 
 
 
 
-  <title>C语言的指针 | 最上川</title>
+  <title>Tag: Optional | 最上川</title>
   
 
 
@@ -187,7 +182,7 @@
   
   
 
-  <div class="container  page-post-detail">
+  <div class="container  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -271,171 +266,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>Optional<small>Tag</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/05/C语言的指针/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chiu">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="最上川">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">C语言的指针</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2019/03/07/Optional/" itemprop="url">
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span itemprop="name">Optional</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T14:36:19+08:00">
-                2019-05-05
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-03-07T16:40:19+08:00" content="2019-03-07">
+          03-07
+        </time>
+      </div>
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <hr>
-<pre><code>______         _         _               
-| ___ \       (_)       | |              
-| |_/ /  ___   _  _ __  | |_   ___  _ __ 
-|  __/  / _ \ | || &apos;_ \ | __| / _ \| &apos;__|
-| |    | (_) || || | | || |_ |  __/| |   
-\_|     \___/ |_||_| |_| \__| \___||_|   
-</code></pre><hr>
-<a id="more"></a>
-<ol>
-<li><p>指针是一种<strong>独立的数据类型</strong>: 指针类型, 例如:<br><code>int*</code> 是指向整数的指针类型<br><code>char*</code> 是指向字符的指针类型</p>
-<p><strong>Q:</strong> 都是指针类型为什么要分呢?<br><strong>A:</strong> 指针存储的是变量在内存中的地址, 这个地址是变量在内存中的<strong>开始地址</strong>; 变量的类型不同, 在内存中所占用的空间大小也不同,比如,我们都知道在64位编译器中char占用1个字节,int占用4个字节,double占用8个字节… <strong>要根据指针类型确定对指针的加减运算的偏移</strong></p>
-</li>
-</ol>
-<p><pre><br>指针（pointer）和 int，char 类似，是一种独立的数据类型<br>区别在于，当我们说“指针”时，其实是说一系列的数据类型（泛指），就像我们说“数值型数据类型”，也是泛指（包括  int, float, double 等等）。<br>当我们具体说 “int 型指针”时，我们是说 int<em>（而不是 float</em> 或者 double<em>），就像是指出了数值类型中的某一个具体类型（例如 int）。<br>下面以 int </em>a = &b; 为例，并假设这行代码的运行环境下，int 为 4字节长。<br>1，指针是地址吗？不是。上面已经说了，指针本身具有独立的数据类型，<br>我们可以用这个类型声明一个变量并赋值，只不过指针所对应的变量用途比较特殊，是用来保存某个内存地址的。<br>也就是说，指针本身占用了一小块内存空间（它本身不是地址，地址就是一串数字，完全不搭边儿），而这块内存空间是用来写入一个地址数据的。<br>2，既然指针是用来保存地址的，也就是保存一串数字而已，为什么还要有类型？<br>类型系统有两个重要作用，一个是用作编译时类型检查，让编译器帮助我们避免犯错，<br>比如上面的例子，我声明的是一个 int 型指针，但如果赋值时使用的 b 不是 int 型（可能酒后写代码不小心写错了），如果没有指针类型检查的话，这个错误可能只有在程序运行的时候才能发现。<br>类型的另外一个作用是，指明一个内存地址所保存的二进制数据，应该怎样被解释。<br>想想看在没有指针类型的情况下，虽然我知道了 a 中保存的地址，但当我想解引用指针（<em>a），读出这块地址中的一个 int 型数据时就有问题了，编译器怎样知道你从这个位置开始要读出一个字节，还是 4 个字节？<br>而在有 int</em> 这个类型的指导下，编译器知道在解引用的时候读出 4 个字节（int* 对应的指针偏移量是 4 字节）<br></pre><br>ref: <a href="https://www.zhihu.com/question/31022750" target="_blank" rel="noopener">知乎</a></p>
-<ol start="2">
-<li><p>可以通过指针来完成”<a href="https://www.wikiwand.com/zh-hans/%E6%B1%82%E5%80%BC%E7%AD%96%E7%95%A5#/%E4%BC%A0%E5%85%B1%E4%BA%AB%E5%AF%B9%E8%B1%A1%E8%B0%83%E7%94%A8%EF%BC%88-%7BCall_by_sharing%7D-%EF%BC%89" target="_blank" rel="noopener">传共享对象调用（Call by sharing）</a>“求值策略;<br>即: 直接根据指针(变量的内存地址)修改变量的值;</p>
-</li>
-<li><p>指针的<a href="https://blog.csdn.net/soonfly/article/details/51131141" target="_blank" rel="noopener">奇技淫巧</a></p>
-</li>
-</ol>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/30/Java-数据结构-二叉树/" rel="next" title="数据结构-二叉树">
-                <i class="fa fa-chevron-left"></i> 数据结构-二叉树
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/05/一些软考中的算法/" rel="prev" title="一些软考中的算法">
-                一些软考中的算法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -443,10 +319,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -652,10 +524,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

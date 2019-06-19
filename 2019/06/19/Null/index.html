@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Python,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -123,18 +123,17 @@
 
 
 
-<meta name="description" content="对于刚入门的新手, Python的难点就是 列表生成式,迭代器,生成器,装饰器…">
-<meta name="keywords" content="Python">
+<meta name="description" content="Null, undefined, None, Nil, Nothing, NaN  Null 与  undefined 的区别如下:  123456789101112131415console.log(null == undefined);     //trueconsole.log(null === undefined);    //falsevar a;console.log(a === un">
 <meta property="og:type" content="article">
-<meta property="og:title" content="理解Python中的生成器">
-<meta property="og:url" content="http://yoursite.com/2019/03/15/理解Python中的生成器/index.html">
+<meta property="og:title" content="最上川">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/Null/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="对于刚入门的新手, Python的难点就是 列表生成式,迭代器,生成器,装饰器…">
+<meta property="og:description" content="Null, undefined, None, Nil, Nothing, NaN  Null 与  undefined 的区别如下:  123456789101112131415console.log(null == undefined);     //trueconsole.log(null === undefined);    //falsevar a;console.log(a === un">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-15T08:27:41.997Z">
+<meta property="og:updated_time" content="2019-06-19T07:08:58.227Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="理解Python中的生成器">
-<meta name="twitter:description" content="对于刚入门的新手, Python的难点就是 列表生成式,迭代器,生成器,装饰器…">
+<meta name="twitter:title" content="最上川">
+<meta name="twitter:description" content="Null, undefined, None, Nil, Nothing, NaN  Null 与  undefined 的区别如下:  123456789101112131415console.log(null == undefined);     //trueconsole.log(null === undefined);    //falsevar a;console.log(a === un">
 
 
 
@@ -164,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/15/理解Python中的生成器/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/19/Null/">
 
 
 
 
 
-  <title>理解Python中的生成器 | 最上川</title>
+  <title> | 最上川</title>
   
 
 
@@ -285,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/15/理解Python中的生成器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/Null/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chiu">
@@ -302,7 +301,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">理解Python中的生成器</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -314,8 +313,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-15T09:05:53+08:00">
-                2019-03-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T15:07:22+08:00">
+                2019-06-19
               </time>
             
 
@@ -352,35 +351,24 @@
       
 
       
-        <p>对于刚入门的新手, Python的难点就是 列表生成式,迭代器,生成器,装饰器…</p>
-<a id="more"></a>
-<h1 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h1><ol>
-<li>任何使用yield关键字的函数都称之为生成器; 与普通函数的区别是生成器含有yield关键字</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">yield</span> n</span><br><span class="line">        n-=<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>生成器生成的是一个序列,该函数返回的对象类型是”generator” <br><br>返回的是一个迭代器, 可以通过连续调用<strong>next</strong>()来返回序列值</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">c=count(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">print(c) <span class="comment"># &lt;generator object count at 0x010C5E30&gt; 因为返回的对象的类型是generator</span></span><br><span class="line"></span><br><span class="line">print(c.__next__()) <span class="comment"># 5</span></span><br><span class="line">print(c.__next__()) <span class="comment"># 4</span></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>生成器函数只有在调用<strong>next</strong>()方法的时候才开始执行函数里面的语句 <br><br>在执行<code>c=count(5)</code>时, 不会打印 counting, 只有执行<code>c.__next__()</code>的时候才会打印; <br><br>(且只会打印一次)</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count2</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">"counting"</span>)</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">yield</span> n   <span class="comment">#生成值：n</span></span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line">c=count(<span class="number">15</span>)</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>每次调用<code>__next__()</code>方法时,count函数会运行到语句yield n处为止 <br><br><code>__next__()</code>的返回值就是生成值n <br><br>再次调用next()方法时,函数继续执行yield之后的语句 <br></li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count</span><span class="params">(n)</span>:</span></span><br><span class="line">    print(<span class="string">"counting"</span>)</span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'before yield'</span>)</span><br><span class="line">        <span class="keyword">yield</span> n   <span class="comment">#生成值：n</span></span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line">        print(<span class="string">'after yield'</span>)</span><br><span class="line"></span><br><span class="line">c=count(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"################"</span>)</span><br><span class="line">print(c.__next__())</span><br><span class="line">print(<span class="string">"################"</span>)</span><br><span class="line">print(c.__next__())</span><br></pre></td></tr></table></figure>
-<p>结果如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">################</span><br><span class="line">counting</span><br><span class="line">before yield</span><br><span class="line">5</span><br><span class="line">################</span><br><span class="line">after yield</span><br><span class="line">before yield</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li><p>如果一直调用next方法,当执行到没有可迭代的值后,程序就会报错:<br><code>Traceback (most recent call last): File “”, line 1, in StopIteration</code></p>
-</li>
-<li><p>一般不会手动的调用next方法，而使用for循环：</p>
+        <p>Null, undefined, None, Nil, Nothing, NaN</p>
+<ul>
+<li>Null 与  undefined 的区别如下:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> == <span class="literal">undefined</span>);     <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> === <span class="literal">undefined</span>);    <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a === <span class="literal">undefined</span>);      <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a === <span class="literal">null</span>);       <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">a = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a === <span class="literal">undefined</span>);   <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a === <span class="literal">null</span>);    <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>null表示”没有对象”,即<strong>该处不应该有值</strong>.典型用法是:</p>
+<ol>
+<li>作为函数的参数,表示该函数的参数不是对象.</li>
+<li>作为对象原型链的终点.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object.getPrototypeOf(Object.prototype); // null</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> count(<span class="number">5</span>):</span><br><span class="line">    <span class="keyword">print</span> (i)</span><br></pre></td></tr></table></figure>
-<hr>
-<p><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014317799226173f45ce40636141b6abc8424e12b5fb27000" target="_blank" rel="noopener"></a><br><a href="https://foofish.net/yield.html" target="_blank" rel="noopener"></a></p>
+<p>undefined表示”缺少值”,就是<strong>此处应该有一个值,但是还没有定义</strong>.典型用法是:</p>
+<ol>
+<li>变量被声明了,但没有赋值时,就等于undefined.</li>
+<li>调用函数时,应该提供的参数没有提供,该参数等于undefined.</li>
+<li>对象没有赋值的属性,该属性的值为undefined.</li>
+<li>函数没有返回值时,默认返回undefined.</li>
+</ol>
 
       
     </div>
@@ -396,12 +384,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Python/" rel="tag"># Python</a>
-          
-        </div>
-      
 
       
       
@@ -411,19 +393,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/15/编程语言的求值策略/" rel="next" title="编程语言的求值策略">
-                <i class="fa fa-chevron-left"></i> 编程语言的求值策略
-              </a>
+              <a href="/2019/05/31/自动机与正则表达式/" rel="next" title="RegExp <--> NFA <--> DFA">
+                <i class="fa fa-chevron-left"></i> RegExp <--> NFA <--> DFA
+              </--></--></a>
             
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/24/Git 总结/" rel="prev" title="一个git的总结献给各位同志">
-                一个git的总结献给各位同志 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,17 +453,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -536,22 +505,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关键点"><span class="nav-number">1.</span> <span class="nav-text">关键点</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
