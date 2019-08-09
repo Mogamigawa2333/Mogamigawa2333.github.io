@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="Hello,">
+  <meta name="keywords" content="SpringCloud,">
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="分为两部分: 规则定义的语法 和 如何启动引擎">
-<meta name="keywords" content="Hello">
+<meta name="description" content="Feign是一个声明式的WebService客户端.主要注解:@EnableDiscoveryClient :启用服务注册与发现 (EDC)@EnableFeignClients：启用feign进行远程调用 (EFC)">
+<meta name="keywords" content="SpringCloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Drools规则引擎">
-<meta property="og:url" content="http://yoursite.com/2019/08/08/Drools/index.html">
+<meta property="og:title" content="在SpringCloud中调用其他微服务">
+<meta property="og:url" content="http://yoursite.com/2019/08/09/Feign/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="分为两部分: 规则定义的语法 和 如何启动引擎">
+<meta property="og:description" content="Feign是一个声明式的WebService客户端.主要注解:@EnableDiscoveryClient :启用服务注册与发现 (EDC)@EnableFeignClients：启用feign进行远程调用 (EFC)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-08T03:32:16.674Z">
+<meta property="og:updated_time" content="2019-08-09T03:44:38.375Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Drools规则引擎">
-<meta name="twitter:description" content="分为两部分: 规则定义的语法 和 如何启动引擎">
+<meta name="twitter:title" content="在SpringCloud中调用其他微服务">
+<meta name="twitter:description" content="Feign是一个声明式的WebService客户端.主要注解:@EnableDiscoveryClient :启用服务注册与发现 (EDC)@EnableFeignClients：启用feign进行远程调用 (EFC)">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/08/Drools/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/09/Feign/">
 
 
 
 
 
-  <title>Drools规则引擎 | 最上川</title>
+  <title>在SpringCloud中调用其他微服务 | 最上川</title>
   
 
 
@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/08/Drools/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/Feign/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chiu">
@@ -302,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Drools规则引擎</h1>
+          <h1 class="post-title" itemprop="name headline">在SpringCloud中调用其他微服务</h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-08T11:31:18+08:00">
-                2019-08-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-09T11:43:48+08:00">
+                2019-08-09
               </time>
             
 
@@ -352,29 +352,35 @@
       
 
       
-        <p><center><br>分为两部分: 规则定义的语法 和 如何启动引擎<br></center><br><a id="more"></a><br>规则引擎里面的</p>
-<ol>
-<li>业务规则 重点是谈<strong>当满足什么样的条件的时候，需要执行什么样的操作</strong>. 因此一个完整的业务规则包括了<strong>条件</strong>和<strong>触发操作</strong>两部分内容.</li>
-<li>引擎 是事物内部的重要的运行机制,规则引擎即重点是解决规则如何描述,如何执行,如何监控等一系列问题.</li>
+        <p>Feign是一个<strong>声明式</strong>的WebService客户端.<br>主要注解:<br>@EnableDiscoveryClient :启用服务注册与发现 (EDC)<br>@EnableFeignClients：启用feign进行远程调用 (EFC)<br><a id="more"></a></p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>启动Eureka</li>
+<li>在Eureka分别注册 服务的提供者 和 服务的消费者:<ol>
+<li>在producer和consumer的配置文件里面指明Eureka的地址;</li>
+<li>在producer和consumer和启动类上面添加@EnableDiscoveryClient注解(启用服务的注册与发现)</li>
 </ol>
-<h2 id="1-规则定义的语法"><a href="#1-规则定义的语法" class="headerlink" title="1.规则定义的语法"></a>1.规则定义的语法</h2><p><a href="http://www.ityouknow.com/drools/2017/08/07/drools-started.html" target="_blank" rel="noopener">纯洁的微笑-小明历险记</a><br>规则定义的文件是以.drl为后缀的文件, 可以为了方便阅读规则文件, 可以先定义一个DSL, 这个DSL实质是一个映射文件.这个DSL以.dsl为后缀.</p>
-<p>基本语法格式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package 包名</span><br><span class="line"></span><br><span class="line">import 引入的java类</span><br><span class="line"></span><br><span class="line">rule 规则名</span><br><span class="line">    when</span><br><span class="line">        (条件)左手定则 (LHS(Left Hand Side))</span><br><span class="line">    then</span><br><span class="line">        (动作/结果)右手定则(RHS(Right Hand Side))</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>采用的是声明式编程(SQL也是声明式编程)<br>每一个规则以rule开头，以end结尾， 中间有且只有一个唯一的when和then.<br>而如果业务中要有多个判断条件时，就采用 &amp;&amp;等运算符 与多条rule混合使用.</p>
-<ul>
-<li>LHS的意思就是 规则的条件部分 即[condition];</li>
-<li>RHS的意思就是 规则的结果部分 即[consequence];</li>
+</li>
 </ul>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
-<li>Kmodule 和 Kbase 是静态的概念,是一个分类(分层/区分)的概念,在kmodule.xml配置文件中可以体现出, 不包含运行时的数据, 但是他们不是指的是文件, 他们是 被Kservice管理 和 存放在Krepo里面的.<br>其中 kmodle 包含多个 kbase;</li>
-<li>ksession 包含Fact和运行时的数据, 是Application与规则引擎打交道的通道.并对运行时数据实时进行规则运算。<br>通过KieContainer创建KieSession是一种较为方便的做法，其本质上是从KieBase中创建出来的。KieSession就是应用程序跟规则引擎进行交互的会话通道。<br>创建KieBase是一个成本非常高的事情，KieBase会建立知识（规则、流程）仓库，而创建KieSession则是一个成本非常低的事情，所以KieBase会建立缓存，而KieSession则不必</li>
-<li>kservice 一个中心;</li>
-<li>Fact通常是一个普通的Java 的POJO，一般它们会有若干个属性，每一个属性都会对应getter 和setter 方法，用来对外提供数据的设置与访问。<br>一般来说，在Drools 规则引擎当中，fact 所承担的作用就是将规则当中要用到的业务数据从应用当中传入进来，对于规则当中产生的数据及状态的变化通常不用fact 传出</li>
+<h2 id="使用Fegin一共分为三步"><a href="#使用Fegin一共分为三步" class="headerlink" title="使用Fegin一共分为三步"></a>使用Fegin一共分为三步</h2><ol>
+<li><p>在consumer的启动类上面添加@EnableFeginClients(启用Fegin进行远程调用)</p>
+</li>
+<li><p>在consumer里: 使用@FeginClient注解定义Fegin客户端<br>将远程的服务映射为本地的java方法, 然后进行调用.</p>
+</li>
+<li><p>在具体的controller中使用@autowire调用</p>
+</li>
+</ol>
+<h3 id="步骤演示"><a href="#步骤演示" class="headerlink" title="步骤演示"></a>步骤演示</h3><p>Step1:</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(TestApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Step2:<br>   这个例子定义了一个feign客户端，将远程服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">//在consumer中:</span><br><span class="line">@FeignClient(name = &quot;test-service&quot;, path = &quot;/test&quot;)</span><br><span class="line">public interface TestService &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/echo&quot;, method = RequestMethod.GET)</span><br><span class="line">    TestModel echo(@RequestParam(&quot;parameter&quot;) String parameter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Step3:</p>
+   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在consumer的controller中:</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    TestService testService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">       <span class="comment">// 这里的使用本地Java API的方式调用远程的Restful接口</span></span><br><span class="line">       TestModel dto = testService.echo(<span class="string">"Hello,你好!"</span>);</span><br><span class="line">       log.info(<span class="string">"echo : &#123;&#125;"</span>, dto);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>大致是这三步:<br>1.consumer的启动类<strong>声明</strong>调用, EFC注解<br>2.使用@FeignClient定义接口,映射为本地方法<br>3.@Autowire调用</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li><p>EnableFeignClients注解的basepackage属性:<br>找出开发人员定义的所有feign客户端,也就是<strong>那些使用了注解@FeignClient的所有接口定义</strong><br>这个也可以放在producer的包中.这样在做consumer开发的过程中就省去了第二步</p>
+</li>
+<li><p>如果把第二步放在了producer的包中, 不要忘记consumer主类上的@componentScan</p>
+</li>
 </ul>
-<h2 id="2-如何使用"><a href="#2-如何使用" class="headerlink" title="2.如何使用"></a>2.如何使用</h2><h3 id="1-kmodule-xml"><a href="#1-kmodule-xml" class="headerlink" title="1. kmodule.xml"></a>1. kmodule.xml</h3><p>这里需要有一个配置文件告诉代码规则文件drl在哪里，在drools中这个文件就是kmodule.xml，放置到resources/META-INF目录下.</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">kmodule</span> <span class="attr">xmlns</span>=<span class="string">"http://jboss.org/kie/6.0.0/kmodule"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">kbase</span> <span class="attr">name</span>=<span class="string">"point_rule"</span> <span class="attr">packages</span>=<span class="string">"rules.point"</span>&gt;</span> <span class="comment">&lt;!-- 这里的packages属性就是规则文件的文件路径 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ksession</span> <span class="attr">name</span>=<span class="string">"point_ksession"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">kbase</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">kmodule</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-启动"><a href="#2-启动" class="headerlink" title="2. 启动"></a>2. 启动</h3><p>见 <a href="https://www.jianshu.com/p/e713860b128e" target="_blank" rel="noopener">Drools入门</a></p>
-<h2 id="规则引擎与工作流引擎的区别"><a href="#规则引擎与工作流引擎的区别" class="headerlink" title="规则引擎与工作流引擎的区别"></a>规则引擎与工作流引擎的区别</h2><h2 id="ref"><a href="#ref" class="headerlink" title="ref"></a>ref</h2><p><a href="https://www.jianshu.com/p/e713860b128e" target="_blank" rel="noopener">Drools入门</a><br><a href="https://www.jianshu.com/p/6ca9dd36f7aa" target="_blank" rel="noopener">Drools语法入门</a><br><a href="https://studygolang.com/articles/11761" target="_blank" rel="noopener">rete相关概念</a><br><a href="https://blog.csdn.net/ZZY1078689276/article/details/79892203" target="_blank" rel="noopener">相关概念</a></p>
 
       
     </div>
@@ -392,7 +398,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hello/" rel="tag"># Hello</a>
+            <a href="/tags/SpringCloud/" rel="tag"># SpringCloud</a>
           
         </div>
       
@@ -405,8 +411,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/18/OOP原型/" rel="next" title="OOP---原型">
-                <i class="fa fa-chevron-left"></i> OOP---原型
+              <a href="/2019/08/08/Drools/" rel="next" title="Drools规则引擎">
+                <i class="fa fa-chevron-left"></i> Drools规则引擎
               </a>
             
           </div>
@@ -414,10 +420,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/09/Feign/" rel="prev" title="在SpringCloud中调用其他微服务">
-                在SpringCloud中调用其他微服务 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -540,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-规则定义的语法"><span class="nav-number">1.</span> <span class="nav-text">1.规则定义的语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关概念"><span class="nav-number">2.</span> <span class="nav-text">相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-如何使用"><span class="nav-number">3.</span> <span class="nav-text">2.如何使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-kmodule-xml"><span class="nav-number">3.1.</span> <span class="nav-text">1. kmodule.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-启动"><span class="nav-number">3.2.</span> <span class="nav-text">2. 启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#规则引擎与工作流引擎的区别"><span class="nav-number">4.</span> <span class="nav-text">规则引擎与工作流引擎的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">5.</span> <span class="nav-text">ref</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Fegin一共分为三步"><span class="nav-number">2.</span> <span class="nav-text">使用Fegin一共分为三步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤演示"><span class="nav-number">2.1.</span> <span class="nav-text">步骤演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
