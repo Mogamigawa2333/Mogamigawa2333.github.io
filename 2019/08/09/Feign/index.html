@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="Feign是一个声明式的WebService客户端.主要注解:@EnableDiscoveryClient :启用服务注册与发现 (EDC)@EnableFeignClients：启用feign进行远程调用 (EFC)">
+<meta name="description" content="注解, 到处都是功能不明所以的注解.">
 <meta name="keywords" content="SpringCloud">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在SpringCloud中调用其他微服务">
 <meta property="og:url" content="http://yoursite.com/2019/08/09/Feign/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="Feign是一个声明式的WebService客户端.主要注解:@EnableDiscoveryClient :启用服务注册与发现 (EDC)@EnableFeignClients：启用feign进行远程调用 (EFC)">
+<meta property="og:description" content="注解, 到处都是功能不明所以的注解.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-09T03:44:38.375Z">
+<meta property="og:updated_time" content="2019-08-09T03:52:36.668Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在SpringCloud中调用其他微服务">
-<meta name="twitter:description" content="Feign是一个声明式的WebService客户端.主要注解:@EnableDiscoveryClient :启用服务注册与发现 (EDC)@EnableFeignClients：启用feign进行远程调用 (EFC)">
+<meta name="twitter:description" content="注解, 到处都是功能不明所以的注解.">
 
 
 
@@ -352,7 +352,10 @@
       
 
       
-        <p>Feign是一个<strong>声明式</strong>的WebService客户端.<br>主要注解:<br>@EnableDiscoveryClient :启用服务注册与发现 (EDC)<br>@EnableFeignClients：启用feign进行远程调用 (EFC)<br><a id="more"></a></p>
+        <center>注解, 到处都是功能不明所以的注解.</center>
+
+<a id="more"></a>
+<p>Feign是一个<strong>声明式</strong>的WebService客户端.<br>主要注解:<br>@EnableDiscoveryClient :启用服务注册与发现 (我称之为 EDC)<br>@EnableFeignClients：启用feign进行远程调用 (我称之为 EFC)</p>
 <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
 <li>启动Eureka</li>
 <li>在Eureka分别注册 服务的提供者 和 服务的消费者:<ol>
@@ -370,10 +373,10 @@
 </li>
 </ol>
 <h3 id="步骤演示"><a href="#步骤演示" class="headerlink" title="步骤演示"></a>步骤演示</h3><p>Step1:</p>
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(TestApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(TestApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Step2:<br>   这个例子定义了一个feign客户端，将远程服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">//在consumer中:</span><br><span class="line">@FeignClient(name = &quot;test-service&quot;, path = &quot;/test&quot;)</span><br><span class="line">public interface TestService &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/echo&quot;, method = RequestMethod.GET)</span><br><span class="line">    TestModel echo(@RequestParam(&quot;parameter&quot;) String parameter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>Step3:</p>
-   <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在consumer的controller中:</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    TestService testService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">       <span class="comment">// 这里的使用本地Java API的方式调用远程的Restful接口</span></span><br><span class="line">       TestModel dto = testService.echo(<span class="string">"Hello,你好!"</span>);</span><br><span class="line">       log.info(<span class="string">"echo : &#123;&#125;"</span>, dto);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在consumer的controller中:</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    TestService testService;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">       <span class="comment">// 这里的使用本地Java API的方式调用远程的Restful接口</span></span><br><span class="line">       TestModel dto = testService.echo(<span class="string">"Hello,你好!"</span>);</span><br><span class="line">       log.info(<span class="string">"echo : &#123;&#125;"</span>, dto);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>大致是这三步:<br>1.consumer的启动类<strong>声明</strong>调用, EFC注解<br>2.使用@FeignClient定义接口,映射为本地方法<br>3.@Autowire调用</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
 <li><p>EnableFeignClients注解的basepackage属性:<br>找出开发人员定义的所有feign客户端,也就是<strong>那些使用了注解@FeignClient的所有接口定义</strong><br>这个也可以放在producer的包中.这样在做consumer开发的过程中就省去了第二步</p>
