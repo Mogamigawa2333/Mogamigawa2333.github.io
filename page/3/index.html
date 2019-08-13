@@ -281,6 +281,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/JPA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/13/JPA/" itemprop="url">SpringData JPA 总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T20:13:26+08:00">
+                2019-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ORM框架太多了-我记不清楚是哪个了"><a href="#ORM框架太多了-我记不清楚是哪个了" class="headerlink" title="ORM框架太多了, 我记不清楚是哪个了"></a>ORM框架太多了, 我记不清楚是哪个了</h2><p>是Spring基于ORM框架,在JPA规范的基础上封装的一套框架.(底层使用的是Hibernate)<br>它提供了包括增删改查等在内的常用功能:<br>在repository的接口继承JpaRepository. 然后就可以使用简单的curd, 不用写代码.<br>可以在接口里声明一个查询/修改方法, 比如: List<entity> findByNameContains(String name);即可实现根据name查询的功能;</entity></p>
+<p>JPA这种的编程方式是 <strong>声明式编程</strong></p>
+<h2 id="有比我总结的更好的"><a href="#有比我总结的更好的" class="headerlink" title="有比我总结的更好的"></a>有比我总结的更好的</h2><p><a href="http://www.ityouknow.com/springboot/2016/08/20/spring-boot-jpa.html" target="_blank" rel="noopener">Content: Spring Boot(五)：Spring Boot Jpa 的使用 –纯洁的微笑</a></p>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点:"></a>注意点:</h2><p>使用JPA最好是数据库里表的字段名称与dao类的名称是一致的, 这是<strong>约定</strong>的默认的缺省的.<br>如果名称不是一致的就要在dao类使用@table和@column等注解来<strong>配置</strong>.</p>
+<hr>
+<h3 id="JPA的复杂查询的注意点"><a href="#JPA的复杂查询的注意点" class="headerlink" title="JPA的复杂查询的注意点:"></a>JPA的复杂查询的注意点:</h3><p>条件很多的复杂查询使用Example,或者是使用@query<br>分页查询传入pageable<br>多表查询: 自定义结果集pojo, 然后使用@query, 返回结果集pojo</p>
+<h4 id="批量更新添加和删除"><a href="#批量更新添加和删除" class="headerlink" title="批量更新添加和删除:"></a>批量更新添加和删除:</h4><p>使用EntityManager<br>首先在service层获取持久化管理器:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PersistenceContext</span></span><br><span class="line"><span class="keyword">private</span> EntityManager em;</span><br></pre></td></tr></table></figure></p>
+<p>批量更新方法,同理插入,删除也都可以如此做.<br><strong>注意:</strong> 需要在方法上添加 @Transactional<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">batchUpateCustom</span><span class="params">(List&lt;User&gt; users)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; users.size(); i++) &#123;  </span><br><span class="line">        User user = users.get(i);</span><br><span class="line">        user.setSomeThing(<span class="string">"something.."</span>)</span><br><span class="line">        em.merge(user);  </span><br><span class="line">        em.flush();</span><br><span class="line">        em.clear();  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="时间日期字段的自动更新"><a href="#时间日期字段的自动更新" class="headerlink" title="时间日期字段的自动更新:"></a>时间日期字段的自动更新:</h2><p>如果你的日期字段使用的是timestamp类型: 可以在dao类的相关属性上面添加注解<br>@CreatedDate<br>表示该字段为创建时间时间字段，在这个实体被insert的时候，会设置值<br>@CreatedBy<br>表示该字段为创建人，在这个实体被insert的时候，会设置值<br>@LastModifiedDate、@LastModifiedBy同理</p>
+<h2 id="JPA内置的curd"><a href="#JPA内置的curd" class="headerlink" title="JPA内置的curd"></a>JPA内置的curd</h2><h2 id="JPA的-Query"><a href="#JPA的-Query" class="headerlink" title="JPA的@Query"></a>JPA的@Query</h2><hr>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref:"></a>ref:</h2><p><a href="https://www.cnblogs.com/zj0208/p/6008627.html" target="_blank" rel="noopener">JPA @Query的用法</a><br><a href="https://blog.csdn.net/u012149181/article/details/79275070" target="_blank" rel="noopener">JPA的curd</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/跨域请求学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1080,7 +1211,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1093,7 +1224,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
