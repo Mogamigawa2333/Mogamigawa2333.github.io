@@ -132,7 +132,7 @@
 <meta property="og:description" content="_____                    _____                _____                    /\    \                  /\    \              /\    \                  /::\    \                /::\    \            /">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://45.77.68.200:32768/files/27450a3d-f983-4978-8e33-d032766b3b1e.png">
-<meta property="og:updated_time" content="2019-05-17T02:22:59.951Z">
+<meta property="og:updated_time" content="2019-08-13T12:00:29.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个git的总结献给各位同志">
 <meta name="twitter:description" content="_____                    _____                _____                    /\    \                  /\    \              /\    \                  /::\    \                /::\    \            /">
@@ -407,9 +407,30 @@
 <h2 id="比较"><a href="#比较" class="headerlink" title="比较:"></a>比较:</h2><p>merge是在所有的提交之后更新, 把别人的提交拿过来应用到自己的分支上<br>rebase 是直接更新所有提交的基点.</p>
 <h2 id="都有副作用"><a href="#都有副作用" class="headerlink" title="###都有副作用"></a>###都有副作用</h2><h1 id="git-fetch-与-git-pull"><a href="#git-fetch-与-git-pull" class="headerlink" title="git fetch 与 git pull"></a>git fetch 与 git pull</h1><p>pull = fetch + merge</p>
 <hr>
+<h1 id="git-如果不能push-出现权限错误"><a href="#git-如果不能push-出现权限错误" class="headerlink" title="git 如果不能push, 出现权限错误:"></a>git 如果不能push, 出现权限错误:</h1><ol>
+<li><p>切换到当前项目的目录</p>
+</li>
+<li><p>检查 当前repo的远程仓库的地址 和g ithub/gitlab的该项目的远程仓库地址 是否一致(我真的碰见过这种弱智问题…)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v <span class="comment">#这是当前repo的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果要是修改项目repo远程地址:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">set</span>-url origin git@github.com:google/gson.git</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>在当前的repo下:<br>查看使用的用户是否正确:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config user.name </span><br><span class="line"></span><br><span class="line">git config user.email</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>到gitLab或者gitHub查看账号和ssh keys密钥是不是一致;<br>如果不一致就去修改本地repo的用户名字和用户邮箱, 或者修改远程的ssh keys.</p>
+<ul>
+<li><p>修改 本地repo的用户名字和用户邮箱:<br><strong>修改本地repo的name和email可以实现 不同的repo使用不同的用户</strong><br>可以设置一个全局用户, 全局用户是<strong>缺省用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config user.name <span class="string">"#名字"</span></span><br><span class="line">git config user.email <span class="string">"#邮箱"</span></span><br><span class="line"><span class="comment"># 注意千万不能使用 git config --global</span></span><br><span class="line"><span class="comment"># you see...</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改 远程的ssh keys. 这个要么使用新的ssh keys, 要么使用旧的ssh keys.</p>
+</li>
+</ul>
+<hr>
 <h1 id="退回"><a href="#退回" class="headerlink" title="退回"></a>退回</h1><p><a href="http://einverne.github.io/post/2017/12/git-reset.html" target="_blank" rel="noopener">git不同阶段的退回</a></p>
 <hr>
-<p><a href="http://jartto.wang/2018/12/11/git-rebase/" target="_blank" rel="noopener"></a></p>
+<p><a href="http://jartto.wang/2018/12/11/git-rebase/" target="_blank" rel="noopener"></a><br><a href="http://drubear.github.io/2016/02/03/%E4%BF%AE%E6%94%B9Git-Repo%E5%9C%B0%E5%9D%80/" target="_blank" rel="noopener">修改Git-Repo地址</a><br><a href="https://www.cnblogs.com/zqunor/p/9055262.html" target="_blank" rel="noopener">删除全局用户</a><br><strong>强烈推荐:</strong> <a href="https://keysaim.github.io/post/git/2017-08-15-how-to-git-with-specific-ssh-key/" target="_blank" rel="noopener">如何使用特定的SSH Key提交GIT</a></p>
 
       
     </div>
@@ -440,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/15/编程语言的求值策略/" rel="next" title="编程语言的求值策略">
-                <i class="fa fa-chevron-left"></i> 编程语言的求值策略
+              <a href="/2019/03/15/理解Python中的生成器/" rel="next" title="理解Python中的生成器">
+                <i class="fa fa-chevron-left"></i> 理解Python中的生成器
               </a>
             
           </div>
@@ -575,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git的4个阶段-区"><span class="nav-number">1.</span> <span class="nav-text">Git的4个阶段(区)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-的-ignore文件的使用"><span class="nav-number">2.</span> <span class="nav-text">git 的.ignore文件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-merge-master"><span class="nav-number">2.1.</span> <span class="nav-text">git merge master:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-rebase-master"><span class="nav-number">2.2.</span> <span class="nav-text">git rebase master :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">2.3.</span> <span class="nav-text">比较:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#都有副作用"><span class="nav-number">2.4.</span> <span class="nav-text">###都有副作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-fetch-与-git-pull"><span class="nav-number">3.</span> <span class="nav-text">git fetch 与 git pull</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退回"><span class="nav-number">4.</span> <span class="nav-text">退回</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git的4个阶段-区"><span class="nav-number">1.</span> <span class="nav-text">Git的4个阶段(区)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-的-ignore文件的使用"><span class="nav-number">2.</span> <span class="nav-text">git 的.ignore文件的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-merge-master"><span class="nav-number">2.1.</span> <span class="nav-text">git merge master:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-rebase-master"><span class="nav-number">2.2.</span> <span class="nav-text">git rebase master :</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">2.3.</span> <span class="nav-text">比较:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#都有副作用"><span class="nav-number">2.4.</span> <span class="nav-text">###都有副作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-fetch-与-git-pull"><span class="nav-number">3.</span> <span class="nav-text">git fetch 与 git pull</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-如果不能push-出现权限错误"><span class="nav-number">4.</span> <span class="nav-text">git 如果不能push, 出现权限错误:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退回"><span class="nav-number">5.</span> <span class="nav-text">退回</span></a></li></ol></div>
             
 
           </div>
