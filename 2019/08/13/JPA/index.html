@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="最上川">
 <meta property="og:description" content="12345     _ ____   _        | |  _ \ / \    _  | | |_) / _ \  | |_| |  __/ ___ \  \___/|_| /_/   \_\">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-13T13:02:10.006Z">
+<meta property="og:updated_time" content="2019-08-14T00:38:05.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringData JPA 总结">
 <meta name="twitter:description" content="12345     _ ____   _        | |  _ \ / \    _  | | |_) / _ \  | |_| |  __/ ___ \  \___/|_| /_/   \_\">
@@ -365,6 +365,15 @@
 <hr>
 <h2 id="时间日期字段的自动更新"><a href="#时间日期字段的自动更新" class="headerlink" title="时间日期字段的自动更新:"></a>时间日期字段的自动更新:</h2><p>如果你的日期字段使用的是timestamp类型: 可以在dao类的相关属性上面添加注解<br>@CreatedDate<br>表示该字段为创建时间时间字段，在这个实体被insert的时候，会设置值<br>@CreatedBy<br>表示该字段为创建人，在这个实体被insert的时候，会设置值<br>@LastModifiedDate、@LastModifiedBy同理</p>
 <h2 id="JPA内置的curd"><a href="#JPA内置的curd" class="headerlink" title="JPA内置的curd"></a>JPA内置的curd</h2><h2 id="JPA的-Query"><a href="#JPA的-Query" class="headerlink" title="JPA的@Query"></a>JPA的@Query</h2><hr>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#数据库生成策略，如果打开会根据entity对象生成数据库. 尽量不要使用.</span><br><span class="line">hibernate:</span><br><span class="line">  ddl-auto: update</span><br></pre></td></tr></table></figure>
+<ul>
+<li>create：每次加载hibernate会自动创建表，以后启动会覆盖之前的表，所以这个值基本不用，严重会导致的数据的丢失。</li>
+<li>create-drop ： 每次加载hibernate时根据model类生成表，但是sessionFactory一关闭，表就自动删除，下一次启动会重新创建。</li>
+<li>update：加载hibernate时根据实体类model创建数据库表，这是表名的依据是@Entity注解的值或者@Table注解的值，sessionFactory关闭表不会删除，且下次启动会根据实体model更新结构或者有新的实体类会创建新的表。</li>
+<li>validate：启动时验证表的结构，不会创建表</li>
+<li>none：启动时不做任何操作</li>
+</ul>
+<hr>
 <h2 id="ref"><a href="#ref" class="headerlink" title="ref:"></a>ref:</h2><p><a href="https://www.cnblogs.com/zj0208/p/6008627.html" target="_blank" rel="noopener">JPA @Query的用法</a><br><a href="https://blog.csdn.net/u012149181/article/details/79275070" target="_blank" rel="noopener">JPA的curd</a></p>
 
       
@@ -405,6 +414,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/16/伪爱国主义/" rel="prev" title="伪爱国主义">
+                伪爱国主义 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -481,7 +494,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -527,7 +540,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM框架太多了-我记不清楚是哪个了"><span class="nav-number">1.</span> <span class="nav-text">ORM框架太多了, 我记不清楚是哪个了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有比我总结的更好的"><span class="nav-number">2.</span> <span class="nav-text">有比我总结的更好的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点"><span class="nav-number">3.</span> <span class="nav-text">注意点:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JPA的复杂查询的注意点"><span class="nav-number">3.1.</span> <span class="nav-text">JPA的复杂查询的注意点:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批量更新添加和删除"><span class="nav-number">3.1.1.</span> <span class="nav-text">批量更新添加和删除:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间日期字段的自动更新"><span class="nav-number">4.</span> <span class="nav-text">时间日期字段的自动更新:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JPA内置的curd"><span class="nav-number">5.</span> <span class="nav-text">JPA内置的curd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JPA的-Query"><span class="nav-number">6.</span> <span class="nav-text">JPA的@Query</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">7.</span> <span class="nav-text">ref:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORM框架太多了-我记不清楚是哪个了"><span class="nav-number">1.</span> <span class="nav-text">ORM框架太多了, 我记不清楚是哪个了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有比我总结的更好的"><span class="nav-number">2.</span> <span class="nav-text">有比我总结的更好的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点"><span class="nav-number">3.</span> <span class="nav-text">注意点:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JPA的复杂查询的注意点"><span class="nav-number">3.1.</span> <span class="nav-text">JPA的复杂查询的注意点:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批量更新添加和删除"><span class="nav-number">3.1.1.</span> <span class="nav-text">批量更新添加和删除:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间日期字段的自动更新"><span class="nav-number">4.</span> <span class="nav-text">时间日期字段的自动更新:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JPA内置的curd"><span class="nav-number">5.</span> <span class="nav-text">JPA内置的curd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JPA的-Query"><span class="nav-number">6.</span> <span class="nav-text">JPA的@Query</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">7.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">8.</span> <span class="nav-text">ref:</span></a></li></ol></div>
             
 
           </div>
