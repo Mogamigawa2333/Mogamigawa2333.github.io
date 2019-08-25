@@ -375,23 +375,29 @@
 </li>
 </ol>
 <p>2.</p>
-<h2 id="业务逻辑设计"><a href="#业务逻辑设计" class="headerlink" title="业务逻辑设计:"></a>业务逻辑设计:</h2><p>有两种:</p>
-<ol>
+<h2 id="业务逻辑设计"><a href="#业务逻辑设计" class="headerlink" title="业务逻辑设计:"></a>业务逻辑设计:</h2><h3 id="登录有两种"><a href="#登录有两种" class="headerlink" title="登录有两种:"></a>登录有两种:</h3><ol>
 <li><p>既然 token 的载荷里面有 过期时间 exp 这个字段, 那么只要后台验真即可, 只要不到有效期就都可以使用.<br>优点是设计简单且后台不用存储,缺点是如果在有效期内有人恶意刷接口,后台将无能为力.</p>
 </li>
 <li><p>使用 token + redis 的方式: 访问时判断 redis 里是否有该 token，如果有，则加载该用户信息完成登录。服务需要存储下发的每个 token 及对应的 value，维持其过期时间.<br>优点是随时可以删除某个 token，阻断该 token 继续使用. 而且 token 可以使用随机数生成不一定使用 JWT.<br>Client-&gt;Server: 传递 Token<br>这种方式的流程是:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#登录存储:</span><br><span class="line">Client-&gt;Server: 发送数据（用户名密码及验证码）</span><br><span class="line">Server-&gt;Redis: 合法：生成Token,并以Token:username键值对存储(也可以是token:用户信息,亦或者是 token:[其它Redis库的key])</span><br><span class="line">Server-&gt;Client: 不合法：返回错误信息</span><br><span class="line">#验证请求:</span><br><span class="line">Server-&gt;Redis: 以Token为键取值</span><br><span class="line">Redis-&gt;Client: Token不存在, 返回错误信息</span><br><span class="line">Redis-&gt;Server: Token存在，则以Token为键取值并返回</span><br><span class="line">Server-&gt;Client: 验证Token的合法性,判断是否被篡改或者盗用，返回JSON信息</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出:"></a>退出:</h3><p>有以下几个方法可以做到失效 JWT token：</p>
+<ul>
+<li>将 token 存入 DB（如 Redis）中，失效则删除；但增加了一个每次校验时候都要先从 DB 中查询 token 是否存在的步骤，而且违背了 JWT 的无状态原则（这不就和 session 一样了么？）。</li>
+<li>维护一个 token 黑名单，失效则加入黑名单中。</li>
+<li>在 JWT 中增加一个版本号字段，失效则改变该版本号。</li>
+<li>在服务端设置加密的 key 时，为每个用户生成唯一的 key，失效则改变该 key</li>
+</ul>
 <hr>
 <h2 id="SSO-设计"><a href="#SSO-设计" class="headerlink" title="SSO 设计:"></a>SSO 设计:</h2><h3 id="目的"><a href="#目的" class="headerlink" title="目的:"></a>目的:</h3><p>就像 SpringCloud 那种的分布式服务, 拥有很多的微服务, 让用户在一次登录以后就可以访问同一系统下的所有的服务.<br>如: xxx.taobao.com<br>ooo.taobao.com<br>aaa.taobao.com<br>login.taobao.com<br>用户只要访问 login.taobao.com 登录, 就可以访问其他服务.</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案:"></a>解决方案:</h3><p>在放 token 的 cookie 中, 添加一个 domian 属性,注意 domain 必须设置为一个点加顶级域名，即<code>.taobao.com</code> 这样的，<code>taobao.com</code>和<code>\*.taobao.com</code> 就都可以接受到这个 Cookie，并获取 JWT 了[其实有一个 CAS(集中式授权认证服务),CAS 知道 JWT 的密钥,这样其他服务就不用都需要知道 JWT 密钥了]</p>
 <hr>
 <h2 id="既然-token-有有效期-而且前端是无状态的-那么前端是怎样存储-token-的"><a href="#既然-token-有有效期-而且前端是无状态的-那么前端是怎样存储-token-的" class="headerlink" title="既然 token 有有效期,而且前端是无状态的, 那么前端是怎样存储 token 的?"></a>既然 token 有有效期,而且前端是无状态的, 那么前端是怎样存储 token 的?</h2><hr>
 <h2 id="安全性建议"><a href="#安全性建议" class="headerlink" title="安全性建议:"></a>安全性建议:</h2><ol>
-<li><p>使用https</p>
+<li><p>使用 https</p>
 </li>
-<li><p>使用http-only的cookie，针对sid和jwt</p>
+<li><p>使用 http-only 的 cookie，针对 sid 和 jwt</p>
 </li>
 <li><p>管理好密钥</p>
 </li>
