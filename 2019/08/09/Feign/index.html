@@ -126,14 +126,14 @@
 <meta name="description" content="注解, 到处都是功能不明所以的注解.">
 <meta name="keywords" content="SpringCloud">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在SpringCloud中调用其他微服务">
+<meta property="og:title" content="在SpringCloud中调用其他微服务(Feign)">
 <meta property="og:url" content="http://yoursite.com/2019/08/09/Feign/index.html">
 <meta property="og:site_name" content="最上川">
 <meta property="og:description" content="注解, 到处都是功能不明所以的注解.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-09T03:52:36.668Z">
+<meta property="og:updated_time" content="2019-08-28T05:31:05.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在SpringCloud中调用其他微服务">
+<meta name="twitter:title" content="在SpringCloud中调用其他微服务(Feign)">
 <meta name="twitter:description" content="注解, 到处都是功能不明所以的注解.">
 
 
@@ -170,7 +170,7 @@
 
 
 
-  <title>在SpringCloud中调用其他微服务 | 最上川</title>
+  <title>在SpringCloud中调用其他微服务(Feign) | 最上川</title>
   
 
 
@@ -302,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">在SpringCloud中调用其他微服务</h1>
+          <h1 class="post-title" itemprop="name headline">在SpringCloud中调用其他微服务(Feign)</h1>
         
 
         <div class="post-meta">
@@ -355,35 +355,50 @@
         <center>注解, 到处都是功能不明所以的注解.</center>
 
 <a id="more"></a>
-<p>Feign是一个<strong>声明式</strong>的WebService客户端.<br>主要注解:<br>@EnableDiscoveryClient :启用服务注册与发现 (我称之为 EDC)<br>@EnableFeignClients：启用feign进行远程调用 (我称之为 EFC)</p>
+<p>Feign 是一个<strong>声明式</strong>的 WebService 客户端.<br>主要注解:<br>@EnableDiscoveryClient :启用服务注册与发现 (我称之为 EDC)<br>@EnableFeignClients：启用 feign 进行远程调用 (我称之为 EFC)</p>
 <h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
-<li>启动Eureka</li>
-<li>在Eureka分别注册 服务的提供者 和 服务的消费者:<ol>
-<li>在producer和consumer的配置文件里面指明Eureka的地址;</li>
-<li>在producer和consumer和启动类上面添加@EnableDiscoveryClient注解(启用服务的注册与发现)</li>
+<li>启动 Eureka</li>
+<li>在 Eureka 分别注册 服务的提供者 和 服务的消费者:<ol>
+<li>在 producer 和 consumer 的配置文件里面指明 Eureka 的地址;</li>
+<li>在 producer 和 consumer 的启动类上面添加@EnableDiscoveryClient 注解(启用服务的注册与发现)<br>这个注解在 producer 和 consumer 都要有, 因为都要在 Eureka 注册和发现.</li>
 </ol>
 </li>
 </ul>
-<h2 id="使用Fegin一共分为三步"><a href="#使用Fegin一共分为三步" class="headerlink" title="使用Fegin一共分为三步"></a>使用Fegin一共分为三步</h2><ol>
-<li><p>在consumer的启动类上面添加@EnableFeginClients(启用Fegin进行远程调用)</p>
+<h2 id="consumer-使用-Fegin-一共分为三步"><a href="#consumer-使用-Fegin-一共分为三步" class="headerlink" title="consumer 使用 Fegin 一共分为三步"></a>consumer 使用 Fegin 一共分为三步</h2><ol>
+<li><p>在 consumer 的启动类上面添加@EnableFeginClients(启用 Fegin 进行远程调用)</p>
 </li>
-<li><p>在consumer里: 使用@FeginClient注解定义Fegin客户端<br>将远程的服务映射为本地的java方法, 然后进行调用.</p>
+<li><p>在 consumer 里: 使用@FeginClient 注解定义 Fegin 客户端<br>将远程的服务映射为本地的 java 方法, 然后进行调用.</p>
 </li>
-<li><p>在具体的controller中使用@autowire调用</p>
+<li><p>在具体的 controller 中使用@autowire 调用</p>
 </li>
 </ol>
 <h3 id="步骤演示"><a href="#步骤演示" class="headerlink" title="步骤演示"></a>步骤演示</h3><p>Step1:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(TestApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Step2:<br>   这个例子定义了一个feign客户端，将远程服务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```java</span><br><span class="line">//在consumer中:</span><br><span class="line">@FeignClient(name = &quot;test-service&quot;, path = &quot;/test&quot;)</span><br><span class="line">public interface TestService &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/echo&quot;, method = RequestMethod.GET)</span><br><span class="line">    TestModel echo(@RequestParam(&quot;parameter&quot;) String parameter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// producer:</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span> <span class="comment">// 启用服务的注册与发现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProducerApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ProducerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">// consumer:</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableDiscoveryClient</span> <span class="comment">// 启用服务的注册与发现</span></span><br><span class="line"><span class="meta">@EnableFeignClients</span> <span class="comment">// 启用feign进行远程调用</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConsumerApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(ConsumerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Step2:<br>这个例子定义了一个 feign 客户端，将远程服务 <a href="http://test-service/test/echo" target="_blank" rel="noopener">http://test-service/test/echo</a> 映射为一个<strong>本地 Java 方法</strong>调用</p>
+<ul>
+<li>在定义这个接口的时候,请求路径要与 producer 的请求路径是一样的.(@RequestMapping)</li>
+<li>接口中的方法和远程服务中 Contoller 中的方法名和参数需保持一致.(代理模式)</li>
+</ul>
+<p>大部分文章在这里语焉不详, consumer 接口的 @RequestMapping 里的请求路径 和 producer 的 Api 的请求路径 到底是不是要相同,网上没有人提及,而我也没有时间去验证,所以做了个最保险的决定:让他们相同.<br>但是, 在<a href="http://www.ityouknow.com/springcloud/2017/05/12/eureka-provider-constomer.html" target="_blank" rel="noopener">纯洁的微笑</a>的博客里面, 提及了 方法名和参数 必须要一致. 为啥呢? 据我猜测: 因为 feign 是基于代理模式的, 这个是要保持一致的.而返回值不做要求,是因为可以为返回值做包装.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在producer中定义Api:</span></span><br><span class="line"><span class="meta">@restController</span></span><br><span class="line"><span class="meta">@requestMapping</span>(<span class="string">"test"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GETMapping</span>(<span class="string">"/echo"</span>)</span><br><span class="line">        <span class="function">TestModel <span class="title">echo</span><span class="params">(@RequestParam(<span class="string">"parameter"</span>)</span> String parameter)</span>&#123; <span class="comment">// 方法名和参数保持一致</span></span><br><span class="line">            TestModel testModel = <span class="keyword">new</span> TestModel();</span><br><span class="line">            testModel.setxxx(<span class="string">"parameter"</span>);</span><br><span class="line">            <span class="keyword">return</span> testModel;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//-------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">// 在 consumer 中,定义一个接口:</span></span><br><span class="line"><span class="meta">@FeignClient</span>(name = <span class="string">"test-service"</span>, path = <span class="string">"/test"</span>)<span class="comment">// path是统一的前缀</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/echo"</span>, method = RequestMethod.GET) <span class="comment">// @RequestMapping表示在调用该方法时需要向/test/echo发送GET请求</span></span><br><span class="line">    <span class="function">TestModel <span class="title">echo</span><span class="params">(@RequestParam(<span class="string">"parameter"</span>)</span> String parameter)</span>; <span class="comment">//方法名和参数保持一致</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Step3:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在consumer的controller中:</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    TestService testService;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">       <span class="comment">// 这里的使用本地Java API的方式调用远程的Restful接口</span></span><br><span class="line">       TestModel dto = testService.echo(<span class="string">"Hello,你好!"</span>);</span><br><span class="line">       log.info(<span class="string">"echo : &#123;&#125;"</span>, dto);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>大致是这三步:<br>1.consumer的启动类<strong>声明</strong>调用, EFC注解<br>2.使用@FeignClient定义接口,映射为本地方法<br>3.@Autowire调用</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>大致是这三步:</p>
+<ol>
+<li>在 consumer 的启动类上 启用服务的注册与发现, EDC 注解(Discovery)<br>启用 Feign 进行远程调用, EFC 注解(Feign)</li>
+<li>使用@FeignClient 定义接口,映射为本地方法(<strong>声明式</strong>)</li>
+<li>@Autowire 调用</li>
+</ol>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
-<li><p>EnableFeignClients注解的basepackage属性:<br>找出开发人员定义的所有feign客户端,也就是<strong>那些使用了注解@FeignClient的所有接口定义</strong><br>这个也可以放在producer的包中.这样在做consumer开发的过程中就省去了第二步</p>
+<li><p>EnableFeignClients 注解的 basepackage 属性:<br>找出开发人员定义的所有 feign 客户端,也就是<strong>那些使用了注解@FeignClient 的所有接口</strong><br>这个也可以放在 producer 的包中.这样在做 consumer 开发的过程中就省去了第二步</p>
 </li>
-<li><p>如果把第二步放在了producer的包中, 不要忘记consumer主类上的@componentScan</p>
+<li><p>如果把第二步放在了 producer 的包中, 不要忘记 consumer 主类上的 @componentScan</p>
+</li>
+<li><p>Feign 的有些注解跟 SpringMVC 的注解写起来一样, 但是意思是不同的</p>
 </li>
 </ul>
+<hr>
+<p><a href>算了不说了,都在代码里</a></p>
 
       
     </div>
@@ -503,7 +518,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -516,7 +531,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -549,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Fegin一共分为三步"><span class="nav-number">2.</span> <span class="nav-text">使用Fegin一共分为三步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤演示"><span class="nav-number">2.1.</span> <span class="nav-text">步骤演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#consumer-使用-Fegin-一共分为三步"><span class="nav-number">2.</span> <span class="nav-text">consumer 使用 Fegin 一共分为三步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤演示"><span class="nav-number">2.1.</span> <span class="nav-text">步骤演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
