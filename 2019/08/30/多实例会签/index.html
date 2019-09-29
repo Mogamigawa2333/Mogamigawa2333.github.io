@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, Source Code Pro, sans-serif, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, Source Code Pro, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, monospace, sans-serif:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Activiti,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Activiti多实例会签">
+<meta name="keywords" content="Activiti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activiti多实例会签">
+<meta property="og:url" content="http://yoursite.com/2019/08/30/多实例会签/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="Activiti多实例会签">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-30T06:11:53.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activiti多实例会签">
+<meta name="twitter:description" content="Activiti多实例会签">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/30/多实例会签/">
+
+
+
+
+
+  <title>Activiti多实例会签 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/30/多实例会签/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Activiti多实例会签</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-30T00:00:00+08:00">
+                2019-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <center>Activiti多实例会签</center>
+
+<a id="more"></a>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念:"></a>概念:</h2><ul>
+<li><p>多实例节点是<strong>在业务流程中定义重复环节的一个方法</strong>。 从开发角度讲，多实例和循环是一样的： 它可以根据给定的集合，为每个元素执行一个环节甚至一个完整的子流程， 既可以顺序依次执行也可以并发同步执行。</p>
+</li>
+<li><p>多实例是在一个普通的节点上添加了额外的属性定义 （所以叫做’多实例特性’），这样<strong>运行时节点就会执行多次</strong>.</p>
+</li>
+</ul>
+<h2 id="业务场景"><a href="#业务场景" class="headerlink" title="业务场景:"></a>业务场景:</h2><p>在一个任务节点的时候，需要多个人对这个节点进行审批，比如实际中这样一个例子，假如是一个部门的投票，这个部门有 5 个人，那么当 5 个人都投票的时候大概分为如下几种：</p>
+<ol>
+<li><p>部门所有人都去投票，当所有人都投票完成的时候，这个节点结束，流程运转到下一个节点。(所有的人都需要投票)</p>
+</li>
+<li><p>部门所有人都去投票, 只要有任意 2/3 的人同意，这个节点结束，流程运转到下一个节点。(部分人投票只要满足条件就算完成)。</p>
+</li>
+<li><p>部门中有一个部门经理，只要部门经理投票过了，这个节点结束，流程运转到下一个节点（一票否决权）。</p>
+</li>
+<li><p>部门中根据职位不同，不同的人都不同的权重，当满足条件的时候，这个节点结束，流程运转到下一个节点。比如说所有的人员权重加起来是 1，a 有 0.2 的权重，其他的四个人分别是 0.1 的权重，我们可以配置权重达到 0.3 就可以走向下一个节点，换言之 a 的权重是其他人的 2 倍，那就是 a 的投票相当于 2 个人投票。这种需求还是很常见的。</p>
+</li>
+<li><p>部门所有人都去投票，a 投票结束到 b,b 开始投票结束到 c, 一直如此，串行执行。最终到最后一个人再统计结果，决定流程的运转。</p>
+</li>
+</ol>
+<p>上面的五种情况，我们可以提取出来一些信息，我们的 activiti 工作流引擎，必须支持如下功能，才能满足上面的需求：</p>
+<ol>
+<li><p>任务节点可以配置自定义满足条件。</p>
+</li>
+<li><p>任务节点必须支持串行、并行。</p>
+</li>
+<li><p>任务节点必须支持可以指定候选人或者候选组。</p>
+</li>
+<li><p>任务节点必须支持可以循环的次数。</p>
+</li>
+<li><p>任务节点必须支持可以自定义权重。</p>
+</li>
+<li><p>任务节点必须支持加签、减签。(就是动态的修改任务节点的处理人)</p>
+</li>
+</ol>
+<p>因为实际上的需求可能比上面的几种情况更加的复杂，上面的 6 个满足条件，工作流支持前 4 个，后面的 2 个条件是不支持的，所以我们必须要扩展 activiti 工作流引擎才能使用 5、6 等的功能。下面我们将详细的介绍前四种条件的使用，在掌握基本使用之后，我们在后面的章节中将详细的介绍，5、6 这两种功能以及可能更加复杂的操作。</p>
+<h2 id="图形标记"><a href="#图形标记" class="headerlink" title="图形标记:"></a>图形标记:</h2><p>在 activiti-app 的节点, 找到 Muti-instance type 属性, 选择 Sequential 或者 Parallel 属性;<br>Sequential: 串行执行,顺序执行, <strong>三条横线表示</strong>, 把<em>同一个任务</em>按次序<em>发送</em>给每个assignee: 比如 alice处理完了 -&gt; bob处理完了 -&gt;Carol处理完了 …<br>Parallel: 并行执行,<strong>三条竖线表示</strong>, 把同一个任务<em>一下子全部</em>发送给所有的assignee: alice,bob,carol同时处理.</p>
+<p>根据<em>规范</em>的要求,每个上级流程为每个实例创建分支时都要提供如下变量:(这些是规范/标准, 这些变量的名字不可变)<br>这些变量可以在设置 CompiletionCondition(完成条件)的时候设置:<a href="#jump">点击跳转</a></p>
+<ul>
+<li>nrOfInstances:实例总数</li>
+<li>nrOfActiveInstances:当前活动的,比如,还没完成的,实例数量. 对于顺序执行的多实例,值一直为 1.</li>
+<li>nrOfCompletedInstances:已经完成实例的数目.<br>可以通过<code>execution.getVariable(x)</code>方法获得这些变量.</li>
+</ul>
+<p>另外,每个创建的分支都会有分支级别的本地变量(比如,其他实例不可见, 不会保存到流程实例级别):</p>
+<ul>
+<li>loopCounter:表示特定实例的<strong>在循环的索引值</strong>.可以使用 activiti 的 elementIndexVariable 属性修改 loopCounter 的变量名.</li>
+</ul>
+<h4 id="Xml-内容"><a href="#Xml-内容" class="headerlink" title="Xml 内容"></a>Xml 内容</h4><p>要把一个节点设置为多实例,节点 xml 元素必须设置一个<code>multiInstanceLoopCharacteristics</code>子元素.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"false|true"</span>&gt;</span></span><br><span class="line"> ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>isSequential 属性表示节点是进行 顺序执行还是并行执行.</p>
+<p>实例的数量会在进入节点时计算一次. 有一些方法配置它.一种方法是使用 loopCardinality 子元素直接指定一个数字.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"false|true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">loopCardinality</span>&gt;</span>5<span class="tag">&lt;/<span class="name">loopCardinality</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>也可以使用结果为整数的表达式:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"false|true"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">loopCardinality</span>&gt;</span>$&#123;nrOfOrders-nrOfCancellations&#125;<span class="tag">&lt;/<span class="name">loopCardinality</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>另一个定义实例数目的方法是,通过<code>loopDataInputRef</code>子元素,设置一个类型为集合的流程变量名. 对于集合中的每个元素,都会创建一个实例. 也可以通过<code>inputDataItem</code>子元素指定集合. 下面的代码演示了这些配置:(<strong>这才是有用的设置</strong>)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">userTask</span> <span class="attr">name</span>=<span class="string">"My Task $&#123;loopCounter&#125;"</span> <span class="attr">activiti:assignee</span>=<span class="string">"$&#123;assignee&#125;"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"false"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">loopDataInputRef</span>&gt;</span>assigneeList<span class="tag">&lt;/<span class="name">loopDataInputRef</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">inputDataItem</span>  /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">userTask</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>假设<code>assigneeList</code>变量包含这些值<code>[kermit, gonzo, foziee]</code>. 在上面代码中,三个用户任务会同时创建.每个分支都会拥有一个用名为<code>assignee</code>的流程变量, 这个变量会包含集合中的对应元素,在例子中会用来设置用户任务的分配者.</p>
+<p><code>loopDataInputRef</code>和<code>inputDataItem</code>的缺点是 1)名字不好记, 2)根据 BPMN 2.0 格式定义,它们不能包含表达式.activiti 通过在  <code>multiInstanceCharacteristics</code>中设置  collection 和  elementVariable 属性解决了这个问题:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">userTask</span> $&#123;<span class="attr">assignee</span>&#125;"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"true"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">activiti:collection</span>=<span class="string">"$&#123;myService.resolveUsersForTask()&#125;"</span> <span class="attr">activiti:elementVariable</span>=<span class="string">"assignee"</span> &gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">userTask</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>多实例节点在所有实例都完成时才会结束.也可以指定一个表达式在每个实例结束时执行. 如果表达式返回 true,所有其他的实例都会销毁,多实例节点也会结束,流程会继续执行. 这个表达式必须定义在 completionCondition 子元素中.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">userTask</span> $&#123;<span class="attr">assignee</span>&#125;"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">activiti:collection</span>=<span class="string">"assigneeList"</span> <span class="attr">activiti:elementVariable</span>=<span class="string">"assignee"</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">completionCondition</span>&gt;</span>$&#123;nrOfCompletedInstances/nrOfInstances &gt;= 0.6 &#125;<span class="tag">&lt;/<span class="name">completionCondition</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">userTask</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在这里例子中,会为<code>assigneeList</code>集合的每个元素创建一个并行的实例. 当 60% 的任务完成时,其他任务就会删除,流程继续执行.</p>
+<hr>
+<p>以上内容为 Activiti 用户手册的内容,下面实现一个简单地流程:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">userTask</span> $&#123;<span class="attr">assignee</span>&#125;"&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">multiInstanceLoopCharacteristics</span> <span class="attr">isSequential</span>=<span class="string">"false"</span> <span class="attr">activiti:collection</span>=<span class="string">"$&#123;assigneeList&#125;"</span> <span class="attr">activiti:elementVariable</span>=<span class="string">"assignee"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">completionCondition</span>&gt;</span>$&#123;nrOfCompletedInstances/nrOfInstances &gt;= 0.6 &#125;<span class="tag">&lt;/<span class="name">completionCondition</span>&gt;</span> </span><br><span class="line">      <span class="tag">&lt;/<span class="name">multiInstanceLoopCharacteristics</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">userTask</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>发布流程: </strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Deployment deployment = repositoryService.createDeployment()</span><br><span class="line"> .addClasspathResource(<span class="string">"com/chq/ssh/test/activiti/deploy/huiqian.bpmn20.xml"</span>)</span><br><span class="line"> .deploy();</span><br></pre></td></tr></table></figure>
+<p><strong>启动流程:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; assigneeList=<span class="keyword">new</span> ArrayList&lt;String&gt;(); <span class="comment">// 分配任务的人员</span></span><br><span class="line">assigneeList.add(<span class="string">"tom"</span>);</span><br><span class="line">assigneeList.add(<span class="string">"jeck"</span>);</span><br><span class="line">assigneeList.add(<span class="string">"mary"</span>);</span><br><span class="line">Map&lt;String, Object&gt; vars = <span class="keyword">new</span> HashMap&lt;String, Object&gt;(); <span class="comment">// 参数</span></span><br><span class="line">vars.put(<span class="string">"assigneeList"</span>, assigneeList);</span><br><span class="line">ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(<span class="string">"huiqian"</span>,vars);</span><br></pre></td></tr></table></figure>
+<p><strong>查询任务: 这时查询以上三个人的任务,都会显示有 “会签” 这个任务:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Task&gt; tasks = taskService.createTaskQuery().taskAssignee(<span class="string">"mary"</span>).list();</span><br></pre></td></tr></table></figure>
+<p>完成任务: 会签节点设置的:\${nrOfCompletedInstances/nrOfInstances&gt;= 0.6 } 所有任务完成超过 60%,剩余的任务就会删除,表示会签通过. 上面一共设置了三个任务,当两个完成时,超过 60%.流程结束 <span id="jump"> </span></p>
+<hr>
+<h2 id="ref"><a href="#ref" class="headerlink" title="ref:"></a>ref:</h2><p><a href="https://blog.csdn.net/qq_27467601/article/details/54694726" target="_blank" rel="noopener">ref</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Activiti/" rel="tag"># Activiti</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/29/Activity/" rel="next" title="Activiti绘制注意事项">
+                <i class="fa fa-chevron-left"></i> Activiti绘制注意事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/中国式审美正在害惨中国人，不知道葱油们有没有这样的体会/" rel="prev" title="不求美感, 只求" 正确"">
+                不求美感, 只求"正确" <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务场景"><span class="nav-number">2.</span> <span class="nav-text">业务场景:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形标记"><span class="nav-number">3.</span> <span class="nav-text">图形标记:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Xml-内容"><span class="nav-number">3.0.1.</span> <span class="nav-text">Xml 内容</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#ref"><span class="nav-number">4.</span> <span class="nav-text">ref:</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
