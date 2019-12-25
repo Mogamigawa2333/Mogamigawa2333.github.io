@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="今日重大发现!!!">
+<meta name="description" content="123我宣布今日重大发现:我只是一只小猫咪,而王医生才是医生.(这是一个 大家都知道而我才刚明白 的事情..)">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AOP、JS,Py的装饰器、注解、装饰器模式、代理模式">
 <meta property="og:url" content="http://yoursite.com/2019/12/15/AOP、JS,Py的装饰器、注解、装饰器模式、代理模式/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="今日重大发现!!!">
+<meta property="og:description" content="123我宣布今日重大发现:我只是一只小猫咪,而王医生才是医生.(这是一个 大家都知道而我才刚明白 的事情..)">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-15T06:22:27.483Z">
+<meta property="og:updated_time" content="2019-12-25T01:47:48.738Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AOP、JS,Py的装饰器、注解、装饰器模式、代理模式">
-<meta name="twitter:description" content="今日重大发现!!!">
+<meta name="twitter:description" content="123我宣布今日重大发现:我只是一只小猫咪,而王医生才是医生.(这是一个 大家都知道而我才刚明白 的事情..)">
 
 
 
@@ -352,8 +352,7 @@
       
 
       
-        <center><br>今日重大发现!!!<br></center>
-
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我宣布今日重大发现:</span><br><span class="line">我只是一只小猫咪,而王医生才是医生.</span><br><span class="line">(这是一个 大家都知道而我才刚明白 的事情..)</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="Python中的装饰器"><a href="#Python中的装饰器" class="headerlink" title="Python中的装饰器"></a>Python中的装饰器</h2><p>这是python中的<a href="https://www.jianshu.com/p/74e9e3a1ea56" target="_blank" rel="noopener">装饰器</a>:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(func)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrapit</span><span class="params">()</span>:</span></span><br><span class="line">		print(<span class="string">'start clock'</span>)</span><br><span class="line">		start= time.clock()</span><br><span class="line">		func()</span><br><span class="line">		end=time.clock()</span><br><span class="line">		print(<span class="string">'time used:'</span>, end-start)</span><br><span class="line">	<span class="keyword">return</span> wrapit</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeit</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    time.sleep(<span class="number">3</span>) <span class="comment">#程序将在这里暂停3秒</span></span><br><span class="line">	print(<span class="string">'test is running..'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#下面这两句,相当于直接test() #见*延迟求值*</span></span><br><span class="line">a = test</span><br><span class="line">a()</span><br></pre></td></tr></table></figure></p>
 <p>装饰器如何理解:</p>
