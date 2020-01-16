@@ -131,7 +131,7 @@
 <meta property="og:site_name" content="最上川">
 <meta property="og:description" content="123456 ______                   _      |  ____|                 | |     | |__    __   __   __ _  | |     |  __|   \ \ / /  / _` | | |     | |____   \ V /  | (_| | | |____ |______|   \_/    \__,_| |___">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-25T01:43:27.726Z">
+<meta property="og:updated_time" content="2020-01-15T01:53:21.408Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编程语言的求值策略(二)">
 <meta name="twitter:description" content="123456 ______                   _      |  ____|                 | |     | |__    __   __   __ _  | |     |  __|   \ \ / /  / _` | | |     | |____   \ V /  | (_| | | |____ |______|   \_/    \__,_| |___">
@@ -359,14 +359,8 @@
 <p>我发现对于我而言比较难以理解的是<strong>共享对象传递</strong> (<em>call by sharing</em>)</p>
 <p>Java就是传共享对象调用,所以这里使用Java来作为示例.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Accessors</span>(chain = <span class="keyword">true</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqUser</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer userId;</span><br><span class="line">    <span class="keyword">private</span> String request;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqUserUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modify</span><span class="params">(ReqUser reqUser)</span> </span>&#123;</span><br><span class="line">        reqUser = <span class="keyword">new</span> ReqUser();</span><br><span class="line">        reqUser.setUserId(<span class="number">111</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">        ReqUser user = <span class="keyword">new</span> ReqUser();</span><br><span class="line">        user.setRequest(<span class="string">"aaaaa"</span>);</span><br><span class="line">        <span class="keyword">new</span> ReqUserUtil().modify(user);</span><br><span class="line">        System.out.println(<span class="string">"....."</span> + <span class="string">"user = "</span> + user);</span><br><span class="line">        <span class="comment">// 输出: .....user = ReqUser(userId=null, request=aaaaa)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注意:<br>    在Java中 new 一个对象, 相当于在内存中开辟了一个新的区域.</p>
-<pre><code>引用是一个名字,一个外号,引用的底层实现是指针,引用一旦被初始化就不能改变,指针可以改变
-引用的作用是 函数的形参和返回值 
-引用是借用的C++的概念
-
-如果把ReqUser类型换成基本数据类型:
-在Java中,基本的数据类型是存在栈中的, 先搜索每个引用指向的字面量是否存在,
-不存在就在内存中放入新的字面量,然后指向它;如果存在,就直接指向这个字面量内存地址.
-</code></pre><hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">引用是一个名字,一个外号,引用的底层实现是指针,引用一旦被初始化就不能改变,指针可以改变</span><br><span class="line">引用的作用是 函数的形参和返回值 </span><br><span class="line">引用是借用的C++的概念</span><br><span class="line"></span><br><span class="line">如果把ReqUser类型换成基本数据类型:</span><br><span class="line">在Java中,基本的数据类型是存在栈中的, 先搜索每个引用指向的字面量是否存在,</span><br><span class="line">不存在就在内存中放入新的字面量,然后指向它;如果存在,就直接指向这个字面量内存地址.</span><br></pre></td></tr></table></figure>
+<hr>
 <p>下次说说 延迟求值(call by need)</p>
 
       
@@ -528,7 +522,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
