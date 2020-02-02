@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="123456789 __  __                         _____  ____  |  \/  |                       |  __ \|  _ \ | \  / | ___  _ __   __ _  ___ | |  | | |_) || |\/| |/ _ \| &amp;apos;_ \ / _` |/ _ \| |  | |  _ &amp;lt; | |">
+<meta name="description" content="12345678 __  __                         _____  ____  |  \/  |                       |  __ \|  _ \ | \  / | ___  _ __   __ _  ___ | |  | | |_) || |\/| |/ _ \| &amp;apos;_ \ / _` |/ _ \| |  | |  _ &amp;lt; | |">
 <meta name="keywords" content="MongoDB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MongoDB学习笔记">
 <meta property="og:url" content="http://yoursite.com/2020/01/30/MongoDB/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="123456789 __  __                         _____  ____  |  \/  |                       |  __ \|  _ \ | \  / | ___  _ __   __ _  ___ | |  | | |_) || |\/| |/ _ \| &amp;apos;_ \ / _` |/ _ \| |  | |  _ &amp;lt; | |">
+<meta property="og:description" content="12345678 __  __                         _____  ____  |  \/  |                       |  __ \|  _ \ | \  / | ___  _ __   __ _  ___ | |  | | |_) || |\/| |/ _ \| &amp;apos;_ \ / _` |/ _ \| |  | |  _ &amp;lt; | |">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-30T08:55:11.188Z">
+<meta property="og:updated_time" content="2020-02-02T12:29:09.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB学习笔记">
-<meta name="twitter:description" content="123456789 __  __                         _____  ____  |  \/  |                       |  __ \|  _ \ | \  / | ___  _ __   __ _  ___ | |  | | |_) || |\/| |/ _ \| &amp;apos;_ \ / _` |/ _ \| |  | |  _ &amp;lt; | |">
+<meta name="twitter:description" content="12345678 __  __                         _____  ____  |  \/  |                       |  __ \|  _ \ | \  / | ___  _ __   __ _  ___ | |  | | |_) || |\/| |/ _ \| &amp;apos;_ \ / _` |/ _ \| |  | |  _ &amp;lt; | |">
 
 
 
@@ -352,7 +352,7 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> __  __                         _____  ____  </span><br><span class="line">|  \/  |                       |  __ \|  _ \ </span><br><span class="line">| \  / | ___  _ __   __ _  ___ | |  | | |_) |</span><br><span class="line">| |\/| |/ _ \| &apos;_ \ / _` |/ _ \| |  | |  _ &lt; </span><br><span class="line">| |  | | (_) | | | | (_| | (_) | |__| | |_) |</span><br><span class="line">|_|  |_|\___/|_| |_|\__, |\___/|_____/|____/ </span><br><span class="line">                     __/ |                   </span><br><span class="line">                    |___/                    简单的了解和学习.</span><br></pre></td></tr></table></figure>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> __  __                         _____  ____  </span><br><span class="line">|  \/  |                       |  __ \|  _ \ </span><br><span class="line">| \  / | ___  _ __   __ _  ___ | |  | | |_) |</span><br><span class="line">| |\/| |/ _ \| &apos;_ \ / _` |/ _ \| |  | |  _ &lt; </span><br><span class="line">| |  | | (_) | | | | (_| | (_) | |__| | |_) |</span><br><span class="line">|_|  |_|\___/|_| |_|\__, |\___/|_____/|____/ </span><br><span class="line">                     __/ |                   </span><br><span class="line">                    |___/                    简单的了解和学习.</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <ul>
 <li><a href="https://docs.mongodb.com/manual/reference/sql-comparison/" target="_blank" rel="noopener">官方文档地址</a></li>
@@ -404,7 +404,12 @@
 </ol>
 <p>查找:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> userId = db.users.findOne(&#123;<span class="attr">user</span>:<span class="string">"me"</span>&#125;).id;</span><br><span class="line">db.orders.findMany(&#123;<span class="attr">user_id</span>:userId&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>示例: 多对多 teachers 和 students<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.teachers.insert([</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">"洪七公"</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">"黄药师"</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">"龟仙人"</span>&#125;</span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">db.students.insert([</span><br><span class="line">    &#123;<span class="attr">name</span>:<span class="string">"郭靖"</span>,</span><br><span class="line">    tech_ids:[ObjectId(<span class="string">"12345678"</span>),ObjectId(<span class="string">"abcqwert"</span>)]</span><br><span class="line">    &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure></p>
-
+<h3 id="6-GridFS-存储文件"><a href="#6-GridFS-存储文件" class="headerlink" title="6. GridFS 存储文件"></a>6. GridFS 存储文件</h3><p>GridFS是一种将大型文件存储在MongoDB的文件规范：<br> 数据库支持以BSON格式保存二进制对象。 但是MongoDB中BSON对象最大不能超过4MB。<br> GridFS 规范提供了一种透明的机制，可以将一个大文件分割成为多个较小的文档。<br> 为实现这点，该规范指定了一个将文件分块的标准。每个文件都将在文件集合对象中保存一个元数据对象，一个或多个块对象可被组合保存在一个块集合中</p>
+<ul>
+<li><a href="https://jacoobwang.github.io/2017/12/30/Mongodb%E7%9A%84%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8GridFs/" target="_blank" rel="noopener">存储原理</a></li>
+</ul>
+<p>mongo自带有一个实现mongofliles，基本操作如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">列出所有文件：</span><br><span class="line">mongofiles list</span><br><span class="line">上传一个文件：</span><br><span class="line">mongofiles put xxx.txt</span><br><span class="line">下载一个文件：</span><br><span class="line">mongofiles <span class="keyword">get</span> xxx.txt</span><br><span class="line">查找文件：</span><br><span class="line">mongofiles search xxx //会查找所有文件名中包含“xxx”的文件</span><br><span class="line">mongofiles list xxx //会查找所有文件名以“xxx”为前缀的文件</span><br><span class="line">参数说明：</span><br><span class="line">–d 指定数据库 ，默认是fs，Mongofiles list –d testGridfs</span><br><span class="line">-u –p 指定用户名，密码</span><br><span class="line">-h 指定主机</span><br><span class="line">-port 指定主机端口</span><br><span class="line">-c 指定集合名，默认是fs</span><br><span class="line">-t 指定文件的MIME类型，默认会忽略</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -443,6 +448,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/31/Shiro简单笔记/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,7 +528,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -565,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-插入"><span class="nav-number">1.</span> <span class="nav-text">1. 插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-查询"><span class="nav-number">2.</span> <span class="nav-text">2. 查询:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-修改"><span class="nav-number">3.</span> <span class="nav-text">3. 修改:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-删除"><span class="nav-number">4.</span> <span class="nav-text">4. 删除:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文档之间的关系"><span class="nav-number">5.</span> <span class="nav-text">5.文档之间的关系:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-插入"><span class="nav-number">1.</span> <span class="nav-text">1. 插入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-查询"><span class="nav-number">2.</span> <span class="nav-text">2. 查询:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-修改"><span class="nav-number">3.</span> <span class="nav-text">3. 修改:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-删除"><span class="nav-number">4.</span> <span class="nav-text">4. 删除:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文档之间的关系"><span class="nav-number">5.</span> <span class="nav-text">5.文档之间的关系:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-GridFS-存储文件"><span class="nav-number">6.</span> <span class="nav-text">6. GridFS 存储文件</span></a></li></ol></div>
             
 
           </div>

@@ -281,6 +281,136 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/Shiro简单笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/31/Shiro简单笔记/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T13:45:58+08:00">
+                2020-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="三个主要的概念"><a href="#三个主要的概念" class="headerlink" title="三个主要的概念:"></a>三个主要的概念:</h2><ol>
+<li>Subject:<br> 主体,是一个user,一个账户,一个定时任务,或者一条狗.一个App当前”执行用户”的一个”视图”.(一种抽象)</li>
+<li>Security Manager:<br> 管家,协调一切</li>
+<li>Realms:<br> 一种资源的domian的抽象.shiro提供一些默认的常用Realm (目录,JDBC), 当然也可以自己配置,这体现了”约定大于配置”</li>
+</ol>
+<ul>
+<li>将Security Manager托管到SecurityUtils中,不与manager接触,之后可以不必关心Manager</li>
+<li>程序员与shiro打交道用的是subject对象,调用功能简单,其底层功能是调用Manager的,是一个传话的(门面模式)</li>
+<li>subject可以执行shiro的’几乎’所有操作, 几乎:除了加密以外的所有操作,因为加密是shiro的一个单独模块</li>
+</ul>
+<h2 id="shiro-ini-格式"><a href="#shiro-ini-格式" class="headerlink" title="shiro.ini 格式:"></a>shiro.ini 格式:</h2><p>ini格式的特点是: 没有标签,但是分区域.<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[main]</span></span><br><span class="line"><span class="attr">shiro.loginUrl</span> = /login.jsp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明自定义的realm, 自定义realm需要extends AuthorizingRealm</span></span><br><span class="line"><span class="attr">realm04</span> = com.xx.MyRealm</span><br><span class="line"><span class="comment"># 将自定义的realm注册给securityManager</span></span><br><span class="line"><span class="attr">securityManager.realms</span> = <span class="variable">$realm04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义用户信息</span></span><br><span class="line"><span class="comment"># 格式: 用户名=密码,角色1,角色2,...</span></span><br><span class="line"><span class="section">[users]</span> <span class="comment"># 区域名,区域名不是乱起的,需要解析</span></span><br><span class="line"><span class="attr">Alice</span>=<span class="number">123</span>,admin</span><br><span class="line"><span class="attr">Bob</span>=<span class="number">456</span>,manager,seller</span><br><span class="line"><span class="attr">Carol</span>=<span class="number">789</span>,clerk</span><br><span class="line"><span class="comment"># 角色及其权限信息 --------------</span></span><br><span class="line"><span class="comment"># 预定权限: </span></span><br><span class="line"><span class="comment"># user:query</span></span><br><span class="line"><span class="comment"># user:detail:query</span></span><br><span class="line"><span class="comment"># user:update</span></span><br><span class="line"><span class="comment"># user:deleted</span></span><br><span class="line"><span class="comment"># user:insert</span></span><br><span class="line"><span class="comment"># order:update</span></span><br><span class="line"></span><br><span class="line"><span class="section">[roles]</span></span><br><span class="line"><span class="comment"># admin拥有所有权限</span></span><br><span class="line"><span class="attr">admin</span>=*</span><br><span class="line"><span class="comment"># clerk拥有查询权限</span></span><br><span class="line"><span class="attr">clerk</span>=user:query,user:query:me # 资源:操作:示例 , 粒度细化到某个资源示例</span><br><span class="line"><span class="comment"># manager拥有用户的所有权限</span></span><br><span class="line"><span class="attr">manager</span>=user:*</span><br><span class="line"></span><br><span class="line"><span class="section">[urls]</span></span><br><span class="line"><span class="comment"># 访问路径 = 过滤器</span></span><br><span class="line"><span class="comment"># anon,authc,logout...都是过滤器别名</span></span><br><span class="line"><span class="comment"># 在shiro的DefaulteFilter(enum)里面定义了许多默认的过滤器,以下用的都是默认的过滤器</span></span><br><span class="line"><span class="comment"># /user/login/page 普通路径</span></span><br><span class="line"><span class="comment"># /user/* 代表/user/a,/user/b,/user/c</span></span><br><span class="line"><span class="comment"># /user/** 代表/user/a/b, /user/c/d/e</span></span><br><span class="line"><span class="comment"># /user/hello? 代表/user/helloa,/user/hellob</span></span><br><span class="line"><span class="comment"># url匹配是从上往下匹配: url匹配的范围也应该是从小到大匹配</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤器:</span></span><br><span class="line"><span class="comment"># anon =&gt; 不需要身份认证</span></span><br><span class="line"><span class="comment"># authc =&gt; 会验证是否已经验证身份,如果没有验证会被强制转发到上面的loginUrl</span></span><br><span class="line"><span class="comment"># logout =&gt; 访问指定的路径,登出路径</span></span><br><span class="line"><span class="comment"># roles["manager",clerk""] =&gt; 指定路径的访问需要subject是这两个角色其中之一</span></span><br><span class="line"><span class="comment"># perms["user:delete","user:update"] =&gt; 指定路径的访问需要subject有这两个权限</span></span><br><span class="line">/user/login/page=anon</span><br><span class="line">/login.jsp = authc</span><br><span class="line">/logout = logout</span><br><span class="line">/account/** = authc</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/MongoDB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -351,7 +481,7 @@
 
       
         
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> __  __                         _____  ____  </span><br><span class="line">|  \/  |                       |  __ \|  _ \ </span><br><span class="line">| \  / | ___  _ __   __ _  ___ | |  | | |_) |</span><br><span class="line">| |\/| |/ _ \| &apos;_ \ / _` |/ _ \| |  | |  _ &lt; </span><br><span class="line">| |  | | (_) | | | | (_| | (_) | |__| | |_) |</span><br><span class="line">|_|  |_|\___/|_| |_|\__, |\___/|_____/|____/ </span><br><span class="line">                     __/ |                   </span><br><span class="line">                    |___/                    简单的了解和学习.</span><br></pre></td></tr></table></figure>
+          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> __  __                         _____  ____  </span><br><span class="line">|  \/  |                       |  __ \|  _ \ </span><br><span class="line">| \  / | ___  _ __   __ _  ___ | |  | | |_) |</span><br><span class="line">| |\/| |/ _ \| &apos;_ \ / _` |/ _ \| |  | |  _ &lt; </span><br><span class="line">| |  | | (_) | | | | (_| | (_) | |__| | |_) |</span><br><span class="line">|_|  |_|\___/|_| |_|\__, |\___/|_____/|____/ </span><br><span class="line">                     __/ |                   </span><br><span class="line">                    |___/                    简单的了解和学习.</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/01/30/MongoDB/#more" rel="contents">
@@ -1384,130 +1514,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/Activity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chiu">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="最上川">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/29/Activity/" itemprop="url">Activiti绘制注意事项</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-29T12:00:09+08:00">
-                2019-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">这是一种惩罚curdBoy的邪恶工具 </span><br><span class="line">  ____    _____    __  __ </span><br><span class="line"> |  _ \  |  __ \  |  \/  |</span><br><span class="line"> | |_) | | |__) | | \  / |</span><br><span class="line"> |  _ &lt;  |  ___/  | |\/| |</span><br><span class="line"> | |_) | | |      | |  | |</span><br><span class="line"> |____/  |_|      |_|  |_|</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/08/29/Activity/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1558,7 +1564,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="忘了爱,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -123,15 +123,17 @@
 
 
 
-<meta name="keywords" content="忘了爱">
+<meta name="description" content="三个主要的概念: Subject: 主体,是一个user,一个账户,一个定时任务,或者一条狗.一个App当前”执行用户”的一个”视图”.(一种抽象) Security Manager: 管家,协调一切 Realms: 一种资源的domian的抽象.shiro提供一些默认的常用Realm (目录,JDBC), 当然也可以自己配置,这体现了”约定大于配置”   将Security Manager托管到">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RegExp &lt;--&gt; NFA &lt;--&gt; DFA">
-<meta property="og:url" content="http://yoursite.com/2019/05/31/自动机与正则表达式/index.html">
+<meta property="og:title" content="最上川">
+<meta property="og:url" content="http://yoursite.com/2020/01/31/Shiro简单笔记/index.html">
 <meta property="og:site_name" content="最上川">
+<meta property="og:description" content="三个主要的概念: Subject: 主体,是一个user,一个账户,一个定时任务,或者一条狗.一个App当前”执行用户”的一个”视图”.(一种抽象) Security Manager: 管家,协调一切 Realms: 一种资源的domian的抽象.shiro提供一些默认的常用Realm (目录,JDBC), 当然也可以自己配置,这体现了”约定大于配置”   将Security Manager托管到">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-31T09:36:23.557Z">
+<meta property="og:updated_time" content="2020-02-01T09:08:45.823Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RegExp &lt;--&gt; NFA &lt;--&gt; DFA">
+<meta name="twitter:title" content="最上川">
+<meta name="twitter:description" content="三个主要的概念: Subject: 主体,是一个user,一个账户,一个定时任务,或者一条狗.一个App当前”执行用户”的一个”视图”.(一种抽象) Security Manager: 管家,协调一切 Realms: 一种资源的domian的抽象.shiro提供一些默认的常用Realm (目录,JDBC), 当然也可以自己配置,这体现了”约定大于配置”   将Security Manager托管到">
 
 
 
@@ -161,13 +163,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/31/自动机与正则表达式/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/31/Shiro简单笔记/">
 
 
 
 
 
-  <title>RegExp <--> NFA <--> DFA | 最上川</--></--></title>
+  <title> | 最上川</title>
   
 
 
@@ -282,7 +284,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/31/自动机与正则表达式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/31/Shiro简单笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chiu">
@@ -299,7 +301,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RegExp <--> NFA <--> DFA</--></--></h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -311,8 +313,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-31T13:57:42+08:00">
-                2019-05-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-31T13:45:58+08:00">
+                2020-01-31
               </time>
             
 
@@ -349,83 +351,17 @@
       
 
       
-        <hr>
-<hr>
-<a id="more"></a>
-<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式:"></a>正则表达式:</h1><h2 id="First-of-all-what-is-Regular"><a href="#First-of-all-what-is-Regular" class="headerlink" title="First of all, what is Regular?"></a>First of all, what is Regular?</h2><p>什么是正则?不仅有正则表达式, 还有一个玩意叫做”正则序”, 我几乎不知道正则是啥意思,问问周边的同学老师他们也表示不知道. 后来我知道了,这完完全全是大陆的垃圾翻译搞得鬼,”正则”这个词应该是后来被创造出来的(具体不可考);</p>
-<p>正则指的是 有一定规律的,有一定的规则,不是乱序的,无序可循的; (有规则的就是漂亮的:对称,曼得陀罗集)</p>
+        <h2 id="三个主要的概念"><a href="#三个主要的概念" class="headerlink" title="三个主要的概念:"></a>三个主要的概念:</h2><ol>
+<li>Subject:<br> 主体,是一个user,一个账户,一个定时任务,或者一条狗.一个App当前”执行用户”的一个”视图”.(一种抽象)</li>
+<li>Security Manager:<br> 管家,协调一切</li>
+<li>Realms:<br> 一种资源的domian的抽象.shiro提供一些默认的常用Realm (目录,JDBC), 当然也可以自己配置,这体现了”约定大于配置”</li>
+</ol>
 <ul>
-<li>比如一段文本的某个词的出现的位置符合某种规律(比如素数出现的规律: 素数定理).</li>
-<li>抑或者是整个文本的本来就是按照一定规则来的, 比如身份证号的前几位表示什么,中间几位表示什么,最后几位又是表示什么.还有就是电话号码.</li>
+<li>将Security Manager托管到SecurityUtils中,不与manager接触,之后可以不必关心Manager</li>
+<li>程序员与shiro打交道用的是subject对象,调用功能简单,其底层功能是调用Manager的,是一个传话的(门面模式)</li>
+<li>subject可以执行shiro的’几乎’所有操作, 几乎:除了加密以外的所有操作,因为加密是shiro的一个单独模块</li>
 </ul>
-<p>正则表达式就是把这个规律,试图用公式的形式表达出来 正则表达式在台湾被译作 “规则运算式”;</p>
-<h2 id="RegExp的特殊元字符"><a href="#RegExp的特殊元字符" class="headerlink" title="RegExp的特殊元字符:"></a>RegExp的特殊元字符:</h2><p><code>. * + ? () [] {} | ^ $</code></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">字符</th>
-<th style="text-align:center">结合性</th>
-<th style="text-align:center">解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">它表示,除了换行符以外所有的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">*</td>
-<td style="text-align:center">左结合性</td>
-<td style="text-align:center">星号匹配0个或多个前面的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">+</td>
-<td style="text-align:center">左结合性</td>
-<td style="text-align:center">加号匹配1个或多个前面的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">?</td>
-<td style="text-align:center">左结合性</td>
-<td style="text-align:center">问号匹配0个或1个前面的字符</td>
-</tr>
-<tr>
-<td style="text-align:center">()</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">子模式</td>
-</tr>
-<tr>
-<td style="text-align:center">[]</td>
-<td style="text-align:center">无</td>
-<td style="text-align:center">字符类, [abc] 表示 “a, b 或 c 的中任何一个字符”,字符类后面可以使用 *, ?, + 或 {min,max} 进行限定. 例如, [0-9]+ 匹配一个或多个任意数字; 因此它可以匹配 xyz123 但不会匹配 abcxyz.</td>
-</tr>
-<tr>
-<td style="text-align:center">{min,max}</td>
-<td style="text-align:center">左结合性</td>
-<td style="text-align:center">匹配出现次数介于 min 和 max 的前面的字符</td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">无</td>
-<td>竖线将两个或多个可选项目分隔开来. 如果可选项目中 任何一个 满足条件, 则会形成匹配. 例如, gray</td>
-<td>grey 既可以匹配 gray 也可以匹配 grey. 同样地, 模式 gr(a</td>
-<td>e)y 中通过下面描述的括号的帮助可以实现同样的作用</td>
-</tr>
-<tr>
-<td style="text-align:center">^</td>
-<td style="text-align:center">右结合性</td>
-<td style="text-align:center">^ 表示需要在行的开始处进行匹配,例如, ^abc 可以匹配 abc123 但不匹配 123abc</td>
-</tr>
-<tr>
-<td style="text-align:center">$</td>
-<td style="text-align:center">左结合性</td>
-<td style="text-align:center">表示需要在行的末端进行匹配. 例如, abc$ 可以匹配 123abc 但不能匹配 abc123</td>
-</tr>
-</tbody>
-</table>
-<p>不严谨的讲，正则语言是用固定大小内存、能够一次性地通过文本并发生匹配的字符串集合(拾人牙慧,见ref1);</p>
-<h1 id="有限状态自动机"><a href="#有限状态自动机" class="headerlink" title="有限状态自动机:"></a>有限状态自动机:</h1><p>由于我没接触过, 对此一点概念都没有, 我连夜请教了wiki老师, 但是我的wiki老师喝醉了, 他说着一些我听不懂的<a href="https://www.wikiwand.com/zh-hans/%E7%A1%AE%E5%AE%9A%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E8%87%AA%E5%8A%A8%E6%9C%BA" target="_blank" rel="noopener">话</a>;</p>
+<h2 id="shiro-ini-格式"><a href="#shiro-ini-格式" class="headerlink" title="shiro.ini 格式:"></a>shiro.ini 格式:</h2><p>ini格式的特点是: 没有标签,但是分区域.<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[main]</span></span><br><span class="line"><span class="attr">shiro.loginUrl</span> = /login.jsp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 声明自定义的realm, 自定义realm需要extends AuthorizingRealm</span></span><br><span class="line"><span class="attr">realm04</span> = com.xx.MyRealm</span><br><span class="line"><span class="comment"># 将自定义的realm注册给securityManager</span></span><br><span class="line"><span class="attr">securityManager.realms</span> = <span class="variable">$realm04</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义用户信息</span></span><br><span class="line"><span class="comment"># 格式: 用户名=密码,角色1,角色2,...</span></span><br><span class="line"><span class="section">[users]</span> <span class="comment"># 区域名,区域名不是乱起的,需要解析</span></span><br><span class="line"><span class="attr">Alice</span>=<span class="number">123</span>,admin</span><br><span class="line"><span class="attr">Bob</span>=<span class="number">456</span>,manager,seller</span><br><span class="line"><span class="attr">Carol</span>=<span class="number">789</span>,clerk</span><br><span class="line"><span class="comment"># 角色及其权限信息 --------------</span></span><br><span class="line"><span class="comment"># 预定权限: </span></span><br><span class="line"><span class="comment"># user:query</span></span><br><span class="line"><span class="comment"># user:detail:query</span></span><br><span class="line"><span class="comment"># user:update</span></span><br><span class="line"><span class="comment"># user:deleted</span></span><br><span class="line"><span class="comment"># user:insert</span></span><br><span class="line"><span class="comment"># order:update</span></span><br><span class="line"></span><br><span class="line"><span class="section">[roles]</span></span><br><span class="line"><span class="comment"># admin拥有所有权限</span></span><br><span class="line"><span class="attr">admin</span>=*</span><br><span class="line"><span class="comment"># clerk拥有查询权限</span></span><br><span class="line"><span class="attr">clerk</span>=user:query,user:query:me # 资源:操作:示例 , 粒度细化到某个资源示例</span><br><span class="line"><span class="comment"># manager拥有用户的所有权限</span></span><br><span class="line"><span class="attr">manager</span>=user:*</span><br><span class="line"></span><br><span class="line"><span class="section">[urls]</span></span><br><span class="line"><span class="comment"># 访问路径 = 过滤器</span></span><br><span class="line"><span class="comment"># anon,authc,logout...都是过滤器别名</span></span><br><span class="line"><span class="comment"># 在shiro的DefaulteFilter(enum)里面定义了许多默认的过滤器,以下用的都是默认的过滤器</span></span><br><span class="line"><span class="comment"># /user/login/page 普通路径</span></span><br><span class="line"><span class="comment"># /user/* 代表/user/a,/user/b,/user/c</span></span><br><span class="line"><span class="comment"># /user/** 代表/user/a/b, /user/c/d/e</span></span><br><span class="line"><span class="comment"># /user/hello? 代表/user/helloa,/user/hellob</span></span><br><span class="line"><span class="comment"># url匹配是从上往下匹配: url匹配的范围也应该是从小到大匹配</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 过滤器:</span></span><br><span class="line"><span class="comment"># anon =&gt; 不需要身份认证</span></span><br><span class="line"><span class="comment"># authc =&gt; 会验证是否已经验证身份,如果没有验证会被强制转发到上面的loginUrl</span></span><br><span class="line"><span class="comment"># logout =&gt; 访问指定的路径,登出路径</span></span><br><span class="line"><span class="comment"># roles["manager",clerk""] =&gt; 指定路径的访问需要subject是这两个角色其中之一</span></span><br><span class="line"><span class="comment"># perms["user:delete","user:update"] =&gt; 指定路径的访问需要subject有这两个权限</span></span><br><span class="line">/user/login/page=anon</span><br><span class="line">/login.jsp = authc</span><br><span class="line">/logout = logout</span><br><span class="line">/account/** = authc</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -441,12 +377,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/忘了爱/" rel="tag"># 忘了爱</a>
-          
-        </div>
-      
 
       
       
@@ -456,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/05/一些软考中的算法/" rel="next" title="KMP算法和一些排序算法">
-                <i class="fa fa-chevron-left"></i> KMP算法和一些排序算法
+              <a href="/2020/01/30/MongoDB/" rel="next" title="MongoDB学习笔记">
+                <i class="fa fa-chevron-left"></i> MongoDB学习笔记
               </a>
             
           </div>
@@ -465,10 +395,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/19/Null/" rel="prev" title="编程语言中的空值">
-                编程语言中的空值 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -591,7 +517,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.</span> <span class="nav-text">正则表达式:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#First-of-all-what-is-Regular"><span class="nav-number">1.1.</span> <span class="nav-text">First of all, what is Regular?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RegExp的特殊元字符"><span class="nav-number">1.2.</span> <span class="nav-text">RegExp的特殊元字符:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有限状态自动机"><span class="nav-number">2.</span> <span class="nav-text">有限状态自动机:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三个主要的概念"><span class="nav-number">1.</span> <span class="nav-text">三个主要的概念:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro-ini-格式"><span class="nav-number">2.</span> <span class="nav-text">shiro.ini 格式:</span></a></li></ol></div>
             
 
           </div>
