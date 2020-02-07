@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, Source Code Pro, sans-serif, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, Source Code Pro, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, monospace, sans-serif:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="123456      _   _   _   _____      | | | \ | | |_   _|     | | |  \| |   | |   _   | | | . ` |   | |  | |__| | | |\  |  _| |_  \____/  |_| \_| |_____|">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JNI调用其他语言">
+<meta property="og:url" content="http://yoursite.com/2020/02/07/JNI调用/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="123456      _   _   _   _____      | | | \ | | |_   _|     | | |  \| |   | |   _   | | | . ` |   | |  | |__| | | |\  |  _| |_  \____/  |_| \_| |_____|">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-07T11:39:13.960Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JNI调用其他语言">
+<meta name="twitter:description" content="123456      _   _   _   _____      | | | \ | | |_   _|     | | |  \| |   | |   _   | | | . ` |   | |  | |__| | | |\  |  _| |_  \____/  |_| \_| |_____|">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/07/JNI调用/">
+
+
+
+
+
+  <title>JNI调用其他语言 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/07/JNI调用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JNI调用其他语言</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-07T19:33:19+08:00">
+                2020-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">      _   _   _   _____ </span><br><span class="line">     | | | \ | | |_   _|</span><br><span class="line">     | | |  \| |   | |  </span><br><span class="line"> _   | | | . ` |   | |  </span><br><span class="line">| |__| | | |\  |  _| |_ </span><br><span class="line"> \____/  |_| \_| |_____|</span><br></pre></td></tr></table></figure>
+<a id="more"></a> 
+<h2 id="Java部分"><a href="#Java部分" class="headerlink" title="Java部分"></a>Java部分</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyNative</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">static</span>&#123;</span><br><span class="line">       System.loadLibrary( <span class="string">"MyNative"</span> ); </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">HelloWord</span><span class="params">()</span></span>; </span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> <span class="keyword">static</span> String <span class="title">cToJava</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span></span>&#123;</span><br><span class="line">      HelloWord();</span><br><span class="line">      String str = cToJava();</span><br><span class="line">      System.out.println(<span class="string">"...JNI调用的返回值是: "</span>+ str);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在JAVA程序中，首先需要在类中声明所调用的库名称<code>System.loadLibrary( String libname );</code>，在库的搜寻路径中定位这个库。<br>定位库的具体操作依赖于操作系统。在windows下，首先从当前目录查找，然后再搜寻<code>PATH</code>环境变量列出的目录。如果找不到该库，则会抛出<code>UnsatisfiedLinkError</code>。<ul>
+<li>可以在java代码中使用<code>System.getProperty(&quot;java.library.path&quot;));</code>查看path文件路径.可以把动态库文件放入这些文件夹当中;<br>注意: linux中输出的结果是: <code>/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib:/usr/local/kava</code><br>其中冒号是linux下的分隔符, 分号是windows下的分割符.<br>也可以以下几种方式自己手动指定:</li>
+<li>可以在运行jar包的时候手动指定: <code>Java -jar -Djava.library.path=/usr/local/kava/ what.jar</code></li>
+<li>可以在java程序运行前,通过linux的export命令临时指定一个库文件地址,临时只对当前shell窗口有效. 步骤为:<br>先执行: <code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/kava</code> 注意这句命令的等于号和$符两边没有空格(都是紧凑的),不然会报错.<br>这里的<code>LD_LIBRARY_PATH</code>是一种特殊的path(?),没有过多了解.<br>然后执行 <code>java -jar what.jar</code>.<ul>
+<li>可以把 <code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/kava</code> 写进<code>/etc/profile</code>里面的最后一行.<br>执行<code>source /etc/profile</code>,使配置文件长期生效.<br>在windows中则可以写在环境变量的PATH中.</li>
+</ul>
+</li>
+<li>可以在java代码中通过<code>System.setProperty(&quot;java.library.path&quot;, &quot;/usr/local/kava&quot;);</code></li>
+<li>可以使用<code>System.load(&quot;绝对路径&quot;)</code>, load和loadLibrary的区别是load方法里面写的是绝对路径.</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li>在这里，库的扩展名字可以不用写出来，究竟是DLL还是SO，由系统自己判断。<br>在Windows下需要写dll的名字的全名,比如需要加载<code>aaa.dll</code>, 是这样写:<code>System.loadLibrary(&quot;aaa&quot;);</code>.<br>在Linux下使用的是.so格式的文件,这个文件有特殊的命名方式,如果代码中还是写<code>System.loadLibrary(&quot;aaa&quot;);</code>,这次加载的就是libaaa.so<br>在Linux下都有一个前缀lib, <code>libxxx.so</code><br>可以在java代码中使用<code>System.mapLibraryName(&quot;aaa&quot;)</code>, 来查看映射的动态链接库的名称.</li>
+<li>还需要对将要调用的方法做本地声明，关键字为<code>native</code>。并且只需要声明，而不需要具体实现。 实现放在C中实现，稍后将做说明。</li>
+<li><p>如果加了static，表明是静态方法。如果不加，表明是一般的方法。加与不加，生成的头文件中有一个参数不同。 </p>
+</li>
+<li><p>现在开始编译它:<br>用<code>javac MyNative.java</code>编译它，生成对应的class文件。<br>用<code>javah -jni MyNative</code>，就会生成对应的MyNative.h头文件.<br>可以查看<code>javah</code>的具体语法.</p>
+</li>
+<li><p>这个时候可以打开MyNative.h文件来查看调用的C函数的名称.<br>我发现C函数名称的规律是这样:<br><code>Java_类_的_路_径_native修饰的方法的名字.</code><br>如果想查看dll文件里面都有哪些函数,可以用 dllexp 来查看(小软件).</p>
+</li>
+</ol>
+<hr>
+<p>以下东西就不是我写的了,仅供参考.</p>
+<h2 id="C实现部分"><a href="#C实现部分" class="headerlink" title="C实现部分"></a>C实现部分</h2><p>刚才用javah MyNative生成的MyNative.h头文件内容如下：<br> <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="comment">/* Header for class MyNative */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _Included_MyNative</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _Included_MyNative</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Class: MyNative</span></span><br><span class="line"><span class="comment">* Method: HelloWord</span></span><br><span class="line"><span class="comment">* Signature: ()V</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Java_MyNative_HelloWord</span> <span class="params">(JNIEnv *, jclass)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Class: MyNative</span></span><br><span class="line"><span class="comment">* Method: cToJava</span></span><br><span class="line"><span class="comment">* Signature: ()Ljava/lang/String;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function">JNIEXPORT jstring JNICALL <span class="title">Java_MyNative_cToJava</span> <span class="params">(JNIEnv *, jclass)</span></span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure></p>
+<p>接下来,就是如何实现它了。其实，用JNI作出的东西也是DLL，被JAVA所调用。</p>
+<p>在具体实现的时候，我们只关心两个函数原型：<br>JNIEXPORT void JNICALL Java_MyNative_HelloWord(JNIEnv <em>, jclass);<br>JNIEXPORT jstring JNICALL Java_MyNative_cToJava(JNIEnv </em>, jclass);</p>
+<p>现在开始第一步。在project里面选择win32 Dynamic-link Library，然后点击下一步，其余的取默认。<br>如果不取默认的，将会有dllmain()函数。取空DLL工程的话，将无这个函数。我在这里取的是空。<br>然后选择new-&gt;File-&gt;C++ Source File，生成一个空<em>.cpp文件。我们把他取名为MyNative。<br>把JNIEXPORT void JNICALL Java_MyNative_HelloWord(JNIEnv </em>, jclass);<br>和JNIEXPORT jstring JNICALL Java_MyNative_cToJava(JNIEnv *, jclass);拷贝到CPP文件中去。然后把头文件包含进来。</p>
+<p>生成的MyNative.cpp内容如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"MyNative.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">JNIEXPORT <span class="keyword">void</span> JNICALL <span class="title">Java_MyNative_HelloWord</span> <span class="params">(JNIEnv *env, jclass jobject)</span></span>&#123;</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"hello word!\n"</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">JNIEXPORT jstring JNICALL Java_MyNative_cToJavaJNIEnv *env, jclass obj)&#123;</span><br><span class="line">   jstring jstr;</span><br><span class="line">   <span class="keyword">char</span> str[]=<span class="string">"Hello,word!\n"</span>;</span><br><span class="line">   jstr=env-&gt;NewStringUTF(str);</span><br><span class="line">   <span class="keyword">return</span> jstr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在编译前一定要注意下列情况。<br> 注意：一定要把SDK中的include文件夹中(和它下面的win32文件夹下的头文件)的几个头文件拷贝到VC的include文件夹中。<br> 或者在VC的tools\options\directories中设置，把头文件给包含进来。</p>
+<p>对程序的一点解释：</p>
+<ol>
+<li>前文不是说过，加了static和不加只是一个参数的区别吗。就是jclass的不同，不加static这里就是jobject。<br>也就是JNIEXPORT void JNICALL Java_MyNative_HelloWord(JNIEnv *env, jobject obj)。</li>
+<li>这里JNIEXPORT和JNICALL都是JNI的关键字，表示此函数是要被JNI调用的。<br>而jstring是以JNI为中介使JAVA的String类型与本地的string沟通的一种类型，我们可以视而不见，就当做String使用(具体对应见表一)。<br>函数的名称是JAVA_再加上java程序的package路径再加函数名组成的（参见有包的情况）。<br>参数中，我们也只需要关心在JAVA程序中存在的参数，至于JNIEnv*和jclass我们一般没有必要去碰它。</li>
+<li>NewStringUTF()是JNI函数，从一个包含UTF格式编码字符的char类型数组中创建一个新的jstring对象。</li>
+<li>以上程序片断jstr=env-&gt;NewStringUTF(str);是C++中的写法，不必使用env指针。<br>因为JNIEnv函数的C++版本包含有直接插入成员函数，他们负责查找函数指针。<br>而对于C的写法，应改为：<code>jstr=(*env)-&gt;NewStringUTF(env,str);</code>因为所有JNI函数的调用都使用env指针，它是任意一个本地方法的第一个参数。<br>env指针是指向一个函数指针表的指针。因此在每个JNI函数访问前加前缀<code>(*env)-&gt;</code>，以确保间接引用函数指针。</li>
+</ol>
+<p>在C和Java编程语言之间传送值时，需要理解这些值类型在这两种语言间的对应关系。这些都在头文件jni.h中，用typedef语句声明了这些类在目标平台上的代价类。<br>头文件也定义了常量如：JNI_FALSE=0 和JNI_TRUE=1;可以去网上搜索Java类型和C类型之间的对应关系。</p>
+<p>现在开始对所写的程序进行编译。选择build-&gt;rebuild all对所写的程序进行编译。点击build-&gt;build MyNative.DLL生成DLL文件。<br>也可以用命令行cl来编译。具体参看其他资料。</p>
+<p><strong>还有JNI还要注意UNICODE编码和ASCII编码之间互相转换;</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/06/IDEA远程/" rel="next" title="IDEA远程debug">
+                <i class="fa fa-chevron-left"></i> IDEA远程debug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java部分"><span class="nav-number">1.</span> <span class="nav-text">Java部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C实现部分"><span class="nav-number">2.</span> <span class="nav-text">C实现部分</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
