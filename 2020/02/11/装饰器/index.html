@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, Source Code Pro, sans-serif, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, Source Code Pro, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, monospace, sans-serif:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1装饰器模式,装饰器,注解. 好像有些了不得的联系...">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="装饰器模式 与 Python的装饰器">
+<meta property="og:url" content="http://yoursite.com/2020/02/11/装饰器/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="1装饰器模式,装饰器,注解. 好像有些了不得的联系...">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-11T14:24:29.880Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="装饰器模式 与 Python的装饰器">
+<meta name="twitter:description" content="1装饰器模式,装饰器,注解. 好像有些了不得的联系...">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/11/装饰器/">
+
+
+
+
+
+  <title>装饰器模式 与 Python的装饰器 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/11/装饰器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">装饰器模式 与 Python的装饰器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-11T22:22:22+08:00">
+                2020-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">装饰器模式,装饰器,注解. 好像有些了不得的联系...</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="大家好-我叫装饰器-Decorator"><a href="#大家好-我叫装饰器-Decorator" class="headerlink" title="大家好, 我叫装饰器(Decorator)"></a>大家好, 我叫装饰器(Decorator)</h2><ul>
+<li><p>本质: </p>
+<ul>
+<li>一个函数/类: (是一个什么样的 函数/类 呢?)<ul>
+<li>它可以让 其他函数/类 在不需要任何代码修改的前提下增加额外的功能</li>
+<li>它的返回值也是一个函数/类</li>
+<li>经常用于AOP编程场景</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>作用: 为已经存在的对象添加额外的功能</p>
+</li>
+</ul>
+<h2 id="Java装饰器模式"><a href="#Java装饰器模式" class="headerlink" title="Java装饰器模式"></a>Java装饰器模式</h2><ul>
+<li><p>属于结构性模式: 创建一个装饰类, 用来包装原有的类, 并在保持原有类的方法签名的的完整性的前提下, 提供额外的功能.</p>
+</li>
+<li><p>装饰器模式所体现出的特点是 “依赖倒置原则” 和 “组合优于继承”.</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IBook</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CommonBook</span> <span class="keyword">implements</span> <span class="title">IBook</span></span>&#123; <span class="comment">//被包装类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>&#123;</span><br><span class="line">        sout(<span class="string">"书的内容"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个装饰类包装原有的类, 并在保持原有类的 方法签名的的完整性的前提下, 提供额外的功能.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SuperBook</span> <span class="keyword">implements</span> <span class="title">IBook</span></span>&#123; <span class="comment">//包装类</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> IBook book;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SuperBook</span><span class="params">(IBook book)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.book = book;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">open</span><span class="params">()</span></span>&#123; <span class="comment">// 保持被包装类的方法签名完整</span></span><br><span class="line">        book.open();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PaperWrappedBook</span> <span class="keyword">extends</span> <span class="title">SuperBook</span></span>&#123; <span class="comment">// 这两个都继承装饰类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PaperWrappedBook</span><span class="params">(IBook book)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(book);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">open</span><span class="params">()</span></span>&#123;</span><br><span class="line">        sout(<span class="string">"纸质前封面"</span>);</span><br><span class="line">        <span class="keyword">super</span>.open();</span><br><span class="line">        sout(<span class="string">"纸质后封面"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RedBook</span> <span class="keyword">extends</span> <span class="title">SuperBook</span></span>&#123; <span class="comment">// 这两个都继承装饰类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RedBook</span><span class="params">(IBook book)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(book);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">open</span><span class="params">()</span></span>&#123;</span><br><span class="line">        sout(<span class="string">"红色封面"</span>);</span><br><span class="line">        <span class="keyword">super</span>.open();</span><br><span class="line">        sout(<span class="string">"红色封面"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试////////////////////////</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestCode</span></span>&#123;</span><br><span class="line">    psvm(String... args)&#123;</span><br><span class="line">        <span class="comment">// 层层包装:</span></span><br><span class="line">        SuperBook book = <span class="keyword">new</span> RedBook(<span class="keyword">new</span> PaperWrappedBook(<span class="keyword">new</span> CommonBook()));</span><br><span class="line">        <span class="comment">// SuperBook book = new PaperWrappedBook(new CommonBook()); // 也可以这样.甚至可以更长.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结果//////////////////////</span></span><br><span class="line"></span><br><span class="line">红色封面</span><br><span class="line">纸质前封面</span><br><span class="line">书的内容</span><br><span class="line">纸质后封面</span><br><span class="line">红色封面</span><br></pre></td></tr></table></figure>
+<p>可以看到, 真正使用的时候使用的是包装类, 然后是类似于<code>new XXX(new XXX)</code>这样的代码,来层层包装.</p>
+<p>JDK的IO的代码就是使用了装饰器模式.</p>
+<h2 id="Python中的装饰器"><a href="#Python中的装饰器" class="headerlink" title="Python中的装饰器"></a>Python中的装饰器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">timeit</span><span class="params">(func)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">wrap</span><span class="params">(*args)</span>:</span></span><br><span class="line">		print(<span class="string">'start clock'</span>)</span><br><span class="line">		start= time.process_time() <span class="comment"># now</span></span><br><span class="line">		func(*args)</span><br><span class="line">		end=time.process_time()</span><br><span class="line">		print(<span class="string">'foo is used'</span>, end-start)</span><br><span class="line">	<span class="keyword">return</span> wrap</span><br><span class="line"></span><br><span class="line"><span class="meta">@timeit # suger</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">(param)</span>:</span></span><br><span class="line">	print(<span class="string">'test is running..'</span> + param)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">test(<span class="string">'3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于:</span></span><br><span class="line"><span class="comment"># a = test #因为装饰器 timeit(func) 返回的是函数对象 wrap, 这条语句相当于  a = wrap</span></span><br><span class="line"><span class="comment"># a('3') # 执行a()就相当于执行warp()</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这东西又称为"等价函数"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果运行不起来, 去掉中文注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ref: https://foofish.net/python-decorator.html</span></span><br></pre></td></tr></table></figure>
+<p>Python中也有类装饰器, 大同小异.</p>
+<h2 id="相同点-和-不同点"><a href="#相同点-和-不同点" class="headerlink" title="相同点 和 不同点"></a>相同点 和 不同点</h2><p>emmmmmm… 好像没看出啥相同点…..<br>唯一的相同点就是: 在不改变原来代码的前提下, 添加额外的功能.</p>
+<p>从上面的python代码,看到<code>@</code>符号, 让人想到Java的注解…<br>Java也可以通过注解来实现装饰器模式,但是由于语言特性与语法,无法实现python一样的透明使用. <a href="https://conndots.coding.me/2015/07/28/java-annotations-decorator/" target="_blank" rel="noopener">参考这里</a></p>
+<p><strong>Java能写装饰器模式, 其他语言包括Python当然也可以写. 这很容易让人产生联想, 所以说装饰器不仅仅是Java独有的设计模式</strong></p>
+<p>Python 的装饰器本身也是一个函数/类,它通过语法糖的方式,帮我们实现了装饰.<br>而 Java的注解 选择了动态修改字节码(反射)，编译器织入等更加复杂的技术实现了类似的功能.</p>
+<hr>
+<p>&lt;&lt;程序员修炼指南&gt;&gt; 第5章第23节:<br>Java依据输入流与输出流，字符流与字节流划分为4种基本数据流，下面看一下字节流与字符流的区别。<br>在最开始，Java中只支持面向字节形式的输入流InputStream与输出流OutputStream，<br>为了更好地兼容Unicode字符，Java 1.1对基本的I/O流类库进行了扩充，引入了支持面向字符形式的输入流Reader和输出流Writer，<br>这样就可以以字符而不仅是字节的形式输入和输出了，设计Reader和Writer类是为了支持国际化。</p>
+<p>以InputStream为例，每一种数据源都有相应的InputStream子类。特别地，FilterInputStream也是一种Input-Stream，<br>但是该类不同于其他InputStream子类的地方是，该类为装饰器类提供基类，<br>在FilterInputStream下又多个不同的装饰器类，用来帮助我们以更多样化的形式获取输入流，<br>例如BufferedInputStream可以帮助我们在读取数据时降低对外存访问的频率。<br>计算机访问外部设备非常耗时，访问外存的频率越高，CPU闲置的时间越久。为减少访问外存的次数，应在一次对外设的访问中读写尽可能多的数据。<br>为此，除了程序与外部数据节点之间交换数据必需的读写机制外，还应增加缓冲机制。<br>缓冲流就是为每一个数据流分配一个缓冲区，利用缓冲区可以减少对外设的访问次数，提高程序运行效率。这也正是装饰器类BufferedInputStream提供的功能。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/07/JNI调用/" rel="next" title="JNI调用其他语言">
+                <i class="fa fa-chevron-left"></i> JNI调用其他语言
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#大家好-我叫装饰器-Decorator"><span class="nav-number">1.</span> <span class="nav-text">大家好, 我叫装饰器(Decorator)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java装饰器模式"><span class="nav-number">2.</span> <span class="nav-text">Java装饰器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python中的装饰器"><span class="nav-number">3.</span> <span class="nav-text">Python中的装饰器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相同点-和-不同点"><span class="nav-number">4.</span> <span class="nav-text">相同点 和 不同点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
