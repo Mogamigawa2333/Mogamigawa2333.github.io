@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, Source Code Pro, sans-serif, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, Source Code Pro, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, monospace, sans-serif:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基本思想: 回调方将本身即this传递给调用方">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回调函数">
+<meta property="og:url" content="http://yoursite.com/2020/02/19/回调函数/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="基本思想: 回调方将本身即this传递给调用方">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-02-19T08:59:23.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回调函数">
+<meta name="twitter:description" content="基本思想: 回调方将本身即this传递给调用方">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/19/回调函数/">
+
+
+
+
+
+  <title>回调函数 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/19/回调函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">回调函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-19T14:35:33+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>基本思想: 回调方将本身即this传递给调用方</strong></p>
+<a id="more"></a>
+<h2 id="一-现有的调用方式"><a href="#一-现有的调用方式" class="headerlink" title="一.现有的调用方式:"></a>一.现有的调用方式:</h2><ol>
+<li><p>直接调用:<br>A类里面的a()方法直接调用B类里面的b()方法;<br>等待B.b()方法执行完成, A.a()才能继续执行;<br>适用于b()方法执行时间不长的情况, 一旦b()方法时间过长或者阻塞,a()剩下的代码将无法执行;</p>
+</li>
+<li><p>异步调用:<br>异步调用就是为了解决b方法出现阻塞,导致整个流程卡住的这种情况.<br>a方法通过起一个新线程的方式来调用b, 代码a接着往下执行.<br>这种方法适用于a方法的剩余代码不依赖b的结果的情况下.</p>
+</li>
+<li><p>回调:<br>回调就是类A的方法a()调用类B的方法b(),<br>然后类B的b()方法执行结束后也能调用类A的a()方法.<br>简单讲即双向调用.同样回调也会分同步调用,异步调用;<br>回调的思想是:</p>
+</li>
+</ol>
+<ul>
+<li>类A的a方法调用类B的b方法.</li>
+<li>类B的b方法执行完毕后主动调用类A的callback方法.</li>
+</ul>
+<p>注意: 直接调用和异步调用属于一类, 回调跟它们两个不是一回事.<br>直接调用和异步调用属于单向调用: A模块方法a单向调用B模块方法b.方法b直接结束后不能调用模块A的方法.<br>只是是否起新线程的问题;<br>回调属于双向调用.</p>
+<p>我们可以这样分类:<br>模块间的调用方式分为单向调用和双向调用.<br>单向调用分为直接调用和异步调用.区别是是否起新线程.<br>双向调用也有直接回调和异步回调.区别也是是否起新线程.</p>
+<h2 id="二-直接回调-的大致过程"><a href="#二-直接回调-的大致过程" class="headerlink" title="二. 直接回调 的大致过程:"></a>二. 直接回调 的大致过程:</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">before()&#123;</span><br><span class="line">    ...</span><br><span class="line">    b(<span class="keyword">this</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">callback(param)&#123;</span><br><span class="line">    sout(<span class="string">"b方法的执行结果是&#123;&#125;"</span>,param);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">///////////////////////////////////</span></span><br><span class="line">b(A a)&#123;</span><br><span class="line">    ... ...</span><br><span class="line">    a.callback(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意:<br><code>原先的a方法</code>在这时候被拆分成了两个 -&gt; before()和callback().<br>before()是<code>原先的a方法</code>在调用b()之前的代码,<br>callback()是<code>原先的a方法</code>在调用b()之后的代码.</p>
+<h2 id="三-直接回调-代码示例"><a href="#三-直接回调-代码示例" class="headerlink" title="三. 直接回调 代码示例:"></a>三. 直接回调 代码示例:</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回调接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Callback</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tellAnswer</span><span class="params">(<span class="keyword">int</span> answer)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个老师对象，实现Callback接口：</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">implements</span> <span class="title">Callback</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Student student;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">(Student student)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.student = student;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">askQuestion</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        student.resolveQuestion(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tellAnswer</span><span class="params">(<span class="keyword">int</span> answer)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"知道了, 你的答案是"</span> + answer);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 接着定义一个学生接口，学生当然是解决问题，但是接收一个Callback参数，这样学生就知道解决完毕问题向谁报告</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">resolveQuestion</span><span class="params">(Callback callback)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个名叫Ricky的同学解决老师提出的问题</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Ricky</span> <span class="keyword">implements</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">resolveQuestion</span><span class="params">(Callback callback)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 模拟解决问题</span></span><br><span class="line">        <span class="keyword">try</span> &#123; </span><br><span class="line">            Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;&#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 回调, 告诉老师答案</span></span><br><span class="line">        callback.tellAnswer(<span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 测试类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CallbackTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testCallback</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Student student = <span class="keyword">new</span> Ricky();</span><br><span class="line">        Teacher teacher = <span class="keyword">new</span> Teacher(student);</span><br><span class="line">        teacher.askQuestion();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四-异步回调"><a href="#四-异步回调" class="headerlink" title="四.异步回调"></a>四.异步回调</h2><p>假设情景:<br>老师并不想One-By-One这样提问，而是同时向Ricky、Mike、Lucy、Bruce、Kate五位同学提问，让同学们自己思考，哪位同学思考好了就直接告诉老师答案即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CallBack</span> </span>&#123;</span><br><span class="line">	<span class="comment">//学生回调老师的函数--回答老师</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">answear</span><span class="params">(String result)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 学生、老师</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> <span class="keyword">implements</span> <span class="title">CallBack</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> Student student;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Teacher</span><span class="params">(Student student)</span></span>&#123;</span><br><span class="line">	    <span class="keyword">this</span>.student = student;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">askQqstion</span><span class="params">(String question)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(<span class="string">"老师询问学生的问题："</span>+question);</span><br><span class="line">		</span><br><span class="line">        <span class="comment">//异步询问学生问题</span></span><br><span class="line">        <span class="comment">//如果这里不用线程就是同步调用</span></span><br><span class="line">        <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">        	<span class="comment">//学生思考老师的问题</span></span><br><span class="line">        	student.thinkProblem(<span class="keyword">this</span>,question);</span><br><span class="line">        	</span><br><span class="line">        &#125;).start();   </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        Correcting();</span><br><span class="line">    &#125; </span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Correcting</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"我继续修改试卷"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">answear</span><span class="params">(String result)</span> </span>&#123;</span><br><span class="line">		 System.out.println(<span class="string">"回答老师的问题："</span>+result);</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">thinkProblem</span><span class="params">(CallBack callBack,String question)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">"学生听到老师的问题，我需要思考3秒钟。"</span>);</span><br><span class="line">        <span class="comment">//模拟思考</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">			Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">        	</span><br><span class="line">        <span class="comment">//思考了半天得到了答案</span></span><br><span class="line">        String result = <span class="string">"200"</span>;    </span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用回调函数，告诉老师答案</span></span><br><span class="line">        callBack.answear(result);     </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////////////</span></span><br><span class="line"><span class="comment">// 测试类</span></span><br><span class="line">Test.java</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Teacher teacher = <span class="keyword">new</span> Teacher(<span class="keyword">new</span> Student());</span><br><span class="line">        <span class="comment">//老师询问问题</span></span><br><span class="line">		teacher.askQqstion(<span class="string">"100+100等于几？"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">同步结果:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">老师询问学生的问题：100+100等于几？</span></span><br><span class="line"><span class="comment">学生听到老师的问题，我需要思考3秒钟。</span></span><br><span class="line"><span class="comment">(暂停3s)</span></span><br><span class="line"><span class="comment">回答老师的问题：200</span></span><br><span class="line"><span class="comment">我继续修改试卷</span></span><br><span class="line"><span class="comment">上述可知，老师修改试卷需要学生回答之后才能继续，不然就一直等学生回答，即为同步回调。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">异步结果:</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">老师询问学生的问题：100+100等于几？</span></span><br><span class="line"><span class="comment">我继续修改试卷</span></span><br><span class="line"><span class="comment">学生听到老师的问题，我需要思考3秒钟。</span></span><br><span class="line"><span class="comment">(暂停3s)</span></span><br><span class="line"><span class="comment">回答老师的问题：200</span></span><br><span class="line"><span class="comment">这里就是老师问完之后，不等学生回答就继续修改试卷，学生思考完告诉老师，即为异步回调。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/11/装饰器/" rel="next" title="装饰器模式 与 Python的装饰器">
+                <i class="fa fa-chevron-left"></i> 装饰器模式 与 Python的装饰器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-现有的调用方式"><span class="nav-number">1.</span> <span class="nav-text">一.现有的调用方式:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-直接回调-的大致过程"><span class="nav-number">2.</span> <span class="nav-text">二. 直接回调 的大致过程:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-直接回调-代码示例"><span class="nav-number">3.</span> <span class="nav-text">三. 直接回调 代码示例:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-异步回调"><span class="nav-number">4.</span> <span class="nav-text">四.异步回调</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
