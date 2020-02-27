@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="数据结构,">
+  <meta name="keywords" content="java,">
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="【译】数据结构中关于树的一切（java版）">
-<meta name="keywords" content="数据结构">
+<meta name="description" content="12">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构-二叉树">
-<meta property="og:url" content="http://yoursite.com/2019/04/30/Java-数据结构-二叉树/index.html">
+<meta property="og:title" content="接口签名算法">
+<meta property="og:url" content="http://yoursite.com/2020/02/25/接口签名算法/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="【译】数据结构中关于树的一切（java版）">
+<meta property="og:description" content="12">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-18T04:50:45.342Z">
+<meta property="og:updated_time" content="2020-02-27T02:38:30.381Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构-二叉树">
-<meta name="twitter:description" content="【译】数据结构中关于树的一切（java版）">
+<meta name="twitter:title" content="接口签名算法">
+<meta name="twitter:description" content="12">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/30/Java-数据结构-二叉树/">
+  <link rel="canonical" href="http://yoursite.com/2020/02/25/接口签名算法/">
 
 
 
 
 
-  <title>数据结构-二叉树 | 最上川</title>
+  <title>接口签名算法 | 最上川</title>
   
 
 
@@ -285,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/30/Java-数据结构-二叉树/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/接口签名算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chiu">
@@ -302,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构-二叉树</h1>
+          <h1 class="post-title" itemprop="name headline">接口签名算法</h1>
         
 
         <div class="post-meta">
@@ -314,8 +314,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-30T11:09:59+08:00">
-                2019-04-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-25T12:29:33+08:00">
+                2020-02-25
               </time>
             
 
@@ -352,7 +352,40 @@
       
 
       
-        <p><a href="https://juejin.im/post/5ad56de7f265da2391489be3#heading-6" target="_blank" rel="noopener">【译】数据结构中关于树的一切（java版）</a></p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>设计接口记住要有验证处理,要么Token要么Sign</strong></p>
+<h2 id="接口添加签名-我有两种方式"><a href="#接口添加签名-我有两种方式" class="headerlink" title="接口添加签名,我有两种方式:"></a>接口添加签名,我有两种方式:</h2><h3 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式:"></a>传统方式:</h3><p>传统方式是使用表单提交的方式来请求, 使用json的方式来响应;<br>请求的header的Content-type键的值为application/x-www-form-urlcode.<br>从content-type的值可以看出参数是使用form方式提交,里面的参数使用的urlcode的方式进行编码.</p>
+<h4 id="请求过程是这样的"><a href="#请求过程是这样的" class="headerlink" title="请求过程是这样的:"></a>请求过程是这样的:</h4><ol>
+<li>排除sign参数</li>
+<li>设所有发送或者接收到的数据为集合M，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA</li>
+<li>在stringA最后拼接上KEY得到stringSignTemp字符串（即stringSignTemp = stringA + &amp;key=KEY），并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue</li>
+<li>形成新的接口: 以下是示例<br><code>https://api.test.com/dosomething?sign=C0F1EB5A06DF4A46207645606B6156C8&amp;timestamp=1582275984&amp;param1=value1&amp;param2=value2</code></li>
+<li>为了防止接口被多次调用, 可以添加timestamp参数</li>
+</ol>
+<h3 id="我的新创"><a href="#我的新创" class="headerlink" title="我的新创:"></a>我的新创:</h3><p>请求和响应都是JSON方式:</p>
+<ol>
+<li><p>把所有参数组装为JSON对象或者JsonArray对象 jsonA</p>
+<p>例如: <code>{&quot;key1&quot;:&quot;value1&quot;,&quot;key2&quot;:&quot;value2&quot;}</code></p>
+</li>
+<li><p>将jsonA转为Base64URL编码的字符串stringA</p>
+<p>例如:<code>YHsia2V5MSI6InZhbHVlMSIsImtleTIiOiJ2YWx1ZTIifQ</code></p>
+</li>
+<li><p>对stringA和密钥使用<strong>HmacSHA256</strong>做摘要, 得到签名字符串signString, </p>
+<p>例如: 密钥为<code>qwerty</code>, 生成的签名为<code>cee282508e9131665a0987eb5c49855b6bac2e56beb0e651e73cec8158b1e891</code></p>
+</li>
+<li><p>构造一个新的JSON对象,里面有两个键, 一个为data, 另一个为sign.</p>
+<p>easyjoy的值为jsonA对象, sign的值为signString.</p>
+<p>例如最后构造出来的json为: <code>{&quot;data&quot;:{&quot;key1&quot;:&quot;value1&quot;,&quot;key2&quot;:&quot;value2&quot;},&quot;sign&quot;:&quot;cee282508e9131665a0987eb5c49855b6bac2e56beb0e651e73cec8158b1e891&quot;}</code></p>
+</li>
+<li><p>验签的时候,只对data的值进行验证. </p>
+</li>
+<li><p>由于是单个系统间的交互, 如果验签通过则证明密钥正确, 密钥正确则可证明身份, 无需token</p>
+</li>
+</ol>
+<h3 id="关于签名算法的说明"><a href="#关于签名算法的说明" class="headerlink" title="关于签名算法的说明:"></a>关于签名算法的说明:</h3><p>MD2<br>MD5<br>SHA-1<br>SHA-256<br>SHA-384<br>SHA-512<br>HmacMD5<br>HmacSHA1<br>HmacSHA256<br>HmacSHA384<br>HmacSHA512</p>
+<p>以上这些都是<strong>摘要算法</strong>, 其中<code>HmacSHA</code>常见的是其缩写形式<code>HS</code>.<br>MD5之类的都是直接摘要, 所以对于MD5来说,密钥要拼在要加密的字符串的后面.<br>其实对于MD5来说根本没有密钥这一说法.</p>
+<p>HMAC,全称为:<code>Hash Message Authentication Code</code>, 中文名”散列消息鉴别码”.<br>主要是利用哈希算法, 以一个密钥和一个消息为输入,生成一个消息摘要为输出.<br>一般的,消息鉴别码用于验证传输于连个共同享有一个密钥的单位之间的消息,HMAC可以与任何迭代的散列函数捆绑使用,MD5和SHA-1就是这种散列函数,<br>HMAC还可以使用一个用于计算和用确认消息鉴别值的密钥.</p>
 
       
     </div>
@@ -370,7 +403,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -383,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/06/MySQL/" rel="next" title="SELECT FINGER FROM HAND WHERE ID = 3;">
-                <i class="fa fa-chevron-left"></i> SELECT FINGER FROM HAND WHERE ID = 3;
+              <a href="/2020/02/20/逆波兰表达式/" rel="next" title="逆波兰表示法">
+                <i class="fa fa-chevron-left"></i> 逆波兰表示法
               </a>
             
           </div>
@@ -392,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/05/C语言的指针/" rel="prev" title="C语言的指针">
-                C语言的指针 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -447,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -499,6 +537,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接口添加签名-我有两种方式"><span class="nav-number">1.</span> <span class="nav-text">接口添加签名,我有两种方式:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统方式"><span class="nav-number">1.1.</span> <span class="nav-text">传统方式:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#请求过程是这样的"><span class="nav-number">1.1.1.</span> <span class="nav-text">请求过程是这样的:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我的新创"><span class="nav-number">1.2.</span> <span class="nav-text">我的新创:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于签名算法的说明"><span class="nav-number">1.3.</span> <span class="nav-text">关于签名算法的说明:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
