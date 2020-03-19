@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, Source Code Pro, sans-serif, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, Source Code Pro, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, monospace, sans-serif:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="12345_|      _|      _|_|_|        _|_|    _|_|    _|        _|        _|    _|  _|  _|  _|        _|        _|    _|  _|    _|_|        _|        _|    _|  _|      _|      _|_|_|        _|_|">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于NIO多路复用这件小事">
+<meta property="og:url" content="http://yoursite.com/2020/02/07/java NIO/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="12345_|      _|      _|_|_|        _|_|    _|_|    _|        _|        _|    _|  _|  _|  _|        _|        _|    _|  _|    _|_|        _|        _|    _|  _|      _|      _|_|_|        _|_|">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-19T03:35:23.159Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于NIO多路复用这件小事">
+<meta name="twitter:description" content="12345_|      _|      _|_|_|        _|_|    _|_|    _|        _|        _|    _|  _|  _|  _|        _|        _|    _|  _|    _|_|        _|        _|    _|  _|      _|      _|_|_|        _|_|">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/07/java NIO/">
+
+
+
+
+
+  <title>关于NIO多路复用这件小事 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/07/java NIO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于NIO多路复用这件小事</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-07T19:33:19+08:00">
+                2020-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">_|      _|      _|_|_|        _|_|    </span><br><span class="line">_|_|    _|        _|        _|    _|  </span><br><span class="line">_|  _|  _|        _|        _|    _|  </span><br><span class="line">_|    _|_|        _|        _|    _|  </span><br><span class="line">_|      _|      _|_|_|        _|_|</span><br></pre></td></tr></table></figure>
+<a id="more"></a> 
+<p><a href="http://xintq.net/2017/06/12/everything-about-java-nio/" target="_blank" rel="noopener">关于Java NIO的一切</a></p>
+<h2 id="我所理解的多路复用模型"><a href="#我所理解的多路复用模型" class="headerlink" title="我所理解的多路复用模型:"></a>我所理解的多路复用模型:</h2><h3 id="情景"><a href="#情景" class="headerlink" title="情景:"></a>情景:</h3><p>一个服务器有多个客户端通过网络与之连接, 类似于聊天室.<br>普通的BIO是这样的: 每个连接由一个线程来管理,每次资源都是阻塞的.</p>
+<p>阻塞/非阻塞: 这是一个动词,表示线程在等待消息时的行为.<br>同步/异步: 消息通知的方式: 同步是一直等待消息. 异步是等待调用方callback.</p>
+<h3 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用:"></a>IO多路复用:</h3><p><code>IO Multiplexing</code> 这个翻译成<code>多路复用</code>太烂了, 太不直观了. 造成很难理解.<br><a href="https://www.zybuluo.com/phper/note/595507" target="_blank" rel="noopener">通俗讲解异步,非阻塞,和IO复用</a></p>
+<p>Java NIO 有三个重要的概念, 先来理解这三个概念主要意思:</p>
+<ul>
+<li><p>缓冲区 Buffer: 本质是一个数组, 但是它内置一些重要的属性,能够记录缓冲区的状态变化. </p>
+<p>  | 属性     | 描述                                                         |<br>  | ——– | ———————————————————— |<br>  | Capacity | <strong>容量</strong>, 即可以容纳的最大数据量; 在缓冲区创建时被设定并且不能改变. |<br>  | Limit    | <strong>极限</strong>, 表示缓冲区的当前终点,不能对缓冲区超过极限的位置进行读写操作,且极限是可以修改的. |<br>  | Position | <strong>位置</strong>, 下一个要被读写的元素的索引,每次读写缓冲区数据时都会改变该值,为下次读写做准备. |<br>  | Mark     | 标记                                                         |</p>
+</li>
+</ul>
+<ul>
+<li><p>通道 channel: 通道,就像是水管一样,也类似于流. <strong>数据可以从通道读出到缓冲区,也可以从缓冲区写入通道.</strong></p>
+<ul>
+<li>同一个通道是双向的, 可以是读也可以是写.</li>
+<li>使用一些方法来操作通道中的数据,或者改变通道的状态.</li>
+<li>有多种不同类型的通道: File Channel用于文件读写,Datagram Channel用于UDP数据读写,Socket Channel用于Socket文件读写,ServerSocket Channel 监听TCP连接请求.</li>
+<li>可以参考<a href="https://matt33.com/2017/08/12/java-nio/" target="_blank" rel="noopener">这篇文章的channel部分</a></li>
+</ul>
+</li>
+<li><p>选择器 selector: 选择器的作用类似于epoll, 其实NIO中的Selector是对底层操作系统的一个抽象,在Linux中调用的是epoll;</p>
+<ul>
+<li>非阻塞IO的核心在于使用一个selector来管理多个通道,可以是不同类型的各种通道注册到selector上,指定监听事件.之后单独启动一个线程来轮询这个selector,看看上面的通道是否有准备好的,当通道准备好可读可写,然后才去真正的读写.</li>
+<li>epoll会观察各个通道的状态, 会把哪个通道发生了怎样的IO事件告诉我们. (xx通道发生了xx事件!)</li>
+<li>可以参考<a href="https://www.javadoop.com/post/nio-and-aio" target="_blank" rel="noopener">这篇文章的非阻塞IO部分</a></li>
+<li>阅读<a href="https://zhuanlan.zhihu.com/p/36764771" target="_blank" rel="noopener">这篇文章</a>会对epoll的作用有个清晰的认识.</li>
+</ul>
+</li>
+</ul>
+<p>NIO是基于Channel和Buffer来进行操作,数据总是从通道读取到缓冲区中,或者从缓冲区写入通道中. Selector用于监听多个通道的事件. 因此使用单个线程就能监听多个客户端通道.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/06/IDEA远程/" rel="next" title="IDEA远程debug">
+                <i class="fa fa-chevron-left"></i> IDEA远程debug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/07/JNI调用/" rel="prev" title="JNI调用其他语言">
+                JNI调用其他语言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#我所理解的多路复用模型"><span class="nav-number">1.</span> <span class="nav-text">我所理解的多路复用模型:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#情景"><span class="nav-number">1.1.</span> <span class="nav-text">情景:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO多路复用"><span class="nav-number">1.2.</span> <span class="nav-text">IO多路复用:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
