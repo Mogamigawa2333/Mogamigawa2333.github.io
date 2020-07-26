@@ -112,7 +112,7 @@
 
 
 
-  <meta name="keywords" content="java Java jawa,">
+  <meta name="keywords" content="概念,">
 
 
 
@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="1Fuck My Life !!!">
-<meta name="keywords" content="java Java jawa">
+<meta name="description" content="不要 “理所当然”">
+<meta name="keywords" content="概念">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jawa IO流">
-<meta property="og:url" content="http://yoursite.com/2019/06/30/Java IO流/index.html">
+<meta property="og:title" content="关于&quot;一致性&quot;这个概念有区别这件小事">
+<meta property="og:url" content="http://yoursite.com/2020/07/26/一致性/index.html">
 <meta property="og:site_name" content="最上川">
-<meta property="og:description" content="1Fuck My Life !!!">
+<meta property="og:description" content="不要 “理所当然”">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-08T01:12:45.618Z">
+<meta property="og:updated_time" content="2020-07-26T02:30:50.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jawa IO流">
-<meta name="twitter:description" content="1Fuck My Life !!!">
+<meta name="twitter:title" content="关于&quot;一致性&quot;这个概念有区别这件小事">
+<meta name="twitter:description" content="不要 “理所当然”">
 
 
 
@@ -164,13 +164,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/30/Java IO流/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/26/一致性/">
 
 
 
 
 
-  <title>Jawa IO流 | 最上川</title>
+  <title>关于"一致性"这个概念有区别这件小事 | 最上川</title>
   
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/30/Java IO流/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/26/一致性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chiu">
@@ -312,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Jawa IO流</h1>
+          <h1 class="post-title" itemprop="name headline">关于"一致性"这个概念有区别这件小事</h1>
         
 
         <div class="post-meta">
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-30T14:25:03+08:00">
-                2019-06-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-26T10:29:00+08:00">
+                2020-07-26
               </time>
             
 
@@ -362,29 +362,45 @@
       
 
       
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Fuck My Life !!!</span><br></pre></td></tr></table></figure>
+        <center>不要 “理所当然”</center>
+
 <a id="more"></a>
-<p>前提, <strong>在 jawa 中的 IO</strong> (java 虽然啰嗦,但也是一门工业化程度非常高的语言,并没有让人很难理解, 同时它也在与时俱进.)</p>
-<h1 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h1><p>IO 流分为两种: 是不是给人看的<br></p>
-<ul>
-<li>字节流: 是按照字节来读取的, 可以读取二进制文件,不是给人看的 InputStream 和 OutputStream</li>
-<li>字符流: 是基于字节流实现的, 是针对字符文件的读写所做的优化,给人看的 Writer 和 Reader</li>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><h5 id="ACID中的C-和-CAP中的C-虽然都是指的是Consistent-但不是同一个意思-不是同一个概念"><a href="#ACID中的C-和-CAP中的C-虽然都是指的是Consistent-但不是同一个意思-不是同一个概念" class="headerlink" title="ACID中的C 和 CAP中的C 虽然都是指的是Consistent, 但不是同一个意思,不是同一个概念"></a>ACID中的C 和 CAP中的C 虽然都是指的是Consistent, 但不是同一个意思,不是同一个概念</h5><p>ACID中的C指的是数据库中 事务一致性, 一系列操作要么全部成功, 要么全部失败.<br>即: 把一系列操作封装起来, 按照顺序执行, 这些操作要么一起成功,要么一起失败.<br>如果事务是并发的多个,系统也必须像执行串行事务那样操作.<br>以转账举例: 五个账号之间互相转账, 每个账号初始有100元, 无论他们之间怎么转账, 最后加起来都是500元.</p>
+<p>CAP中的C指的是节点服务器之间复制的值的一致性:</p>
+<ol>
+<li>为什么要在多个节点服务器之间复制值呢?<ul>
+<li>为了实现高可用</li>
+<li>为了减少访问负荷</li>
 </ul>
-<p><strong>InputStream 和 OutputStream 是抽象类(abstract 修饰), 不能实例化, 只能用他们的实现类来修饰.</strong></p>
-<p>还可以这样分类: 按照流是否直接与特定的地方(如磁盘.内存.设备等)相连,分为节点流和处理流两类.<br></p>
-<ul>
-<li>节点流: 直接与外围设备关联的数据的源和目的地交互 如 FileInputStream</li>
-<li>处理流: 对一个已经存在的流的过滤封装等处理 如 BufferReader</li>
+</li>
+<li>复制所引发的问题 –&gt; 一致性, 类似于线程之间的数据共享, 在启动新线程的时候也会复制新的数据的副本.</li>
+</ol>
+<h3 id="一致性的分类"><a href="#一致性的分类" class="headerlink" title="一致性的分类"></a>一致性的分类</h3><ul>
+<li>强一致性</li>
+<li>弱一致性</li>
+<li>最终一致性</li>
 </ul>
-<p>节点流基本有这三个: 文件, 管道, 数组(ByteArrayInputStream).<br><br>处理流有这么几个: 缓冲操作,基本数据类型操作,对象序列化操作,转化控制,打印控制.</p>
-<h1 id="第二部分-字节流的通用读写方式"><a href="#第二部分-字节流的通用读写方式" class="headerlink" title="第二部分: 字节流的通用读写方式"></a>第二部分: 字节流的通用读写方式</h1><p>流, 是一种资源. 一个程序占用着这个资源, 其它程序就不能使用这个资源, 所以在使用完成后要关闭这个资源.<br><br>用的最多的类是 read和write, 其他的往后稍稍, 以后再搜索</p>
-<p>读的模式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Open a Stream</span><br><span class="line">while (more information)</span><br><span class="line">read information</span><br><span class="line">close the Stream</span><br></pre></td></tr></table></figure>
-<p>写的模式:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Open a Stream</span><br><span class="line">while (more information)</span><br><span class="line">write information</span><br><span class="line">close the Stream</span><br></pre></td></tr></table></figure>
-<p>(从一个水缸舀水到另外一水缸)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    FileInputStream fileInputStream = <span class="keyword">new</span> FileInputStream(f);<span class="comment">//这是左边的水缸</span></span><br><span class="line">    ByteArrayOutputStream byteArrayOutputStream = <span class="keyword">new</span> ByteArrayOutputStream();<span class="comment">//这是右边的水缸</span></span><br><span class="line">    <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1000</span>];  <span class="comment">//准备一个瓢</span></span><br><span class="line">    <span class="keyword">int</span> readCount = <span class="number">0</span>;<span class="comment">//inputStream的read方法读取完的时候,返回读取的字节个数.当读到文件的末尾的时候, 这个readCount的值为-1</span></span><br><span class="line">    <span class="keyword">while</span> ((readCount = fileInputStream.read(buffer)) != -<span class="number">1</span>) &#123;   <span class="comment">//一直舀</span></span><br><span class="line">        <span class="comment">//这里的第三个参数绝不能是1000, 因为非常可能读取的个数不是1000,</span></span><br><span class="line">        <span class="comment">//所以这里的第三个参数是ReadCount, 这也是ReadCount最重要的作用.</span></span><br><span class="line">        byteArrayOutputStream.write(buffer, <span class="number">0</span>, readCount);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> byteArrayOutputStream.toByteArray();<span class="comment">//执行return之前会执行finally里面的代码.</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">    fileInputStream.close();  <span class="comment">//关掉出水水龙头</span></span><br><span class="line">    byteArrayOutputStream.close();   <span class="comment">//关掉进水口</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="第三部分-字符流的读写"><a href="#第三部分-字符流的读写" class="headerlink" title="第三部分 字符流的读写"></a>第三部分 字符流的读写</h1><h1 id="第四部分-简洁代码-Try-with-resource-和-cleanUp"><a href="#第四部分-简洁代码-Try-with-resource-和-cleanUp" class="headerlink" title="第四部分 简洁代码: Try with resource 和 @cleanUp"></a>第四部分 简洁代码: Try with resource 和 @cleanUp</h1>
+<p>他们之间的区别是: 一旦有写操作写入任何一个服务器,就要立即同步到其他的服务器.这是强一致性.<br>而过一段时间才同步到其他服务器的就是弱一致性或者最终一致性. 可以把最终一致性看作是弱一致性的一种特殊情况</p>
+<p>但是, 你想,你细想, 有些时候, 事务之间是有执行顺序的, 得按照一定的执行顺序才能做对.<br>这时候就需要更加强大的一致性了, 这种一致性叫做 <strong>线性一致性</strong>.</p>
+<h5 id="线性一致性的实现"><a href="#线性一致性的实现" class="headerlink" title="线性一致性的实现"></a>线性一致性的实现</h5><p>线性一致性的实现方式有两种: 2PC提交 和 Paxos算法.<br>这两种方案的基础是: 我知道自己提交的是不是成功, 但是不知道其他节点是不是成功.</p>
+<ul>
+<li>2PC提交(2阶段提交协议):<br>  这种提交方式有两个角色: 协调者和参与者;<br>  参与者将操作成败通知协调者，再由协调者根据所有参与者的反馈情报决定各参与者是否要提交操作还是中止操作<br>  第一个阶段是准备阶段: 协调者向参与者询问是否可以执行提交操作.<br>  两阶段之间, 参与者阻塞…<br>  第二阶段是提交阶段: 如果参与者响应是可以提交, 那么协调者发出提交指令,接着参与者返回ACK;  只要其中一个参与者返回的响应是否, 那么协调者就发出回滚指令, 所有的参与者回滚到之前的状态.接着参与者返回ACK.</li>
+<li>Paxos算法(共识算法)和改进的Raft算法: </li>
+</ul>
+<h5 id="线性一致性-和-最终一致性"><a href="#线性一致性-和-最终一致性" class="headerlink" title="线性一致性 和 最终一致性"></a>线性一致性 和 最终一致性</h5><p>CAP中的C一般指的就是线性一致性. 线性一致性是比一般一致性还要强的一种一致性.<br>但是为了取舍, 大部分系统放弃了线性一致性, 选择了最终一致性, 这也是消息队列的作用.即保证消息的最终一致性.</p>
+<p>另外: </p>
+<ul>
+<li>ZooKeeper使用了Paxos算法, 保证了CP, 即一致性和容错性.</li>
+<li>Eureka保证了AP, 即可用性和容错性.</li>
+</ul>
+<h5 id="BASE理论-既然无法做到强一致性，那么每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性"><a href="#BASE理论-既然无法做到强一致性，那么每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性" class="headerlink" title="BASE理论: 既然无法做到强一致性，那么每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性"></a>BASE理论: 既然无法做到强一致性，那么每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性</h5><ul>
+<li>Basically Available：基本可用，指分布式系统在出现故障的时候，允许损失部分可用性，保证核心可用。但不等价于不可用。</li>
+<li>Soft-state：软状态/柔性事务，即状态可以有一段时间的不同步。</li>
+<li>Eventual consistency：最终一致性，系统中的所有数据副本经过一定时间后，最终能够达到一致的状态，不需要实时保证系统数据的强一致性。</li>
+</ul>
+<hr>
+<p><a href="https://www.jdon.com/46956" target="_blank" rel="noopener">Ref</a><br><a href="https://segmentfault.com/a/1190000022248118" target="_blank" rel="noopener">值得一看</a></p>
+
       
     </div>
     
@@ -401,7 +417,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java-Java-jawa/" rel="tag"># java Java jawa</a>
+            <a href="/tags/概念/" rel="tag"># 概念</a>
           
         </div>
       
@@ -414,8 +430,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/20/Optional/" rel="next" title="Optional">
-                <i class="fa fa-chevron-left"></i> Optional
+              <a href="/2020/04/03/redis搭建高可用集群/" rel="next" title="redis搭建高可用集群">
+                <i class="fa fa-chevron-left"></i> redis搭建高可用集群
               </a>
             
           </div>
@@ -423,10 +439,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/12/SPI 与 API/" rel="prev" title="API 与 SPI">
-                API 与 SPI <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -549,7 +561,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一部分"><span class="nav-number">1.</span> <span class="nav-text">第一部分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二部分-字节流的通用读写方式"><span class="nav-number">2.</span> <span class="nav-text">第二部分: 字节流的通用读写方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三部分-字符流的读写"><span class="nav-number">3.</span> <span class="nav-text">第三部分 字符流的读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四部分-简洁代码-Try-with-resource-和-cleanUp"><span class="nav-number">4.</span> <span class="nav-text">第四部分 简洁代码: Try with resource 和 @cleanUp</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">1.</span> <span class="nav-text">区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ACID中的C-和-CAP中的C-虽然都是指的是Consistent-但不是同一个意思-不是同一个概念"><span class="nav-number">1.0.1.</span> <span class="nav-text">ACID中的C 和 CAP中的C 虽然都是指的是Consistent, 但不是同一个意思,不是同一个概念</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性的分类"><span class="nav-number">2.</span> <span class="nav-text">一致性的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#线性一致性的实现"><span class="nav-number">2.0.1.</span> <span class="nav-text">线性一致性的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线性一致性-和-最终一致性"><span class="nav-number">2.0.2.</span> <span class="nav-text">线性一致性 和 最终一致性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BASE理论-既然无法做到强一致性，那么每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性"><span class="nav-number">2.0.3.</span> <span class="nav-text">BASE理论: 既然无法做到强一致性，那么每个业务根据自身的特点，采用适当的方式来使系统达到最终一致性</span></a></li></ol></li></div>
             
 
           </div>
