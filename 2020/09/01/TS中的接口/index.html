@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans+SC:500,700|Source+Code+Pro:500,600&amp;subset=chinese-simplified/css?family=Noto Sans SC, Source Code Pro, sans-serif, monospace:300,300italic,400,400italic,700,700italic|Noto Sans SC, Source Code Pro, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, sans-serif:300,300italic,400,400italic,700,700italic|Source Code Pro, Noto Sans SC, monospace, sans-serif:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="TypeScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1这, 才是接口的进化完全体.">
+<meta name="keywords" content="TypeScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TS中的接口">
+<meta property="og:url" content="http://yoursite.com/2020/09/01/TS中的接口/index.html">
+<meta property="og:site_name" content="最上川">
+<meta property="og:description" content="1这, 才是接口的进化完全体.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-01T02:16:49.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TS中的接口">
+<meta name="twitter:description" content="1这, 才是接口的进化完全体.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/01/TS中的接口/">
+
+
+
+
+
+  <title>TS中的接口 | 最上川</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">最上川</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tools"></i> <br>
+            
+            tools
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/01/TS中的接口/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chiu">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="最上川">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TS中的接口</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-01T09:24:57+08:00">
+                2020-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这, 才是接口的进化完全体.</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ul>
+<li>定义一个<strong>标准</strong>, 定义了行为和动作的规范</li>
+<li>对值所具有的<strong>结构</strong>进行检查<br>值的定义: 属性,方法,类, 所以有三种接口: 属性接口,方法接口,类型接口</li>
+</ul>
+<h3 id="属性接口"><a href="#属性接口" class="headerlink" title="属性接口"></a>属性接口</h3><ul>
+<li><p>首先, TS可以自定义方法传入的参数, 即:对JSON进行约束<br>(因为JSON就是JS的类, 嘘..)</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printlabel</span>(<span class="params">labelInfo:&#123;label:<span class="built_in">string</span>&#125;</span>):<span class="title">void</span></span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"$&#123;labelInfo&#125;"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">printlabel(&#123;label:<span class="string">"what is nini?"</span>&#125;);<span class="comment">//√正确写法</span></span><br><span class="line">printlabel(&#123;name:<span class="string">"what is nini?"</span>&#125;);<span class="comment">//×错误写法</span></span><br><span class="line">printlabel(&#123;label:<span class="string">"what"</span>,info:<span class="string">"nini"</span>&#125;)<span class="comment">//×</span></span><br><span class="line">printlabel(<span class="string">"nini"</span>)<span class="comment">//×</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果要对一大批方法的参数进行约束, 可以定义一个接口</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义接口</span></span><br><span class="line"><span class="keyword">interface</span> FullName&#123;</span><br><span class="line">	firstName: <span class="built_in">string</span>;</span><br><span class="line">	secondName: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定义方法</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printFullName</span>(<span class="params">name:FullName</span>)</span>&#123;</span><br><span class="line">	  <span class="built_in">console</span>.log(<span class="string">"$&#123;name.firstName&#125; -- $&#123;name.secondName&#125;"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用方法</span></span><br><span class="line">printName(&#123;firstName:<span class="string">'张'</span>, secondName: <span class="string">'三'</span>&#125;); <span class="comment">// 必须带有 firstName,secondName</span></span><br><span class="line"></span><br><span class="line">printName(&#123;firstName:<span class="string">'张'</span>, secondName: <span class="string">'三'</span>, name: <span class="string">'张三'</span>&#125;); <span class="comment">//× 只能带有 firstName，secondName</span></span><br><span class="line"><span class="comment">//注意两个的区别↑↓</span></span><br><span class="line"><span class="keyword">const</span> nameObj = &#123;firstName:<span class="string">'张'</span>, secondName: <span class="string">'三'</span>, name: <span class="string">'张三'</span>, age: <span class="number">20</span>&#125;;</span><br><span class="line">printName(nameObj); <span class="comment">// 正确，这种方式，可以传额外的，但是 firstName、secondName 必须有</span></span><br><span class="line"></span><br><span class="line">printName(&#123; <span class="comment">// 参数的顺序可以不一样</span></span><br><span class="line">  secondName: <span class="string">'四'</span>,</span><br><span class="line">  firstName: <span class="string">'李'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="方法接口"><a href="#方法接口" class="headerlink" title="方法接口"></a>方法接口</h3><ul>
+<li>用来规范方法的形状</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义接口.这个接口规定了方法的形状</span></span><br><span class="line"><span class="keyword">interface</span> FunShape&#123;</span><br><span class="line">	<span class="comment">//定义这个方法接收两个必选参数都是number,以及一个可选的字符串参数desc</span></span><br><span class="line">	(x:<span class="built_in">number</span>,y:<span class="built_in">number</span>,desc?:<span class="built_in">string</span>):<span class="built_in">number</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//方法定义</span></span><br><span class="line"><span class="keyword">var</span> sum: FunShape = <span class="function"><span class="keyword">function</span> (<span class="params">x, y, desc = ''</span>):<span class="title">number</span></span>&#123;</span><br><span class="line">    <span class="comment">// ts类型系统默认推论可以不必书写上述类型定义</span></span><br><span class="line">    <span class="built_in">console</span>.log(desc, x + y);</span><br><span class="line">    <span class="keyword">return</span> x+y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//方法调用</span></span><br><span class="line">sum(<span class="number">32</span>, <span class="number">22</span>);</span><br><span class="line">sum(<span class="number">1</span>,<span class="built_in">Number</span>.MAX_VALUE,<span class="string">"返回值是负数"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="类型接口"><a href="#类型接口" class="headerlink" title="类型接口"></a>类型接口</h3><p>与java的接口的用法相同, 关键字<code>implents</code>, 规范了类的形状,不再赘述</p>
+<h3 id="可索引接口"><a href="#可索引接口" class="headerlink" title="可索引接口"></a>可索引接口</h3><p>没看懂, 且不常用, 以后再说</p>
+<h3 id="扩展接口"><a href="#扩展接口" class="headerlink" title="扩展接口"></a>扩展接口</h3><p>使用<code>extends</code>扩展接口, 要求<em>里氏替换原则</em>, 只横向扩展,不纵向替换.</p>
+<h3 id="混合类型的接口"><a href="#混合类型的接口" class="headerlink" title="混合类型的接口"></a>混合类型的接口</h3><hr>
+<p><a href="https://esnail.github.io/ts-gitbook/book/chapter7/readme.html" target="_blank" rel="noopener">esnail</a><br><a href="https://juejin.im/post/6844903799459414029#heading-5" target="_blank" rel="noopener">TS 的 Interface 了解一下</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/31/甜点专家 Kotlin/" rel="next" title="甜点专家Kotlin">
+                <i class="fa fa-chevron-left"></i> 甜点专家Kotlin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chiu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用"><span class="nav-number">1.</span> <span class="nav-text">作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性接口"><span class="nav-number">1.1.</span> <span class="nav-text">属性接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法接口"><span class="nav-number">1.2.</span> <span class="nav-text">方法接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型接口"><span class="nav-number">1.3.</span> <span class="nav-text">类型接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可索引接口"><span class="nav-number">1.4.</span> <span class="nav-text">可索引接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展接口"><span class="nav-number">1.5.</span> <span class="nav-text">扩展接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合类型的接口"><span class="nav-number">1.6.</span> <span class="nav-text">混合类型的接口</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
